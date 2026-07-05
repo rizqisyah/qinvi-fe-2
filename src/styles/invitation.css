@@ -844,10 +844,10 @@
 
 /* Circle bg behind card */
 .events-circle-bg {
-  width: 447px;
+  width: 427px;
   height: 447px;
   top: -41px;
-  left: -36px;
+  left: -25px;
   z-index: 1;
 }
 
@@ -870,6 +870,7 @@
 
 .events-foliage--left {
   left: -215px;
+  z-index: 0;
 }
 
 .events-foliage--right {
@@ -991,16 +992,16 @@
   width: 73px;
   height: 60px;
   top: 159px; /* local inside card */
-  left: 22px;
-  z-index: 5;
+  left: 0px;
+  z-index: 0;
 }
 
 .events-deco1-right {
   width: 73px;
   height: 60px;
   top: 159px;
-  right: -53px;
-  z-index: 5;
+  right: 0px;
+  z-index: 0;
 }
 
 /* flower1 pair */
@@ -1008,7 +1009,7 @@
   width: 59px;
   height: 74px;
   top: 176px;
-  left: 46px;
+  left: 0px;
   z-index: 5;
 }
 
@@ -1022,15 +1023,15 @@
 
 /* deco2 pair */
 .events-deco2-left {
-  width: 102px;
+  width: 65px;
   height: 99px;
   top: 206px;
-  left: 76px;
+  left: 0px;
   z-index: 5;
 }
 
 .events-deco2-right {
-  width: 102px;
+  width: 65px;
   height: 99px;
   top: 206px;
   right: -16px;
@@ -1039,18 +1040,18 @@
 
 /* circ1 pair */
 .events-circ1-left {
-  width: 159px;
+  width: 95px;
   height: 159px;
   top: 225px;
-  left: 91px;
+  left: 0px;
   z-index: 4;
 }
 
 .events-circ1-right {
-  width: 159px;
+  width: 109px;
   height: 159px;
   top: 225px;
-  right: -73px;
+  right: 0px;
   z-index: 4;
 }
 
