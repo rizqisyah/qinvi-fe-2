@@ -17,7 +17,6 @@
       <RsvpSection />
       <WishesSection />
       <GallerySection />
-      <FooterSection />
     </template>
   </div>
 </template>
@@ -33,7 +32,6 @@ import GiftSection from './sections/GiftSection.vue'
 import RsvpSection from './sections/RsvpSection.vue'
 import WishesSection from './sections/WishesSection.vue'
 import GallerySection from './sections/GallerySection.vue'
-import FooterSection from './sections/FooterSection.vue'
 
 const isLoading = ref(true)
 const isOpen = ref(false)

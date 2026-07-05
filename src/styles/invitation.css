@@ -32,7 +32,7 @@
 .invitation-canvas {
   position: relative;
   width: 375px;
-  height: 9211px;
+  height: 8215px;
   margin: 0 auto;
   overflow: hidden;
   background: var(--cream-bg);
@@ -94,7 +94,7 @@
 .invitation-section--gift { height: 704px; }
 .invitation-section--rsvp { height: 572px; background: var(--cream-bg); }
 .invitation-section--wishes { height: 1664px; background: #d3c891; }
-.invitation-section--gallery { height: 1508px; }
+.invitation-section--gallery { height: 430px; }
 .invitation-section--footer { height: 333px; }
 
 /* ----- Reusable Utilities ----- */
@@ -1428,41 +1428,114 @@
 
 
 /* ============================================================
-   GALLERY SECTION (1508px)
+   GALLERY SECTION (520px) — interactive carousel
    ============================================================ */
 
-/* gallery-composition.png — real asset-export */
-.figma-asset.gallery-composition {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 375px;
-  height: 1508px;
-  object-fit: cover;
-  z-index: 0;
+.invitation-section--gallery {
+  background: var(--cream-bg);
 }
 
-.invitation-section--gallery .script-heading {
-  position: absolute;
-  top: 680px;
-  left: 0;
-  width: 100%;
+.invitation-section--gallery .script-heading.gallery-title {
+  margin: 20px 0 0;
   font-size: 40px;
-  z-index: 1;
-  color: #fff7d7;
+  line-height: 1;
+  text-align: center;
+  color: var(--brown-main);
 }
 
-.gallery-thanks {
+.gallery-carousel {
+  position: relative;
+  width: 375px;
+  margin-top: 14px;
+}
+
+.gallery-main-photo-wrapper {
+  position: relative;
+  width: 300px;
+  height: 280px;
+  margin: 0 auto;
+}
+
+.gallery-main-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+  transition: opacity 0.35s ease;
+}
+
+.gallery-nav {
   position: absolute;
-  top: 740px;
-  left: 24px;
-  width: 327px;
-  font-family: var(--font-script);
-  font-size: 24px;
-  color: #fff7d7;
-  text-align: center;
-  line-height: 1.5;
-  z-index: 1;
+  top: 50%;
+  z-index: 5;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d4af37, #b8860b);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: translateY(-50%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.gallery-nav:hover {
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.gallery-nav:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.gallery-nav--prev {
+  left: -18px;
+}
+
+.gallery-nav--next {
+  right: -18px;
+}
+
+.gallery-thumbnails {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 0 20px;
+}
+
+.gallery-thumb {
+  width: 56px;
+  height: 56px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+  transition: border-color 0.25s, transform 0.2s;
+}
+
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
+
+.gallery-thumb:hover {
+  transform: scale(1.06);
+}
+
+.gallery-thumb.is-active {
+  border-color: #b8860b;
+  transform: scale(1.08);
 }
 
 
