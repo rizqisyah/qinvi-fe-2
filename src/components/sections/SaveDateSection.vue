@@ -1,12 +1,21 @@
 <template>
   <section class="inv-section invitation-section invitation-section--save-date" data-section="save-date">
-    <!-- save-date-decor.png was a full-frame fallback duplicate — removed -->
-    <h2 class="script-heading">Save The Date</h2>
+    <img class="save-asset save-bg" src="../../assets/figma/save-bg.png" alt="" />
+    <img class="save-asset save-leaf-l" src="../../assets/figma/save-leaf-left.png" alt="" />
+    <img class="save-asset save-leaf-r" src="../../assets/figma/save-leaf-right.png" alt="" />
+    <img class="save-asset save-leaf2-l" src="../../assets/figma/save-leaf2-left.png" alt="" />
+    <img class="save-asset save-leaf2-r" src="../../assets/figma/save-leaf2-right.png" alt="" />
+    <img class="save-asset save-band-l" src="../../assets/figma/save-band-left.png" alt="" />
+    <img class="save-asset save-band-r" src="../../assets/figma/save-band-right.png" alt="" />
+    <img class="save-asset save-flower-l" src="../../assets/figma/save-flower-left.png" alt="" />
+    <img class="save-asset save-flower-r" src="../../assets/figma/save-flower-right.png" alt="" />
+    <img class="save-asset save-divider" src="../../assets/figma/save-divider.png" alt="" />
+    <h2 class="script-heading">Save The<br />Date</h2>
     <div class="countdown-grid">
-      <div class="countdown-box"><strong>00</strong><span>Days</span></div>
-      <div class="countdown-box"><strong>00</strong><span>Hours</span></div>
-      <div class="countdown-box"><strong>00</strong><span>Minutes</span></div>
-      <div class="countdown-box"><strong>00</strong><span>Seconds</span></div>
+      <div class="countdown-box"><p class="countdown-num">00</p><p class="countdown-label">Days</p></div>
+      <div class="countdown-box"><p class="countdown-num">00</p><p class="countdown-label">Hours</p></div>
+      <div class="countdown-box"><p class="countdown-num">00</p><p class="countdown-label">Minutes</p></div>
+      <div class="countdown-box"><p class="countdown-num">00</p><p class="countdown-label">Seconds</p></div>
     </div>
     <button class="decor-button calendar-button" type="button" disabled>Add to Calender</button>
   </section>

@@ -89,7 +89,7 @@
 .invitation-section--hero { height: 700px; overflow: visible; background: var(--cream-bg); }
 .invitation-section--quran { height: 530px; overflow: visible; }
 .invitation-section--couple { height: 1600px; }
-.invitation-section--save-date { height: 515px; }
+.invitation-section--save-date { height: 550px; background: #fff; }
 .invitation-section--events { height: 1085px; }
 .invitation-section--gift { height: 704px; }
 .invitation-section--rsvp { height: 572px; background: var(--gold-rsvp); }
@@ -717,28 +717,89 @@
    SAVE DATE SECTION (515px)
    ============================================================ */
 
+.save-asset {
+  position: absolute;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+}
+
+.save-bg { left: -289px; top: 1px; width: 976px; height: 457px; z-index: 0; }
+.save-leaf-l { left: 20px; top: 128px; width: 94px; height: 125px; z-index: 1; }
+.save-leaf-r { right: 0; top: 128px; width: 103px; height: 125px; z-index: 1; }
+.save-leaf2-l { left: 0px; top: 207px; width: 26px; height: 46px; z-index: 1; }
+.save-leaf2-r { right: 0; top: 207px; width: 28px; height: 46px; z-index: 1; }
+.save-band-l { left: 92px; top: 310px; width: 425px; height: 239px; z-index: 1; }
+.save-band-r { right: 100px; top: 316px; width: 425px; height: 239px; z-index: 1; }
+.save-flower-l { left: 0px; top: 239px; width: 35px; height: 57px; z-index: 1; }
+.save-flower-r { right: 0; top: 239px; width: 32px; height: 57px; z-index: 1; }
+.save-divider { left: 128px; top: 177px; width: 120px; height: 30px; z-index: 1; }
+
 .invitation-section--save-date .script-heading {
   position: absolute;
-  top: 50px;
+  top: 109px;
   left: 0;
   width: 100%;
   font-size: 40px;
+  color: #844711;
+  line-height: 38px;
+  z-index: 5;
 }
 
 .invitation-section--save-date .countdown-grid {
   position: absolute;
-  top: 130px;
-  left: 0;
-  width: 100%;
+  top: 219px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 66.56px 66.56px;
+  column-gap: 7px;
+  row-gap: 3px;
+  z-index: 3;
+}
+
+.invitation-section--save-date .countdown-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 66.56px;
+  height: 68.23px;
+  background: rgba(255,255,255,0.58);
+  border: 1px solid #732222;
+  border-radius: 10px;
+  color: #732222;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.invitation-section--save-date .countdown-num {
+  font-family: var(--font-cormorant);
+  font-size: 28.8px;
+  font-weight: 400;
+  color: #732222;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.invitation-section--save-date .countdown-label {
+  font-family: var(--font-cormorant);
+  font-size: 12.8px;
+  font-style: italic;
+  font-weight: 400;
+  color: #732222;
+  line-height: 1;
+  margin: 0;
 }
 
 .invitation-section--save-date .calendar-button {
   position: absolute;
-  top: 260px;
+  top: 378px;
   left: 50%;
   transform: translateX(-50%);
   padding: 10px 28px;
   font-size: 13px;
+  z-index: 3;
 }
 
 
