@@ -24,7 +24,6 @@
     <img class="couple-asset couple-leaf-bride-r" src="../../assets/figma/couple-leaf-bride-r.png" alt="" />
     <!-- Foliage -->
     <img class="couple-asset couple-foliage couple-foliage-groom-l" src="../../assets/figma/couple-foliage-groom-l.png" alt="" />
-    <img class="couple-asset couple-foliage couple-foliage-bride-l" src="../../assets/figma/couple-foliage-bride-l.png" alt="" />
     <img class="couple-asset couple-foliage couple-foliage-bride-r" src="../../assets/figma/couple-foliage-bride-r.png" alt="" />
 
     <h2 class="script-heading">The Bride &amp;<br />The Groom</h2>
