@@ -580,7 +580,8 @@
   width: 192px;
   margin: 12px auto 0;
   font-family: "Playfair Display", var(--font-serif);
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 11px;
   line-height: 16px;
   color: var(--brown-main);
   text-align: center;
@@ -590,7 +591,8 @@
   width: 192px;
   margin: 0 auto;
   font-family: "Playfair Display", var(--font-serif);
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 11px;
   line-height: 16px;
   color: var(--brown-main);
   text-align: center;
