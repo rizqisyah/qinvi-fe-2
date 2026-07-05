@@ -17,6 +17,7 @@
       <RsvpSection />
       <WishesSection />
       <GallerySection />
+      <FooterSection />
     </template>
   </div>
 </template>

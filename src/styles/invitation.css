@@ -32,7 +32,7 @@
 .invitation-canvas {
   position: relative;
   width: 375px;
-  height: 8215px;
+  height: 9385px;
   margin: 0 auto;
   overflow: hidden;
   background: var(--cream-bg);
@@ -94,7 +94,7 @@
 .invitation-section--gift { height: 704px; }
 .invitation-section--rsvp { height: 572px; background: var(--cream-bg); }
 .invitation-section--wishes { height: 1664px; background: #d3c891; }
-.invitation-section--gallery { height: 430px; }
+.invitation-section--gallery { height: 1600px; }
 .invitation-section--footer { height: 333px; }
 
 /* ----- Reusable Utilities ----- */
@@ -1536,6 +1536,146 @@
 .gallery-thumb.is-active {
   border-color: #b8860b;
   transform: scale(1.08);
+}
+
+/* ----- Gallery top divider (bridges the Wishes section seam) ----- */
+
+.gallery-top-divider {
+  width: 375px;
+  height: 68px;
+}
+
+/* ----- Gallery closing composition (monogram, hashtag, couple-under-arch) -----
+   Each flower/ornament is its own layer (matches the Hero section convention)
+   so individual pieces can be animated later. Positions are absolute, taken
+   directly from the Figma node bounds. */
+
+.gallery-closing {
+  position: relative;
+  width: 375px;
+  height: 1040px;
+  margin-top: 52px;
+}
+
+.closing-asset {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+
+/* Fade + rise in, staggered per layer, once the closing composition scrolls into view */
+.closing-anim {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: var(--stagger, 0ms);
+}
+
+.gallery-closing.in-view .closing-anim {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .closing-anim {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* layers added below one at a time, dictated from Figma */
+
+.closing-tree-l { top: 180px; left: 0px; width: 152px; height: 270px; }
+.closing-tree-r { top: 180px; right: 0px; width: 152px; height: 270px; transform: scaleX(-1); }
+
+.closing-dahlia-stem-l { top: 0; left: 0; width: 100px; height: 150px; }
+.closing-dahlia-stem-r { top: 0; right: 0; width: 100px; height: 150px; transform: scaleX(-1); }
+.closing-orchid-l { top: 50px; left: -100px; width: 168px; height: 163px; }
+.closing-orchid-r { top: 50px; right: -100px; width: 168px; height: 163px; transform: scaleX(-1); }
+.closing-dahlia-crop-l { top: 130px; left: -30px; width: 82px; height: 108px; }
+.closing-dahlia-crop-r { top: 130px; right: -30px; width: 82px; height: 108px; transform: scaleX(-1); }
+.closing-ranunculus-l { top: 160px; left: -20px; width: 110px; height: 138px; }
+.closing-ranunculus-r { top: 160px; right: -20px; width: 110px; height: 138px; transform: scaleX(-1); }
+
+.closing-monogram {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 180px;
+}
+
+.closing-hashtag {
+  top: 165px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 227px;
+  height: 61px;
+}
+
+.closing-wax-seal {
+  top: 230px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 104px;
+  height: 104px;
+  z-index: 1;
+}
+
+.closing-terrace {                                                                    
+top: 521px;
+left: 0;
+  width: 375px;
+  height: 254px;
+  }
+
+
+.closing-couple-arch {
+  top: 260px;
+  left: 0;
+  width: 375px;
+  height: 435px;
+}
+
+.closing-dahlia-round-l { top: 355px; left: -10px; width: 102px; height: 66px; }
+.closing-dahlia-round-r { top: 355px; right: -10px; width: 102px; height: 66px; transform: scaleX(-1); }
+.closing-lily-l { top: 400px; z-index: 1; left: -20px; width: 114px; height: 114px; }
+.closing-lily-r { top: 400px; z-index: 1; right: -20px; width: 114px; height: 114px; transform: scaleX(-1); }
+.closing-dahlia-stem2-l { top: 450px; z-index: 0; left: -10px; width: 82px; height: 108px; }
+.closing-dahlia-stem2-r { top: 450px; z-index: 0; right: -10px; width: 82px; height: 108px; transform: scaleX(-1); }
+.closing-orchid2-l { top: 478px; left: -60px; width: 168px; height: 163px; }
+.closing-orchid2-r { top: 478px; right: -60px; width: 168px; height: 163px; transform: scaleX(-1); }
+.closing-vase-l { top: 561px; left: -60px; width: 187px; height: 187px; }
+.closing-vase-r { top: 561px; right: -60px; width: 187px; height: 187px; transform: scaleX(-1); }
+
+.closing-thanks {
+  position: absolute;
+  top: 820px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 287px;
+  font-size: 40px;
+}
+
+.closing-message {
+  position: absolute;
+  top: 870px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 287px;
+  text-align: center;
+  font-family: var(--font-script);
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.closing-divider {
+  top: 980px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 145px;
+  height: 20px;
 }
 
 
