@@ -807,54 +807,268 @@
    EVENTS SECTION (1085px)
    ============================================================ */
 
-/* Akad card — upper area */
-.akad-card {
+.invitation-section--events {
+  position: relative;
+  height: 1085px;
+  width: 375px;
+  background: #fff;
+  overflow: visible;
+}
+
+/* Event card wrapper — positioned absolutely per Figma */
+.events-card {
+  position: absolute;
+  left: 0;
+  width: 375px;
+  height: 377px;
+}
+
+/* Card background surface (white rounded rect) */
+.events-card-bg {
+  position: absolute;
+  inset: 0;
+  width: 375px;
+  height: 377px;
+  background: #fff;
+  border-radius: 30px 0 0 0;
+  pointer-events: none;
+}
+
+/* Shared asset base */
+.events-asset {
+  position: absolute;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+}
+
+/* Circle bg behind card */
+.events-circle-bg {
+  width: 447px;
+  height: 447px;
+  top: -41px;
+  left: -36px;
+  z-index: 1;
+}
+
+/* Wax seal — centered */
+.events-wax-seal {
+  width: 92px;
+  height: 92px;
+  top: -55px;
+  left: 50%;
+  margin-left: -46px;
+  z-index: 12;
+}
+
+/* Foliage — hangs off left or right edge */
+.events-foliage {
+  width: 678px;
+  height: 335px;
+  z-index: 2;
+}
+
+.events-foliage--left {
+  left: -215px;
+}
+
+.events-foliage--right {
+  right: -215px;
+}
+
+/* Divider — centered */
+.events-divider {
+  width: 22px;
+  height: 31px;
+  top: 194px; /* relative to text-wrap start — handled in text-wrap */
+  left: 50%;
+  margin-left: -11px;
+  z-index: 10;
+}
+
+/* Text content wrapper — layered above foliage, below wax-seal */
+.events-text-wrap {
+  position: absolute;
+  left: 0;
   top: 0;
-  padding: 40px 24px 0;
+  width: 375px;
+  z-index: 8;
+  text-align: center;
 }
 
-.akad-card .script-heading {
+.events-text-wrap .script-heading.events-title {
+  margin: 0;
+  font-family: var(--font-script);
   font-size: 40px;
-  margin-bottom: 20px;
+  color: var(--brown-dark);
+  text-align: center;
+  line-height: 38px;
+  position: absolute;
+  top: 37px;
+  left: 49px;
+  width: 277px;
 }
 
-.akad-card p {
-  margin-bottom: 8px;
+.events-text-wrap .events-date {
+  margin: 0;
+  font-family: var(--font-playball);
+  font-size: 20px;
+  color: var(--brown-dark);
+  text-align: center;
+  line-height: 24px;
+  position: absolute;
+  top: 90px;
+  left: 56px;
+  width: 262px;
 }
 
-.akad-card .event-address {
-  padding: 0 20px;
-  margin-bottom: 16px;
+.events-text-wrap .events-time {
+  margin: 0;
+  font-family: var(--font-playball);
+  font-size: 20px;
+  color: var(--brown-dark);
+  text-align: center;
+  line-height: 24px;
+  position: absolute;
+  top: 158px;
+  left: 56px;
+  width: 262px;
 }
 
-.akad-card .maps-button {
-  margin-top: 8px;
+.events-text-wrap .events-divider {
+  position: absolute;
+  top: 194px;
+  left: 50%;
+  margin-left: -11px;
+  z-index: 10;
+}
+
+.events-text-wrap .events-location {
+  margin: 0;
+  font-family: var(--font-playball);
+  font-size: 20px;
+  color: var(--brown-dark);
+  text-align: center;
+  line-height: 24px;
+  position: absolute;
+  top: 225px;
+  left: 56px;
+  width: 262px;
+}
+
+.events-text-wrap .events-address {
+  margin: 0;
+  font-family: var(--font-playball);
+  font-size: 13px;
+  color: var(--brown-dark);
+  text-align: center;
+  line-height: 17px;
+  position: absolute;
+  top: 250px;
+  left: 56px;
+  width: 262px;
+}
+
+/* Maps button */
+.events-maps-button {
+  position: absolute;
+  top: 318px;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 8px 28px;
+  min-width: 127px;
+  font-family: var(--font-jost);
+  font-size: 13px;
+  color: #be3a3a;
+  text-align: center;
+  z-index: 10;
 }
 
-/* Resepsi card — lower area */
-.resepsi-card {
-  top: 540px;
-  padding: 40px 24px 0;
+/* ===== Decorative overlays (same x-positions for both cards) ===== */
+
+/* deco1 pair */
+.events-deco1-left {
+  width: 73px;
+  height: 60px;
+  top: 159px; /* local inside card */
+  left: 22px;
+  z-index: 5;
 }
 
-.resepsi-card .script-heading {
-  font-size: 40px;
-  margin-bottom: 20px;
+.events-deco1-right {
+  width: 73px;
+  height: 60px;
+  top: 159px;
+  right: -53px;
+  z-index: 5;
 }
 
-.resepsi-card p {
-  margin-bottom: 8px;
+/* flower1 pair */
+.events-flower1-left {
+  width: 59px;
+  height: 74px;
+  top: 176px;
+  left: 46px;
+  z-index: 5;
 }
 
-.resepsi-card .event-address {
-  padding: 0 20px;
-  margin-bottom: 16px;
+.events-flower1-right {
+  width: 59px;
+  height: 74px;
+  top: 176px;
+  right: -16px;
+  z-index: 5;
 }
 
-.resepsi-card .maps-button {
-  margin-top: 8px;
-  padding: 8px 28px;
+/* deco2 pair */
+.events-deco2-left {
+  width: 102px;
+  height: 99px;
+  top: 206px;
+  left: 76px;
+  z-index: 5;
+}
+
+.events-deco2-right {
+  width: 102px;
+  height: 99px;
+  top: 206px;
+  right: -16px;
+  z-index: 5;
+}
+
+/* circ1 pair */
+.events-circ1-left {
+  width: 159px;
+  height: 159px;
+  top: 225px;
+  left: 91px;
+  z-index: 4;
+}
+
+.events-circ1-right {
+  width: 159px;
+  height: 159px;
+  top: 225px;
+  right: -73px;
+  z-index: 4;
+}
+
+/* deco3 pair */
+.events-deco3-left {
+  width: 76px;
+  height: 63px;
+  top: 280px;
+  left: 22px;
+  z-index: 5;
+}
+
+.events-deco3-right {
+  width: 76px;
+  height: 63px;
+  top: 275px;
+  right: -5px;
+  z-index: 5;
 }
 
 
