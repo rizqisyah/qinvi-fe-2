@@ -87,7 +87,7 @@
 
 /* Section heights from measurement map */
 .invitation-section--hero { height: 700px; overflow: visible; background: var(--cream-bg); }
-.invitation-section--quran { height: 530px; }
+.invitation-section--quran { height: 530px; overflow: visible; }
 .invitation-section--couple { height: 1600px; }
 .invitation-section--save-date { height: 515px; }
 .invitation-section--events { height: 1085px; }
@@ -532,29 +532,68 @@
    QURAN SECTION (530px)
    ============================================================ */
 
-.invitation-section--quran .script-heading {
+.invitation-section--quran {
+  background: var(--cream-bg);
+}
+
+.quran-asset {
   position: absolute;
-  top: 50px;
-  left: 0;
-  width: 100%;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+}
+
+.quran-card { left: -15px; top: 120px; width: 406px; height: 406px; z-index: 2; }
+.quran-seal { left: 138px; top: 114px; width: 92px; height: 92px; z-index: 4; }
+.quran-foliage-right { right: 0; top: 19px; width: 178px; height: 317px; z-index: 3; }
+.quran-foliage-right-back { right: 0; top: 14px; width: 178px; height: 317px; z-index: 3; }
+.quran-foliage-left-back { left: 0; top: 14px; width: 178px; height: 317px; z-index: 3; }
+.quran-lantern-left { left: -99px; top: 328px; width: 198px; height: 198px; z-index: 3; }
+.quran-lantern-right { right: -99px; top: 328px; width: 198px; height: 198px; z-index: 3; }
+.quran-flower-left { left: -83px; top: 254px; width: 165px; height: 165px; z-index: 5; }
+.quran-flower-right { right: -83px; top: 254px; width: 165px; height: 165px; z-index: 5; }
+.quran-lantern-left,
+.quran-lantern-right,
+.quran-flower-left,
+.quran-flower-right {
+  transform-origin: 50% 96%;
+  animation: heroGoyangSmall 3600ms ease-in-out 0ms infinite alternate;
+}
+.quran-divider { left: 128px; top: 449px; width: 120px; height: 33px; z-index: 6; }
+
+.quran-text-wrap {
+  position: absolute;
+  left: 83px;
+  top: 184px;
+  width: 209px;
+  z-index: 7;
+  color: var(--brown-main);
+  text-align: center;
+}
+
+.invitation-section--quran .script-heading {
   font-size: 32px;
+  line-height: 48px;
 }
 
 .arabic-copy {
-  position: absolute;
-  top: 110px;
-  left: 24px;
-  width: 327px;
+  width: 192px;
+  margin: 12px auto 0;
+  font-family: "Playfair Display", var(--font-serif);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--brown-main);
+  text-align: center;
 }
 
 .quran-copy {
-  position: absolute;
-  top: 290px;
-  left: 24px;
-  width: 327px;
+  width: 192px;
+  margin: 0 auto;
+  font-family: "Playfair Display", var(--font-serif);
   font-size: 12px;
+  line-height: 16px;
+  color: var(--brown-main);
   text-align: center;
-  line-height: 1.65;
 }
 
 
