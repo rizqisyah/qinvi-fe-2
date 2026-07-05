@@ -1,0 +1,330 @@
+{
+  "sourceFrame": "2:80",
+  "sourceName": "Arif & Dita",
+  "canvas": {
+    "width": 375,
+    "height": 9211
+  },
+  "assets": [
+    {
+      "section": "reference",
+      "figmaNodeId": "2:80",
+      "figmaName": "Arif & Dita",
+      "file": "reference-full-frame.png",
+      "type": "full-frame-reference",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:145",
+      "figmaName": "Home (1) 1",
+      "file": "hero-home-1.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "696:133",
+      "figmaName": "The Wedding of (7) 7",
+      "file": "hero-extra-right.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:146",
+      "figmaName": "Home (1) 2",
+      "file": "hero-home-2.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "696:126",
+      "figmaName": "The Wedding of (22) 2",
+      "file": "hero-arch.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "696:130",
+      "figmaName": "The Wedding of (48) 1",
+      "file": "hero-medallion.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:122",
+      "figmaName": "Untitled1125_20260703171826 1",
+      "file": "hero-wreath.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:123",
+      "figmaName": "Untitled1088_20260703171126 1",
+      "file": "hero-top-ornament.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:125",
+      "figmaName": "The Wedding of (4) 1",
+      "file": "hero-flower-left.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:126",
+      "figmaName": "The Wedding of (4) 2",
+      "file": "hero-flower-right.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:128",
+      "figmaName": "flower 2 1",
+      "file": "hero-side-flower-left.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:131",
+      "figmaName": "flower 2 2",
+      "file": "hero-side-flower-right.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:140",
+      "figmaName": "Home (22) 1",
+      "file": "hero-lantern-left.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:141",
+      "figmaName": "Home (22) 2",
+      "file": "hero-lantern-right.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:143",
+      "figmaName": "Home (6) 1",
+      "file": "hero-leaf-right.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:144",
+      "figmaName": "Home (6) 2",
+      "file": "hero-leaf-left.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "696:122",
+      "figmaName": "Home (6) 9",
+      "file": "hero-leaf-left-back.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "696:123",
+      "figmaName": "Home (6) 10",
+      "file": "hero-leaf-right-back.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:147",
+      "figmaName": "Home (14) 1",
+      "file": "hero-palm-left.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:148",
+      "figmaName": "Home (14) 2",
+      "file": "hero-palm-right.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:149",
+      "figmaName": "Home (11) 1",
+      "file": "hero-small-flower-right.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:150",
+      "figmaName": "Home (11) 2",
+      "file": "hero-small-flower-left.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:124",
+      "figmaName": "IMG_0889 1",
+      "file": "hero-title-script.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "696:124",
+      "figmaName": "The Wedding of (6) 3",
+      "file": "hero-dot-left.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "696:125",
+      "figmaName": "The Wedding of (6) 4",
+      "file": "hero-dot-right.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:138",
+      "figmaName": "Home (10) 1",
+      "file": "hero-bud-left.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "hero",
+      "figmaNodeId": "685:139",
+      "figmaName": "Home (10) 2",
+      "file": "hero-bud-right.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "quran",
+      "figmaNodeId": "2:80",
+      "figmaName": "Arif & Dita (quran-decor)",
+      "file": "quran-decor.png",
+      "type": "fallback-full-frame-crop",
+      "fallbackReason": "Node-specific export not available; using full-frame crop fallback. Same file hash as reference-full-frame.png."
+    },
+    {
+      "section": "couple",
+      "figmaNodeId": "2:80",
+      "figmaName": "Arif & Dita (couple-groom-composition)",
+      "file": "couple-groom-composition.png",
+      "type": "fallback-full-frame-crop",
+      "fallbackReason": "Node-specific export not available; using full-frame crop fallback. Same file hash as reference-full-frame.png."
+    },
+    {
+      "section": "couple",
+      "figmaNodeId": "2:80",
+      "figmaName": "Arif & Dita (couple-bride-composition)",
+      "file": "couple-bride-composition.png",
+      "type": "fallback-full-frame-crop",
+      "fallbackReason": "Node-specific export not available; using full-frame crop fallback. Same file hash as reference-full-frame.png."
+    },
+    {
+      "section": "save-date",
+      "figmaNodeId": "2:80",
+      "figmaName": "Arif & Dita (save-date-decor)",
+      "file": "save-date-decor.png",
+      "type": "fallback-full-frame-crop",
+      "fallbackReason": "Node-specific export not available; using full-frame crop fallback. Same file hash as reference-full-frame.png."
+    },
+    {
+      "section": "events",
+      "figmaNodeId": "2:80",
+      "figmaName": "Arif & Dita (event-akad-bg)",
+      "file": "event-akad-bg.png",
+      "type": "fallback-full-frame-crop",
+      "fallbackReason": "Node-specific export not available; using full-frame crop fallback. Same file hash as reference-full-frame.png."
+    },
+    {
+      "section": "events",
+      "figmaNodeId": "2:80",
+      "figmaName": "Arif & Dita (event-resepsi-bg)",
+      "file": "event-resepsi-bg.png",
+      "type": "fallback-full-frame-crop",
+      "fallbackReason": "Node-specific export not available; using full-frame crop fallback. Same file hash as reference-full-frame.png."
+    },
+    {
+      "section": "gift",
+      "figmaNodeId": "2:2102",
+      "figmaName": "gift-decor",
+      "file": "gift-decor.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "rsvp",
+      "figmaNodeId": "2:2089",
+      "figmaName": "rsvp-decor",
+      "file": "rsvp-decor.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "wishes",
+      "figmaNodeId": "2:2110",
+      "figmaName": "wishes-bg",
+      "file": "wishes-bg.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "wishes",
+      "figmaNodeId": "2:2141",
+      "figmaName": "wishes-composition",
+      "file": "wishes-composition.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "gallery",
+      "figmaNodeId": "688:313",
+      "figmaName": "gallery-composition",
+      "file": "gallery-composition.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "footer",
+      "figmaNodeId": "2:2123",
+      "figmaName": "footer-decor",
+      "file": "footer-decor.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    },
+    {
+      "section": "footer",
+      "figmaNodeId": "2:2138",
+      "figmaName": "bottom-menu",
+      "file": "bottom-menu.png",
+      "type": "asset-export",
+      "fallbackReason": "none"
+    }
+  ]
+}
