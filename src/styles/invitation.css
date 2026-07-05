@@ -619,20 +619,31 @@
 .couple-frame-groom { left: -189px; top: 202px; width: 348px; height: 348px; z-index: 2; }
 .couple-frame-bride { left: -184px; top: 1036px; width: 348px; height: 348px; z-index: 2; }
 
-.couple-fl-groom-l { left: -94px; top: 376px; width: 187px; height: 187px; z-index: 4; }
-.couple-fl-groom-r { right: -94px; top: 376px; width: 187px; height: 187px; z-index: 4; }
+.couple-fl-groom-l { left: -50px; top: 376px; width: 187px; height: 187px; z-index: 4; }
+.couple-fl-groom-r { right: -50px; top: 376px; width: 187px; height: 187px; z-index: 4; }
 .couple-fl-bride-l { left: -94px; top: 1210px; width: 187px; height: 187px; z-index: 4; }
 .couple-fl-bride-r { right: -94px; top: 1210px; width: 187px; height: 187px; z-index: 4; }
 
 /* Foliage */
-.couple-foliage-groom-l { left: 0; top: 100px; width: 178px; height: 317px; z-index: 2; }
-.couple-foliage-groom-r { right: 0; top: 100px; width: 178px; height: 317px; z-index: 2; }
+.couple-foliage-groom-l { left: -20px; top: 180px; width: 178px; height: 317px; z-index: 2; }
+.couple-foliage-groom-r { right: 0; top: 150px; width: 178px; height: 317px; z-index: 2; }
 .couple-foliage-bride-l { left: 0; top: 930px; width: 178px; height: 317px; z-index: 2; }
 .couple-foliage-bride-r { right: 0; top: 930px; width: 178px; height: 317px; z-index: 2; }
 
-/* Edge flower + foliage windy animation (foliage excl) */
+.couple-ornament { left: 108px; top: 728px; width: 160px; height: 284px; z-index: 1; }
+
+/* Small flowers + leaves */
+.couple-fl2-groom-l { left: -83px; top: 427px; width: 165px; height: 165px; z-index: 4; }
+.couple-fl2-groom-r { right: -83px; top: 427px; width: 165px; height: 165px; z-index: 4; }
+.couple-leaf-groom-l { left: -44px; top: 336px; width: 87px; height: 154px; z-index: 3; }
+.couple-leaf-groom-r { right: -44px; top: 336px; width: 87px; height: 154px; z-index: 3; }
+.couple-leaf-bride-l { left: -44px; top: 1170px; width: 87px; height: 154px; z-index: 3; }
+.couple-leaf-bride-r { right: -44px; top: 1170px; width: 87px; height: 154px; z-index: 3; }
+
+/* Edge flower + small flower windy animation */
 .couple-fl-groom-l, .couple-fl-groom-r,
-.couple-fl-bride-l, .couple-fl-bride-r {
+.couple-fl-bride-l, .couple-fl-bride-r,
+.couple-fl2-groom-l, .couple-fl2-groom-r {
   transform-origin: 50% 96%;
   animation: heroGoyangSmall 3600ms ease-in-out 0ms infinite alternate;
 }

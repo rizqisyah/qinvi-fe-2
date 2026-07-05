@@ -14,12 +14,20 @@
     <img class="couple-asset couple-edge couple-fl-groom-r" src="../../assets/figma/couple-flower-groom-right.png" alt="" />
     <img class="couple-asset couple-edge couple-fl-bride-l" src="../../assets/figma/couple-flower-bride-left.png" alt="" />
     <img class="couple-asset couple-edge couple-fl-bride-r" src="../../assets/figma/couple-flower-bride-right.png" alt="" />
+    <img class="couple-asset couple-ornament" src="../../assets/figma/couple-ornament.png" alt="" />
+    <!-- Small flowers + leaves -->
+    <img class="couple-asset couple-fl2 couple-fl2-groom-l" src="../../assets/figma/couple-flower2-groom-l.png" alt="" />
+    <img class="couple-asset couple-fl2 couple-fl2-groom-r" src="../../assets/figma/couple-flower2-groom-r.png" alt="" />
+    <img class="couple-asset couple-leaf-groom-l" src="../../assets/figma/couple-leaf-groom-l.png" alt="" />
+    <img class="couple-asset couple-leaf-groom-r" src="../../assets/figma/couple-leaf-groom-r.png" alt="" />
+    <img class="couple-asset couple-leaf-bride-l" src="../../assets/figma/couple-leaf-bride-l.png" alt="" />
+    <img class="couple-asset couple-leaf-bride-r" src="../../assets/figma/couple-leaf-bride-r.png" alt="" />
     <!-- Foliage -->
     <img class="couple-asset couple-foliage couple-foliage-groom-l" src="../../assets/figma/couple-foliage-groom-l.png" alt="" />
     <img class="couple-asset couple-foliage couple-foliage-bride-l" src="../../assets/figma/couple-foliage-bride-l.png" alt="" />
     <img class="couple-asset couple-foliage couple-foliage-bride-r" src="../../assets/figma/couple-foliage-bride-r.png" alt="" />
 
-    <h2 class="script-heading">The Bride &amp; The Groom</h2>
+    <h2 class="script-heading">The Bride &amp;<br />The Groom</h2>
 
     <div class="couple-card groom-card">
       <p class="couple-short-name">Antonio</p>
