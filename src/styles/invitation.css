@@ -92,7 +92,7 @@
 .invitation-section--save-date { height: 550px; background: #fff; }
 .invitation-section--events { height: 1085px; }
 .invitation-section--gift { height: 704px; }
-.invitation-section--rsvp { height: 572px; background: var(--gold-rsvp); }
+.invitation-section--rsvp { height: 572px; background: var(--cream-bg); }
 .invitation-section--wishes { height: 1664px; }
 .invitation-section--gallery { height: 1508px; }
 .invitation-section--footer { height: 333px; }
@@ -1240,14 +1240,14 @@
    RSVP SECTION (572px) — gold background
    ============================================================ */
 
-/* rsvp-decor.png — real asset-export */
+/* rsvp-decor.png — Figma composite: RSVP group 2:2089 */
 .figma-asset.rsvp-decor {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 375px;
-  height: 572px;
-  object-fit: cover;
+  left: 24px;
+  width: 332px;
+  height: 560px;
+  object-fit: contain;
   z-index: 0;
 }
 
