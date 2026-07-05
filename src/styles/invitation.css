@@ -1086,89 +1086,44 @@
   overflow: visible;
 }
 
-/* --- Decorative flowers (outside card, absolute to section) --- */
-.gift-flower {
-  position: absolute;
-  width: 165px;
-  height: 165px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.gift-flower-tr { left: 300px; top: -9px; }
-.gift-flower-tl { left: 77px; top: -9px; }
-.gift-flower-mr { right: -277px; top: 65px; }
-.gift-flower-ml { left: -109px; top: 65px; }
-.gift-flower-br { right: -103px; top: 375px; }
-.gift-flower-bl { left: 56px; top: 375px; }
-
-.gift-flower2 {
-  position: absolute;
-  width: 154px;
-  height: 128px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.gift-flower2-mr { right: -111px; top: 127px; }
-.gift-flower2-ml { left: 40px; top: 127px; }
-
-/* --- White card --- */
-.gift-card {
-  position: absolute;
-  left: 21px;
-  top: 50px;
-  width: 332px;
-  height: 610px;
-  background: #ffffff;
-  border-radius: 30px;
-  z-index: 1;
-}
-
-/* --- Divider --- */
+/* Divider — centered at top */
 .gift-divider {
   position: absolute;
-  top: 65px;
+  top: 40px;
   left: 50%;
   margin-left: -60px;
   width: 120px;
   height: 30px;
-  z-index: 10;
+  z-index: 2;
   pointer-events: none;
 }
 
-/* --- Title --- */
-.gift-title {
+/* Title — Wedding Gift, below divider */
+.invitation-section--gift .gift-title {
   position: absolute;
-  top: 100px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 251px;
-  margin: 0;
-  font-family: var(--font-script);
+  top: 80px;
+  left: 0;
+  width: 100%;
   font-size: 48px;
-  color: #844711;
   line-height: 38px;
-  text-align: center;
-  z-index: 11;
+  color: #844711;
+  z-index: 2;
 }
 
-/* --- Description --- */
-.gift-description {
+/* Description */
+.invitation-section--gift .gift-description {
   position: absolute;
   top: 173px;
   left: 21px;
   width: 334px;
-  margin: 0;
-  font-family: var(--font-eb-garamond);
   font-size: 16px;
+  text-align: center;
   color: #8d4417;
   line-height: 24px;
-  text-align: center;
-  z-index: 11;
+  z-index: 2;
 }
 
-/* --- BCA Logo --- */
+/* BCA Logo */
 .gift-bca-logo {
   position: absolute;
   top: 244px;
@@ -1176,52 +1131,46 @@
   margin-left: -30px;
   width: 60px;
   height: 19px;
-  z-index: 11;
-  pointer-events: none;
+  z-index: 2;
 }
 
-/* --- Rekening wrapper --- */
-.gift-rekening-wrap {
+/* Rekening text */
+.invitation-section--gift .gift-rekening {
   position: absolute;
   top: 274px;
-  left: 24px;
-  width: 311px;
+  left: 0;
+  width: 100%;
   text-align: center;
-  z-index: 11;
-}
-
-.gift-rekening-wrap p {
-  margin: 0;
   font-family: var(--font-eb-garamond);
   font-size: 12px;
-  color: #844711;
-  line-height: 17px;
-}
-
-.gift-rekening {
+  color: var(--brown-main);
   margin: 0;
+  z-index: 2;
 }
 
-.gift-an {
+.invitation-section--gift .gift-an {
+  position: absolute;
+  top: 293px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-eb-garamond);
+  font-size: 12px;
+  color: var(--brown-main);
   margin: 0;
+  z-index: 2;
 }
 
-/* --- Copy button --- */
-.gift-copy-button {
+/* Copy text button */
+.invitation-section--gift .copy-button {
   position: absolute;
   top: 318px;
   left: 50%;
-  margin-left: -52px;
-  width: 105px;
-  height: 36px;
-  border: 0;
-  border-radius: 60px;
-  background: #a37f25;
+  transform: translateX(-50%);
   font-family: var(--font-eb-garamond);
   font-size: 14px;
-  color: #ffffff;
-  cursor: default;
-  z-index: 11;
+  padding: 8px 28px;
+  z-index: 2;
 }
 
 .gift-copy-button:disabled {
