@@ -1,17 +1,14 @@
 <template>
   <section class="inv-section invitation-section invitation-section--wishes" data-section="wishes">
-    <!-- wishes-bg.png — real asset-export -->
-    <img class="figma-asset wishes-bg" src="../../assets/figma/wishes-bg.png" alt="" />
-    <!-- wishes-composition.png — real asset-export, decorative overlay -->
-    <img class="figma-asset wishes-composition" src="../../assets/figma/wishes-composition.png" alt="" />
     <h2 class="script-heading">Wedding Wish</h2>
     <p class="text-body wishes-intro">Silakan kirimkan doa dan ucapan yang tulus untuk kami:</p>
-    <p class="wishes-prompt">Sampaikan ucapan selamat untuk<br />pernikahan kami:</p>
     <div class="wishes-form">
-      <span class="form-label">Nama:</span><span class="required-marker">*</span><div class="visual-input wishes-name"></div>
+      <label class="form-label" for="wish-name">Nama:<span class="required-marker">*</span></label>
+      <input id="wish-name" class="visual-input wishes-name" type="text" />
+      <p class="wishes-prompt">Sampaikan ucapan selamat untuk<br />pernikahan kami:</p>
+      <textarea id="wish-message" class="visual-input wishes-message"></textarea>
     </div>
-    <button class="decor-button wishes-button" type="button" disabled>Kirim</button>
-    <button class="decor-button confirm-button" type="button" disabled>Kirim Konfirmasi</button>
+    <button class="decor-button confirm-button" type="button">Kirim Konfirmasi</button>
     <div class="wishes-list">
       <div class="wish-item">
         <p class="wish-author">Anggun</p>

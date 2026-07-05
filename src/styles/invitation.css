@@ -93,7 +93,7 @@
 .invitation-section--events { height: 1085px; }
 .invitation-section--gift { height: 704px; }
 .invitation-section--rsvp { height: 572px; background: var(--cream-bg); }
-.invitation-section--wishes { height: 1664px; }
+.invitation-section--wishes { height: 1664px; background: #d3c891; }
 .invitation-section--gallery { height: 1508px; }
 .invitation-section--footer { height: 333px; }
 
@@ -1316,25 +1316,13 @@
   z-index: 0;
 }
 
-/* wishes-composition.png — real asset-export, decorative overlay layer */
-.figma-asset.wishes-composition {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 375px;
-  height: 1664px;
-  object-fit: cover;
-  z-index: 0;
-  opacity: 0.5;
-  pointer-events: none;
-}
-
 .invitation-section--wishes .script-heading {
   position: absolute;
   top: 40px;
   left: 0;
   width: 100%;
   font-size: 40px;
+  color: var(--white-soft);
   z-index: 1;
 }
 
@@ -1344,72 +1332,80 @@
   left: 24px;
   width: 327px;
   font-size: 16px;
+  color: #e8eced;
   text-align: center;
   z-index: 1;
 }
 
 .wishes-prompt {
-  position: absolute;
-  top: 170px;
-  left: 24px;
-  width: 327px;
+  margin: 20px 0 8px;
+  width: 286px;
   font-family: var(--font-cormorant);
   font-weight: 700;
   font-size: 16px;
+  line-height: 22.4px;
   color: var(--brown-main);
-  text-align: center;
-  z-index: 1;
+  text-align: left;
 }
 
 .wishes-form {
   position: absolute;
-  top: 240px;
-  left: 24px;
-  width: 327px;
+  top: 216px;
+  left: 42px;
+  width: 286px;
   z-index: 1;
 }
 
 .wishes-form .form-label {
-  margin-bottom: 4px;
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-cormorant);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22.4px;
+  color: #e8eced;
 }
 
 .wishes-form .required-marker {
   margin-left: 2px;
+  color: #f56c6c;
 }
 
 .wishes-form .visual-input {
   width: 100%;
   border-radius: 4px;
-  margin-bottom: 12px;
+  border: 0;
+  outline: 0;
+  background: #ffffff;
+  color: var(--brown-main);
+  font-family: var(--font-noto-sans);
+  font-size: 14px;
+  pointer-events: auto;
+  box-sizing: border-box;
+  padding: 8px 12px;
 }
 
-/* Kirim button — Cormorant Garamond SemiBold 16px per Figma, not Jost */
-.invitation-section--wishes .wishes-button {
-  position: absolute;
-  top: 360px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-cormorant);
-  font-weight: 600;
-  font-size: 16px;
-  padding: 8px 36px;
-  z-index: 1;
+.wishes-form .wishes-message {
+  height: 84px;
+  resize: none;
 }
 
 /* Kirim Konfirmasi button — Jost 13px */
 .invitation-section--wishes .confirm-button {
   position: absolute;
-  top: 420px;
+  top: 448px;
   left: 50%;
   transform: translateX(-50%);
   padding: 8px 28px;
   z-index: 1;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 /* Wishes list (static entries) */
 .wishes-list {
   position: absolute;
-  top: 490px;
+  top: 548px;
   left: 24px;
   width: 327px;
   z-index: 1;
