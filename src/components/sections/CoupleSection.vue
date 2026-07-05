@@ -1,29 +1,36 @@
 <template>
   <section class="inv-section invitation-section invitation-section--couple" data-section="couple">
+    <!-- Background layers -->
+    <img class="couple-asset couple-circle-groom" src="../../assets/figma/couple-circle-groom.png" alt="" />
+    <img class="couple-asset couple-circle-bride" src="../../assets/figma/couple-circle-bride.png" alt="" />
+    <img class="couple-asset couple-bg-groom" src="../../assets/figma/couple-bg-groom.png" alt="" />
+    <img class="couple-asset couple-bg-bride" src="../../assets/figma/couple-bg-bride.png" alt="" />
+    <img class="couple-asset couple-side-groom" src="../../assets/figma/couple-side-groom.png" alt="" />
+    <img class="couple-asset couple-side-bride" src="../../assets/figma/couple-side-bride.png" alt="" />
+    <!-- Ornamental frames -->
+    <img class="couple-asset couple-frame-bride" src="../../assets/figma/couple-frame-bride.png" alt="" />
+    <!-- Edge flowers -->
+    <img class="couple-asset couple-edge couple-fl-groom-l" src="../../assets/figma/couple-flower-groom-left.png" alt="" />
+    <img class="couple-asset couple-edge couple-fl-groom-r" src="../../assets/figma/couple-flower-groom-right.png" alt="" />
+    <img class="couple-asset couple-edge couple-fl-bride-l" src="../../assets/figma/couple-flower-bride-left.png" alt="" />
+    <img class="couple-asset couple-edge couple-fl-bride-r" src="../../assets/figma/couple-flower-bride-right.png" alt="" />
+    <!-- Foliage -->
+    <img class="couple-asset couple-foliage couple-foliage-groom-l" src="../../assets/figma/couple-foliage-groom-l.png" alt="" />
+    <img class="couple-asset couple-foliage couple-foliage-bride-l" src="../../assets/figma/couple-foliage-bride-l.png" alt="" />
+    <img class="couple-asset couple-foliage couple-foliage-bride-r" src="../../assets/figma/couple-foliage-bride-r.png" alt="" />
+
     <h2 class="script-heading">The Bride &amp; The Groom</h2>
-    <!-- couple-groom-composition.png was a full-frame fallback duplicate — removed -->
+
     <div class="couple-card groom-card">
       <p class="couple-short-name">Antonio</p>
       <p class="couple-full-name">Antonio Josua Setiyadi</p>
       <p class="couple-parent">Putra Pertama dari Bapak Tono<br />&amp; Ibu Ratna</p>
     </div>
-    <!-- Ornamental divider between groom and bride cards -->
-    <div class="couple-divider" aria-hidden="true">
-      <span class="divider-line"></span>
-      <span class="divider-ornament">✿</span>
-      <span class="divider-line"></span>
-    </div>
-    <!-- couple-bride-composition.png was a full-frame fallback duplicate — removed -->
+
     <div class="couple-card bride-card">
       <p class="couple-short-name">Ayu</p>
       <p class="couple-full-name">Ayu Shella Pratni</p>
       <p class="couple-parent">Putri Pertama dari Bapak Heri<br />&amp; Ibu Sofie</p>
-    </div>
-    <!-- Bottom decorative floral cluster -->
-    <div class="couple-bottom-decor" aria-hidden="true">
-      <div class="decor-blob decor-blob--1"></div>
-      <div class="decor-blob decor-blob--2"></div>
-      <div class="decor-blob decor-blob--3"></div>
     </div>
   </section>
 </template>

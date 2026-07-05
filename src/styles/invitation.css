@@ -603,87 +603,77 @@
    COUPLE SECTION (1600px)
    ============================================================ */
 
+.couple-asset {
+  position: absolute;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+}
+
+.couple-circle-groom { left: -4px; top: 174px; width: 383px; height: 383px; z-index: 1; }
+.couple-circle-bride { left: 1px; top: 1008px; width: 383px; height: 383px; z-index: 1; }
+.couple-bg-groom { left: -124px; top: 239px; width: 623px; height: 308px; z-index: 0; }
+.couple-bg-bride { left: -119px; top: 1073px; width: 623px; height: 308px; z-index: 0; }
+.couple-side-groom { left: 178px; top: 81px; width: 208px; height: 370px; z-index: 2; }
+.couple-side-bride { left: 208px; top: 921px; width: 208px; height: 370px; z-index: 2; }
+.couple-frame-groom { left: -189px; top: 202px; width: 348px; height: 348px; z-index: 2; }
+.couple-frame-bride { left: -184px; top: 1036px; width: 348px; height: 348px; z-index: 2; }
+
+.couple-fl-groom-l { left: -94px; top: 376px; width: 187px; height: 187px; z-index: 4; }
+.couple-fl-groom-r { right: -94px; top: 376px; width: 187px; height: 187px; z-index: 4; }
+.couple-fl-bride-l { left: -94px; top: 1210px; width: 187px; height: 187px; z-index: 4; }
+.couple-fl-bride-r { right: -94px; top: 1210px; width: 187px; height: 187px; z-index: 4; }
+
+/* Foliage */
+.couple-foliage-groom-l { left: 0; top: 100px; width: 178px; height: 317px; z-index: 2; }
+.couple-foliage-groom-r { right: 0; top: 100px; width: 178px; height: 317px; z-index: 2; }
+.couple-foliage-bride-l { left: 0; top: 930px; width: 178px; height: 317px; z-index: 2; }
+.couple-foliage-bride-r { right: 0; top: 930px; width: 178px; height: 317px; z-index: 2; }
+
+/* Edge flower + foliage windy animation (foliage excl) */
+.couple-fl-groom-l, .couple-fl-groom-r,
+.couple-fl-bride-l, .couple-fl-bride-r {
+  transform-origin: 50% 96%;
+  animation: heroGoyangSmall 3600ms ease-in-out 0ms infinite alternate;
+}
+
 .invitation-section--couple > .script-heading {
   position: absolute;
   top: 40px;
   left: 0;
   width: 100%;
   font-size: 40px;
+  z-index: 5;
 }
 
 /* Groom card — upper half */
 .groom-card {
-  top: 120px;
+  top: 580px;
   padding: 0 24px;
+  z-index: 3;
 }
 
 .groom-card .couple-short-name {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .groom-card .couple-full-name {
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 /* Bride card — lower half */
 .bride-card {
-  top: 820px;
+  top: 1450px;
   padding: 0 24px;
+  z-index: 3;
 }
 
 .bride-card .couple-short-name {
-  margin-bottom: 8px;
-}
-
-.bride-card .couple-full-name {
   margin-bottom: 6px;
 }
 
-/* Ornamental divider between groom and bride */
-.couple-divider {
-  position: absolute;
-  top: 510px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  z-index: 1;
-}
-
-.divider-line {
-  display: block;
-  width: 80px;
-  height: 1px;
-  background: var(--gold-pale);
-  opacity: 0.6;
-}
-
-.divider-ornament {
-  font-family: var(--font-script);
-  font-size: 24px;
-  color: var(--gold-rsvp);
-  opacity: 0.7;
-  line-height: 1;
-}
-
-/* Bottom decorative floral blobs — gentle radial gradient circles */
-.couple-bottom-decor {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.decor-blob {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
+.bride-card .couple-full-name {
+  margin-bottom: 4px;
 }
 
 .decor-blob--1 {
