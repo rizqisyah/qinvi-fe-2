@@ -6,28 +6,54 @@
   >
     <!-- 375x725 artwork stage, scaled to cover the viewport height. -->
     <div class="cover-stage" :style="{ '--cover-scale': coverScale }">
-      <!-- Depth-ordered slabs, each a full-frame layer exported at its true Figma
-           transform. Back flowers tuck behind the grass hill; foreground flowers
-           sit in front of it. Every slab animates independently. -->
-      <div class="cover-plane cover-plane-arch" style="--depth: 3">
+      <!-- Every flower/leaf is its own full-frame layer, exported at its true
+           Figma transform, so each blooms and sways on its own. Back flowers
+           tuck behind the grass hill; foreground flowers sit in front. -->
+      <div class="cover-plane cover-plane-arch" style="z-index: 1">
         <img class="cover-layer enter-arch" src="../../assets/figma/cover-arch.webp" alt="" />
       </div>
-      <div class="cover-plane cover-plane-leaves" style="--depth: 8">
-        <img class="cover-layer sway-leaves enter-leaves" src="../../assets/figma/cover-leaves.webp" alt="" />
-      </div>
-      <div class="cover-plane cover-plane-backleft" style="--depth: 14">
-        <img class="cover-layer sway-left enter-left" src="../../assets/figma/cover-backleft.webp" alt="" />
-      </div>
-      <div class="cover-plane cover-plane-backright" style="--depth: 14">
-        <img class="cover-layer sway-right enter-right" src="../../assets/figma/cover-backright.webp" alt="" />
-      </div>
-      <div class="cover-plane cover-plane-hill" style="--depth: 6">
+
+      <!-- back flowers + leaves (z 2-20) -->
+      <div class="cover-plane" style="z-index: 2"><img class="cover-fl cover-n287" src="../../assets/figma/cover-n287.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 3"><img class="cover-fl cover-n288" src="../../assets/figma/cover-n288.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 4"><img class="cover-fl cover-n304" src="../../assets/figma/cover-n304.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 5"><img class="cover-fl cover-n306" src="../../assets/figma/cover-n306.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 6"><img class="cover-fl cover-n259" src="../../assets/figma/cover-n259.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 7"><img class="cover-fl cover-n263" src="../../assets/figma/cover-n263.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 8"><img class="cover-fl cover-n260" src="../../assets/figma/cover-n260.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 9"><img class="cover-fl cover-n265" src="../../assets/figma/cover-n265.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 10"><img class="cover-fl cover-n266" src="../../assets/figma/cover-n266.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 11"><img class="cover-fl cover-n295" src="../../assets/figma/cover-n295.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 12"><img class="cover-fl cover-n268" src="../../assets/figma/cover-n268.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 13"><img class="cover-fl cover-n273" src="../../assets/figma/cover-n273.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 14"><img class="cover-fl cover-n308" src="../../assets/figma/cover-n308.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 15"><img class="cover-fl cover-n310" src="../../assets/figma/cover-n310.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 16"><img class="cover-fl cover-n312" src="../../assets/figma/cover-n312.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 17"><img class="cover-fl cover-n309" src="../../assets/figma/cover-n309.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 18"><img class="cover-fl cover-n274" src="../../assets/figma/cover-n274.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 19"><img class="cover-fl cover-n275" src="../../assets/figma/cover-n275.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 20"><img class="cover-fl cover-n277" src="../../assets/figma/cover-n277.webp" alt="" /></div>
+
+      <!-- grass hill (z 21): back flowers behind, front flowers ahead -->
+      <div class="cover-plane cover-plane-hill" style="z-index: 21">
         <img class="cover-layer enter-hill" src="../../assets/figma/cover-hill.webp" alt="" />
       </div>
-      <div class="cover-plane cover-plane-front" style="--depth: 20">
-        <img class="cover-layer breathe-front enter-front" src="../../assets/figma/cover-front.webp" alt="" />
-      </div>
-      <div class="cover-plane cover-plane-mono" style="--depth: 7">
+
+      <!-- foreground flowers (z 22-32) -->
+      <div class="cover-plane" style="z-index: 22"><img class="cover-fl cover-n298" src="../../assets/figma/cover-n298.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 23"><img class="cover-fl cover-n294" src="../../assets/figma/cover-n294.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 24"><img class="cover-fl cover-n293" src="../../assets/figma/cover-n293.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 25"><img class="cover-fl cover-n297" src="../../assets/figma/cover-n297.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 26"><img class="cover-fl cover-n292" src="../../assets/figma/cover-n292.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 27"><img class="cover-fl cover-n278" src="../../assets/figma/cover-n278.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 28"><img class="cover-fl cover-n280" src="../../assets/figma/cover-n280.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 29"><img class="cover-fl cover-n289" src="../../assets/figma/cover-n289.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 30"><img class="cover-fl cover-n290" src="../../assets/figma/cover-n290.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 31"><img class="cover-fl cover-n291" src="../../assets/figma/cover-n291.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 32"><img class="cover-fl cover-n296" src="../../assets/figma/cover-n296.webp" alt="" /></div>
+
+      <!-- monogram (z 33) -->
+      <div class="cover-plane cover-plane-mono" style="z-index: 33">
         <img class="cover-layer breathe-mono enter-mono" src="../../assets/figma/cover-monogram.webp" alt="" />
       </div>
 
@@ -74,7 +100,6 @@ onMounted(async () => {
   updateScale()
   window.addEventListener('resize', updateScale)
   await nextTick()
-  // Next frame so the entrance transition runs from the initial state.
   requestAnimationFrame(() => {
     isReady.value = true
   })
