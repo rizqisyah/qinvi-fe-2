@@ -48,16 +48,11 @@
 
 /* Section heights from measurement map */
 .invitation-section--hero { height: 700px; overflow: visible; background: var(--cream-bg); }
-.invitation-cover { height: 700px; overflow: visible; background: var(--cream-bg); }
 
+/* When locked (cover showing), the canvas just wraps the 375x725 cover stage. */
 .invitation-canvas.is-locked {
-  height: 100svh;
-  min-height: 700px;
-}
-
-.invitation-canvas.is-locked .invitation-cover {
-  height: 100svh;
-  min-height: 700px;
+  height: 725px;
+  background: #fffed6;
 }
 
 /* Splash exit: fade out in place, revealing the invitation underneath */
@@ -533,114 +528,131 @@
    COVER SCREEN (splash before opening — fully independent from Hero)
    ============================================================ */
 
-.cover-item {
+/* Garden-arch cover: 375x725 stage, each decorative layer exported full/
+   uncropped from Figma and positioned by its frame-relative bounds. Cream
+   Union background; bleed past the 375-wide stage is clipped. */
+.cover-root {
+  position: relative;
+  width: 375px;
+  height: 725px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #fffed6;
+}
+
+.cover-layer {
   position: absolute;
   display: block;
   max-width: none;
-  box-sizing: content-box;
   pointer-events: none;
 }
 
-.cover-arch { left: 0; top: 211px; width: 375px; height: 328px; }
-.cover-monogram { left: 136px; top: 73px; width: 97px; height: 124px; z-index: 3; }
+.cover-l01 { left: -78px; top: -97px; width: 525px; height: 582px; z-index: 1; }
+.cover-l04 { left: -168px; top: 370px; width: 375px; height: 211px; z-index: 4; }
+.cover-l05 { left: 164px; top: 376px; width: 375px; height: 211px; z-index: 5; }
+.cover-l06 { left: -21px; top: 429px; width: 418px; height: 279px; z-index: 6; }
+.cover-l07 { left: 0px; top: 436px; width: 375px; height: 280px; z-index: 7; }
+.cover-l08 { left: 0px; top: 485px; width: 375px; height: 231px; z-index: 8; }
+.cover-l10 { left: 134px; top: 597px; width: 298px; height: 286px; z-index: 10; }
+.cover-l16 { left: -97px; top: 65px; width: 205px; height: 277px; z-index: 16; }
+.cover-l17 { left: 66px; top: 495px; width: 132px; height: 178px; z-index: 17; }
+.cover-l18 { left: 302px; top: 499px; width: 132px; height: 178px; z-index: 18; }
+.cover-l19 { left: 258px; top: 62px; width: 205px; height: 277px; z-index: 19; }
+.cover-l20 { left: -180px; top: 286px; width: 298px; height: 286px; z-index: 20; }
+.cover-l21 { left: 68px; top: 315px; width: 68px; height: 121px; z-index: 21; }
+.cover-l22 { left: 258px; top: 286px; width: 298px; height: 286px; z-index: 22; }
+.cover-l23 { left: 171px; top: 627px; width: 298px; height: 286px; z-index: 23; }
+.cover-l24 { left: 307px; top: 315px; width: 68px; height: 121px; z-index: 24; }
+.cover-l25 { left: -21px; top: 140px; width: 82px; height: 146px; z-index: 25; }
+.cover-l26 { left: 10px; top: 377px; width: 82px; height: 146px; z-index: 26; }
+.cover-l27 { left: 311px; top: 140px; width: 82px; height: 146px; z-index: 27; }
+.cover-l28 { left: -63px; top: 420px; width: 135px; height: 200px; z-index: 28; }
+.cover-l29 { left: -72px; top: -79px; width: 180px; height: 267px; z-index: 29; }
+.cover-l30 { left: 51px; top: 135px; width: 82px; height: 146px; z-index: 30; }
+.cover-l31 { left: 316px; top: 135px; width: 82px; height: 146px; z-index: 31; }
+.cover-l32 { left: 272px; top: -79px; width: 180px; height: 267px; z-index: 32; }
+.cover-l33 { left: 232px; top: 652px; width: 176px; height: 261px; z-index: 33; }
+.cover-l34 { left: 242px; top: 913px; width: 176px; height: 261px; z-index: 34; }
+.cover-l35 { left: 303px; top: 420px; width: 135px; height: 200px; z-index: 35; }
+.cover-l36 { left: 120px; top: 635px; width: 135px; height: 200px; z-index: 36; }
+.cover-l37 { left: -94px; top: 213px; width: 185px; height: 185px; z-index: 37; }
+.cover-l38 { left: 284px; top: 203px; width: 185px; height: 185px; z-index: 38; }
+.cover-l39 { left: -59px; top: 558px; width: 125px; height: 125px; z-index: 39; }
+.cover-l40 { left: 311px; top: 558px; width: 125px; height: 125px; z-index: 40; }
+.cover-l41 { left: 122px; top: 114px; width: 126px; height: 161px; z-index: 41; }
+.cover-l42 { left: 317px; top: 584px; width: 90px; height: 137px; z-index: 42; }
+.cover-l43 { left: -37px; top: 633px; width: 90px; height: 137px; z-index: 43; }
+.cover-l44 { left: 26px; top: 667px; width: 90px; height: 137px; z-index: 44; }
+.cover-l45 { left: 127px; top: 641px; width: 132px; height: 182px; z-index: 45; }
 
-.cover-foliage-left { left: 0; top: 205px; width: 108px; height: 192px; z-index: 2; }
-.cover-foliage-right { right: 0; top: 205px; width: 108px; height: 192px; z-index: 2; }
-.cover-bouquet-left { left: 0; top: 340px; width: 150px; height: 150px; z-index: 2; }
-.cover-bouquet-right { right: 0; top: 340px; width: 150px; height: 150px; z-index: 2; }
-
-.cover-pine-left { left: -193px; top: 226px; width: 385px; height: 385px; z-index: 1; }
-.cover-pine-right { right: -193px; top: 226px; width: 385px; height: 385px; z-index: 1; }
-.cover-side-left { left: -70px; top: 440px; width: 139px; height: 90px; z-index: 2; }
-.cover-side-right { right: -70px; top: 440px; width: 139px; height: 90px; z-index: 2; }
-.cover-petal-left { left: 0; top: 330px; width: 88px; height: 88px; z-index: 2; }
-.cover-petal-right { right: 0; top: 331px; width: 88px; height: 88px; z-index: 2; }
-.cover-vine-left { left: 0; top: 332px; width: 73px; height: 131px; z-index: 2; }
-.cover-vine-right { right: 0; top: 342px; width: 73px; height: 131px; z-index: 2; }
-.cover-vine-left-back { left: 0; top: 315px; width: 68px; height: 121px; z-index: 2; }
-.cover-vine-right-back { right: 0; top: 314px; width: 68px; height: 121px; z-index: 2; }
-
-.cover-title,
-.cover-guest {
+/* Real text + button overlaid on the artwork */
+.cover-text {
   position: absolute;
   left: 0;
   width: 375px;
+  margin: 0;
   text-align: center;
-  z-index: 4;
+  color: #905d2a;
+  pointer-events: none;
 }
 
-.cover-title { top: 305px; }
-
-.cover-title-label {
-  margin: 0;
-  font-family: var(--font-playball);
-  font-size: 16px;
-  color: var(--brown-main);
-}
-
-.cover-couple-names {
-  margin: 8px 0 0;
+/* Text sits above all artwork so the (dynamic-length) guest name stays legible. */
+.cover-wedding-of {
+  top: 286px;
   font-family: var(--font-script);
-  font-size: 32px;
-  line-height: 1;
-  color: var(--brown-main);
+  font-size: 20px;
+  line-height: 38px;
+  z-index: 100;
 }
 
-.cover-guest { top: 566px; }
-
-.cover-guest-label {
-  margin: 0;
-  font-family: var(--font-cormorant);
-  font-style: italic;
-  font-size: 13px;
-  color: var(--brown-main);
+.cover-couple {
+  top: 319px;
+  font-family: var(--font-script);
+  font-size: 28px;
+  line-height: 38px;
+  z-index: 100;
 }
 
-.cover-guest-name {
-  margin: 2px 0 0;
+.cover-dear {
+  top: 536px;
   font-family: var(--font-playball);
-  font-size: 19px;
-  color: var(--red-deep);
+  font-size: 14px;
+  z-index: 100;
 }
 
-.cover-lawn {
-  position: absolute;
-  left: -60px;
-  right: -60px;
-  top: 520px;
-  height: 260px;
-  z-index: 1;
-  background: linear-gradient(180deg, #a9cf74 0%, #7fae4d 45%, #5c9236 100%);
-  border-radius: 50% 50% 0 0 / 34% 34% 0 0;
+.cover-guest {
+  top: 560px;
+  font-family: var(--font-playball);
+  font-size: 20px;
+  z-index: 100;
 }
 
 .cover-open-button {
   position: absolute;
   left: 50%;
-  bottom: 34px;
-  z-index: 8;
-  min-width: 172px;
-  height: 42px;
-  border: 1px solid rgba(132, 71, 17, 0.28);
-  border-radius: 999px;
-  background: rgba(255, 247, 215, 0.88);
-  color: var(--brown-dark);
-  font-family: var(--font-jost);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  box-shadow: 0 12px 28px rgba(132, 71, 17, 0.18);
-  cursor: pointer;
+  top: 597px;
   transform: translateX(-50%);
+  z-index: 101;
+  width: 166px;
+  height: 44px;
+  border: 0;
+  border-radius: 14px;
+  background: #f8f1af;
+  color: #905d2a;
+  font-family: var(--font-playball);
+  font-size: 20px;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: filter 0.2s, transform 0.2s;
 }
 
-.cover-open-button::before {
-  content: '';
-  position: absolute;
-  inset: 5px;
-  border: 1px solid rgba(144, 93, 42, 0.24);
-  border-radius: inherit;
-  pointer-events: none;
+.cover-open-button:hover {
+  filter: brightness(1.04);
+  transform: translateX(-50%) scale(1.03);
+}
+
+.cover-open-button:active {
+  transform: translateX(-50%) scale(0.98);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -655,13 +667,6 @@
     animation: none !important;
     opacity: 1;
     transform: translate3d(-50%, 0, 0);
-  }
-
-  .invitation-cover .cover-title,
-  .invitation-cover .cover-guest {
-    animation: none !important;
-    opacity: 1;
-    transform: none;
   }
 }
 
