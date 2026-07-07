@@ -1,14 +1,9 @@
 <template>
   <div class="invitation-canvas" :class="{ 'is-locked': !isOpen }" aria-label="Antonio and Ayu wedding invitation">
-    <div v-if="isLoading" class="opening-loader" aria-label="Memuat undangan">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <SplashScreen v-if="!isOpen" @open="openInvitation" />
 
-    <HeroSection :is-ready="!isLoading" :is-open="isOpen" @open="openInvitation" />
     <template v-if="isOpen">
+      <HeroSection :is-ready="true" :is-open="true" />
       <QuranSection />
       <CoupleSection />
       <SaveDateSection />
@@ -23,7 +18,8 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
+import SplashScreen from './sections/SplashScreen.vue'
 import HeroSection from './sections/HeroSection.vue'
 import QuranSection from './sections/QuranSection.vue'
 import CoupleSection from './sections/CoupleSection.vue'
@@ -34,14 +30,7 @@ import RsvpSection from './sections/RsvpSection.vue'
 import WishesSection from './sections/WishesSection.vue'
 import GallerySection from './sections/GallerySection.vue'
 
-const isLoading = ref(true)
 const isOpen = ref(false)
-
-onMounted(() => {
-  window.setTimeout(() => {
-    isLoading.value = false
-  }, 1100)
-})
 
 function openInvitation() {
   isOpen.value = true

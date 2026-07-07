@@ -39,45 +39,6 @@
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 24px 80px rgba(0, 0, 0, 0.35);
 }
 
-.invitation-canvas.is-locked {
-  height: 100svh;
-  min-height: 700px;
-}
-
-.invitation-canvas.is-locked .invitation-section--hero {
-  height: 100svh;
-  min-height: 700px;
-}
-
-.opening-loader {
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  display: grid;
-  place-items: center;
-  background: rgba(255, 247, 215, 0.86);
-}
-
-.opening-loader span {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: var(--brown-main);
-  transform-origin: 0 42px;
-  animation: openingSpin 1.15s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-}
-
-.opening-loader span:nth-child(1) { transform: rotate(0deg) translateY(-42px); animation-delay: -0.32s; }
-.opening-loader span:nth-child(2) { transform: rotate(90deg) translateY(-42px); animation-delay: -0.24s; }
-.opening-loader span:nth-child(3) { transform: rotate(180deg) translateY(-42px); animation-delay: -0.16s; }
-.opening-loader span:nth-child(4) { transform: rotate(270deg) translateY(-42px); animation-delay: -0.08s; }
-
-@keyframes openingSpin {
-  0% { opacity: 1; rotate: 0deg; }
-  100% { opacity: 0.25; rotate: 360deg; }
-}
-
 /* ----- Section Wrappers ----- */
 .inv-section {
   position: relative;
@@ -87,6 +48,17 @@
 
 /* Section heights from measurement map */
 .invitation-section--hero { height: 700px; overflow: visible; background: var(--cream-bg); }
+.invitation-cover { height: 700px; overflow: visible; background: var(--cream-bg); }
+
+.invitation-canvas.is-locked {
+  height: 100svh;
+  min-height: 700px;
+}
+
+.invitation-canvas.is-locked .invitation-cover {
+  height: 100svh;
+  min-height: 700px;
+}
 .invitation-section--quran { height: 530px; overflow: visible; }
 .invitation-section--couple { height: 1600px; }
 .invitation-section--save-date { height: 550px; background: #fff; }
@@ -508,6 +480,120 @@
   100% { transform: rotate(1.7deg) translate3d(1px, 1px, 0); }
 }
 
+/* ============================================================
+   COVER SCREEN (splash before opening — fully independent from Hero)
+   ============================================================ */
+
+.cover-item {
+  position: absolute;
+  display: block;
+  max-width: none;
+  box-sizing: content-box;
+  pointer-events: none;
+}
+
+.cover-arch { left: 0; top: 211px; width: 375px; height: 328px; }
+.cover-monogram { left: 136px; top: 73px; width: 97px; height: 124px; z-index: 3; }
+
+.cover-foliage-left { left: 0; top: 205px; width: 108px; height: 192px; z-index: 2; }
+.cover-foliage-right { right: 0; top: 205px; width: 108px; height: 192px; z-index: 2; }
+.cover-bouquet-left { left: 0; top: 340px; width: 150px; height: 150px; z-index: 2; }
+.cover-bouquet-right { right: 0; top: 340px; width: 150px; height: 150px; z-index: 2; }
+
+.cover-pine-left { left: -193px; top: 226px; width: 385px; height: 385px; z-index: 1; }
+.cover-pine-right { right: -193px; top: 226px; width: 385px; height: 385px; z-index: 1; }
+.cover-side-left { left: -70px; top: 440px; width: 139px; height: 90px; z-index: 2; }
+.cover-side-right { right: -70px; top: 440px; width: 139px; height: 90px; z-index: 2; }
+.cover-petal-left { left: 0; top: 330px; width: 88px; height: 88px; z-index: 2; }
+.cover-petal-right { right: 0; top: 331px; width: 88px; height: 88px; z-index: 2; }
+.cover-vine-left { left: 0; top: 332px; width: 73px; height: 131px; z-index: 2; }
+.cover-vine-right { right: 0; top: 342px; width: 73px; height: 131px; z-index: 2; }
+.cover-vine-left-back { left: 0; top: 315px; width: 68px; height: 121px; z-index: 2; }
+.cover-vine-right-back { right: 0; top: 314px; width: 68px; height: 121px; z-index: 2; }
+
+.cover-title,
+.cover-guest {
+  position: absolute;
+  left: 0;
+  width: 375px;
+  text-align: center;
+  z-index: 4;
+}
+
+.cover-title { top: 305px; }
+
+.cover-title-label {
+  margin: 0;
+  font-family: var(--font-playball);
+  font-size: 16px;
+  color: var(--brown-main);
+}
+
+.cover-couple-names {
+  margin: 8px 0 0;
+  font-family: var(--font-script);
+  font-size: 32px;
+  line-height: 1;
+  color: var(--brown-main);
+}
+
+.cover-guest { top: 566px; }
+
+.cover-guest-label {
+  margin: 0;
+  font-family: var(--font-cormorant);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--brown-main);
+}
+
+.cover-guest-name {
+  margin: 2px 0 0;
+  font-family: var(--font-playball);
+  font-size: 19px;
+  color: var(--red-deep);
+}
+
+.cover-lawn {
+  position: absolute;
+  left: -60px;
+  right: -60px;
+  top: 520px;
+  height: 260px;
+  z-index: 1;
+  background: linear-gradient(180deg, #a9cf74 0%, #7fae4d 45%, #5c9236 100%);
+  border-radius: 50% 50% 0 0 / 34% 34% 0 0;
+}
+
+.cover-open-button {
+  position: absolute;
+  left: 50%;
+  bottom: 34px;
+  z-index: 8;
+  min-width: 172px;
+  height: 42px;
+  border: 1px solid rgba(132, 71, 17, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 247, 215, 0.88);
+  color: var(--brown-dark);
+  font-family: var(--font-jost);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  box-shadow: 0 12px 28px rgba(132, 71, 17, 0.18);
+  cursor: pointer;
+  transform: translateX(-50%);
+}
+
+.cover-open-button::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(144, 93, 42, 0.24);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .invitation-section--hero .hero-asset {
     animation: none !important;
@@ -516,14 +602,17 @@
     filter: none;
   }
 
-  .opening-loader,
   .hero-open-button {
     animation: none !important;
-  }
-
-  .hero-open-button {
     opacity: 1;
     transform: translate3d(-50%, 0, 0);
+  }
+
+  .invitation-cover .cover-title,
+  .invitation-cover .cover-guest {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -1433,10 +1522,11 @@
 
 .invitation-section--gallery {
   background: var(--cream-bg);
+  overflow: visible;
 }
 
 .invitation-section--gallery .script-heading.gallery-title {
-  margin: 20px 0 0;
+  margin: 112px 0 0;
   font-size: 40px;
   line-height: 1;
   text-align: center;
@@ -1541,8 +1631,12 @@
 /* ----- Gallery top divider (bridges the Wishes section seam) ----- */
 
 .gallery-top-divider {
+  position: absolute;
+  left: 0;
+  top: -200px;
   width: 375px;
-  height: 68px;
+  height: 201px;
+  z-index: 5;
 }
 
 /* ----- Gallery closing composition (monogram, hashtag, couple-under-arch) -----

@@ -1,6 +1,6 @@
 <template>
   <section class="inv-section invitation-section invitation-section--gallery" data-section="gallery">
-    <img class="figma-asset gallery-top-divider" src="../../assets/figma/gallery-top-divider.png" alt="" />
+    <img class="figma-asset gallery-top-divider" src="../../assets/figma/gallery-top-divider-garland.png" alt="" />
 
     <h2 class="script-heading gallery-title">Gallery</h2>
 
