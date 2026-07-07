@@ -1,5 +1,10 @@
 <template>
-  <section class="inv-section invitation-section invitation-section--rsvp" data-section="rsvp">
+  <section
+    ref="rootRef"
+    class="inv-section invitation-section invitation-section--rsvp reveal-on-scroll"
+    :class="{ 'in-view': inView }"
+    data-section="rsvp"
+  >
     <!-- rsvp-header.png — cropped from rsvp-decor.png: arch + roses + heading + description only -->
     <img class="figma-asset rsvp-header" src="../../assets/figma/rsvp-header.png" alt="" />
     <div class="rsvp-form">
@@ -22,3 +27,9 @@
     </div>
   </section>
 </template>
+
+<script setup>
+import { useScrollReveal } from '../../composables/useScrollReveal'
+
+const { rootRef, inView } = useScrollReveal()
+</script>

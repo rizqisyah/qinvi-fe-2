@@ -1,5 +1,10 @@
 <template>
-  <section class="invitation-section invitation-section--gift" data-section="gift">
+  <section
+    ref="rootRef"
+    class="invitation-section invitation-section--gift reveal-on-scroll"
+    :class="{ 'in-view': inView }"
+    data-section="gift"
+  >
     <!-- Figma composite: card + edge ornaments + separator -->
     <img class="gift-decor" :src="img('gift-decor.png')" alt="" />
 
@@ -21,6 +26,10 @@
 </template>
 
 <script setup>
+import { useScrollReveal } from '../../composables/useScrollReveal'
+
+const { rootRef, inView } = useScrollReveal()
+
 const img = (name) =>
   new URL(`../../assets/figma/${name}`, import.meta.url).href
 </script>

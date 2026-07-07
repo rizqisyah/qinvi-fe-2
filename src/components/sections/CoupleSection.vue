@@ -1,5 +1,10 @@
 <template>
-  <section class="inv-section invitation-section invitation-section--couple" data-section="couple">
+  <section
+    ref="rootRef"
+    class="inv-section invitation-section invitation-section--couple reveal-on-scroll"
+    :class="{ 'in-view': inView }"
+    data-section="couple"
+  >
     <!-- Background layers -->
     <img class="couple-asset couple-circle-groom" src="../../assets/figma/couple-circle-groom.png" alt="" />
     <img class="couple-asset couple-circle-bride" src="../../assets/figma/couple-circle-bride.png" alt="" />
@@ -41,3 +46,9 @@
     </div>
   </section>
 </template>
+
+<script setup>
+import { useScrollReveal } from '../../composables/useScrollReveal'
+
+const { rootRef, inView } = useScrollReveal()
+</script>

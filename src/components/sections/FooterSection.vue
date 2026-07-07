@@ -1,5 +1,10 @@
 <template>
-  <section class="inv-section invitation-section invitation-section--footer" data-section="footer">
+  <section
+    ref="rootRef"
+    class="inv-section invitation-section invitation-section--footer reveal-on-scroll"
+    :class="{ 'in-view': inView }"
+    data-section="footer"
+  >
     <div class="footer-credit">
       <p class="footer-credit-label">Created with Love by,</p>
       <p class="footer-credit-name">@25ribuaja <span>x</span> Qinvi</p>
@@ -23,3 +28,9 @@
     <img class="figma-asset bottom-menu" src="../../assets/figma/bottom-menu.png" alt="" />
   </section>
 </template>
+
+<script setup>
+import { useScrollReveal } from '../../composables/useScrollReveal'
+
+const { rootRef, inView } = useScrollReveal()
+</script>

@@ -1,5 +1,10 @@
 <template>
-  <section class="invitation-section invitation-section--events" data-section="events">
+  <section
+    ref="rootRef"
+    class="invitation-section invitation-section--events reveal-on-scroll"
+    :class="{ 'in-view': inView }"
+    data-section="events"
+  >
     <article
       v-for="evt in events"
       :key="evt.key"
@@ -74,6 +79,10 @@
 </template>
 
 <script setup>
+import { useScrollReveal } from '../../composables/useScrollReveal'
+
+const { rootRef, inView } = useScrollReveal()
+
 const img = (name) =>
   new URL(`../../assets/figma/${name}`, import.meta.url).href
 

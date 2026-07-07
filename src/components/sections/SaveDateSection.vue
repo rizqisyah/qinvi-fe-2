@@ -1,5 +1,10 @@
 <template>
-  <section class="inv-section invitation-section invitation-section--save-date" data-section="save-date">
+  <section
+    ref="rootRef"
+    class="inv-section invitation-section invitation-section--save-date reveal-on-scroll"
+    :class="{ 'in-view': inView }"
+    data-section="save-date"
+  >
     <img class="save-asset save-bg" src="../../assets/figma/save-bg.png" alt="" />
     <img class="save-asset save-leaf-l" src="../../assets/figma/save-leaf-left.png" alt="" />
     <img class="save-asset save-leaf-r" src="../../assets/figma/save-leaf-right.png" alt="" />
@@ -20,3 +25,9 @@
     <button class="decor-button calendar-button" type="button" disabled>Add to Calender</button>
   </section>
 </template>
+
+<script setup>
+import { useScrollReveal } from '../../composables/useScrollReveal'
+
+const { rootRef, inView } = useScrollReveal()
+</script>

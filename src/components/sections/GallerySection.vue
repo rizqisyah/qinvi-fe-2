@@ -1,5 +1,10 @@
 <template>
-  <section class="inv-section invitation-section invitation-section--gallery" data-section="gallery">
+  <section
+    ref="rootRef"
+    class="inv-section invitation-section invitation-section--gallery reveal-on-scroll"
+    :class="{ 'in-view': inView }"
+    data-section="gallery"
+  >
     <img class="figma-asset gallery-top-divider" src="../../assets/figma/gallery-top-divider-garland.png" alt="" />
 
     <h2 class="script-heading gallery-title">Gallery</h2>
@@ -104,6 +109,9 @@
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useScrollReveal } from '../../composables/useScrollReveal'
+
+const { rootRef, inView } = useScrollReveal()
 
 const photos = [
   'gallery-photo-main.png',

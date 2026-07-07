@@ -1,5 +1,10 @@
 <template>
-  <section class="inv-section invitation-section invitation-section--quran" data-section="quran">
+  <section
+    ref="rootRef"
+    class="inv-section invitation-section invitation-section--quran reveal-on-scroll"
+    :class="{ 'in-view': inView }"
+    data-section="quran"
+  >
     <img class="quran-asset quran-card" src="../../assets/figma/quran-card.png" alt="" />
     <img class="quran-asset quran-seal" src="../../assets/figma/quran-seal.png" alt="" />
     <img class="quran-asset quran-lantern quran-lantern-left" src="../../assets/figma/quran-lantern-left.png" alt="" />
@@ -21,3 +26,9 @@
     </div>
   </section>
 </template>
+
+<script setup>
+import { useScrollReveal } from '../../composables/useScrollReveal'
+
+const { rootRef, inView } = useScrollReveal()
+</script>

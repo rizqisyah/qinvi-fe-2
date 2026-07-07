@@ -94,6 +94,47 @@
   text-align: center;
 }
 
+/* Scroll-triggered reveal: each direct child of the section fades/slides in
+   on its own, staggered, the first time the section enters the viewport. */
+.reveal-on-scroll > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-on-scroll.in-view > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-on-scroll > *:nth-child(1) { --reveal-delay: 0ms; }
+.reveal-on-scroll > *:nth-child(2) { --reveal-delay: 45ms; }
+.reveal-on-scroll > *:nth-child(3) { --reveal-delay: 90ms; }
+.reveal-on-scroll > *:nth-child(4) { --reveal-delay: 135ms; }
+.reveal-on-scroll > *:nth-child(5) { --reveal-delay: 180ms; }
+.reveal-on-scroll > *:nth-child(6) { --reveal-delay: 225ms; }
+.reveal-on-scroll > *:nth-child(7) { --reveal-delay: 270ms; }
+.reveal-on-scroll > *:nth-child(8) { --reveal-delay: 315ms; }
+.reveal-on-scroll > *:nth-child(9) { --reveal-delay: 360ms; }
+.reveal-on-scroll > *:nth-child(10) { --reveal-delay: 405ms; }
+.reveal-on-scroll > *:nth-child(11) { --reveal-delay: 450ms; }
+.reveal-on-scroll > *:nth-child(12) { --reveal-delay: 495ms; }
+.reveal-on-scroll > *:nth-child(13) { --reveal-delay: 540ms; }
+.reveal-on-scroll > *:nth-child(14) { --reveal-delay: 585ms; }
+.reveal-on-scroll > *:nth-child(15) { --reveal-delay: 630ms; }
+.reveal-on-scroll > *:nth-child(16) { --reveal-delay: 675ms; }
+.reveal-on-scroll > *:nth-child(17) { --reveal-delay: 720ms; }
+.reveal-on-scroll > *:nth-child(18) { --reveal-delay: 765ms; }
+.reveal-on-scroll > *:nth-child(19) { --reveal-delay: 810ms; }
+.reveal-on-scroll > *:nth-child(20) { --reveal-delay: 855ms; }
+.reveal-on-scroll > *:nth-child(21) { --reveal-delay: 900ms; }
+.reveal-on-scroll > *:nth-child(22) { --reveal-delay: 945ms; }
+.reveal-on-scroll > *:nth-child(23) { --reveal-delay: 990ms; }
+.reveal-on-scroll > *:nth-child(24) { --reveal-delay: 1035ms; }
+.reveal-on-scroll > *:nth-child(25) { --reveal-delay: 1080ms; }
+.reveal-on-scroll > *:nth-child(26) { --reveal-delay: 1125ms; }
+
 /* Decorative / visual button (static, no interactivity) */
 .decor-button {
   display: inline-flex;
