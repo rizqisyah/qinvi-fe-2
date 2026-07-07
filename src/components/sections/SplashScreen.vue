@@ -82,9 +82,9 @@ import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 defineEmits(['open'])
 
 const STAGE_HEIGHT = 725
-// Sit just inside the 375px column so the side flowers keep a small margin
-// instead of getting clipped at the edges.
-const SIDE_FIT = 0.95
+// Render at the artwork's designed width (1 = exact Figma frame). Scaling past 1
+// to fill height would clip the side flowers, so we cap here.
+const SIDE_FIT = 1.0
 
 const guestName = ref('Bapak/Ibu/Saudara/i')
 const isReady = ref(false)
