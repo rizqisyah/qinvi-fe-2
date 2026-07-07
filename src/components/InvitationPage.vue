@@ -1,6 +1,8 @@
 <template>
   <div class="invitation-canvas" :class="{ 'is-locked': !isOpen }" aria-label="Antonio and Ayu wedding invitation">
-    <SplashScreen v-if="!isOpen" @open="openInvitation" />
+    <Transition name="splash">
+      <SplashScreen v-if="!isOpen" @open="openInvitation" />
+    </Transition>
 
     <template v-if="isOpen">
       <HeroSection :is-ready="true" :is-open="true" />
@@ -29,6 +31,7 @@ import GiftSection from './sections/GiftSection.vue'
 import RsvpSection from './sections/RsvpSection.vue'
 import WishesSection from './sections/WishesSection.vue'
 import GallerySection from './sections/GallerySection.vue'
+import FooterSection from './sections/FooterSection.vue'
 
 const isOpen = ref(false)
 

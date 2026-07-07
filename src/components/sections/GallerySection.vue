@@ -6,11 +6,13 @@
 
     <div class="gallery-carousel" role="region" aria-label="Photo gallery">
       <div class="gallery-main-photo-wrapper">
-        <img
-          class="gallery-main-photo"
-          :src="currentPhotoSrc"
-          :alt="`Gallery photo ${currentIndex + 1} of ${photos.length}`"
-        />
+        <button class="gallery-main-photo-button" type="button" aria-label="Enlarge photo" @click="openLightbox">
+          <img
+            class="gallery-main-photo"
+            :src="currentPhotoSrc"
+            :alt="`Gallery photo ${currentIndex + 1} of ${photos.length}`"
+          />
+        </button>
 
         <button class="gallery-nav gallery-nav--prev" type="button" aria-label="Previous photo" @click="prevPhoto">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -38,6 +40,29 @@
           <img :src="img(photo)" alt="" />
         </button>
       </div>
+    </div>
+
+    <div v-if="lightboxOpen" class="gallery-lightbox" @click.self="closeLightbox">
+      <button class="gallery-lightbox-close" type="button" aria-label="Close" @click="closeLightbox">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="4" y1="4" x2="20" y2="20" />
+          <line x1="20" y1="4" x2="4" y2="20" />
+        </svg>
+      </button>
+
+      <button class="gallery-lightbox-nav gallery-lightbox-nav--prev" type="button" aria-label="Previous photo" @click="prevPhoto">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+
+      <img class="gallery-lightbox-photo" :src="currentPhotoSrc" :alt="`Gallery photo ${currentIndex + 1} of ${photos.length}`" />
+
+      <button class="gallery-lightbox-nav gallery-lightbox-nav--next" type="button" aria-label="Next photo" @click="nextPhoto">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
     </div>
 
     <div class="gallery-closing" ref="closingEl" :class="{ 'in-view': closingInView }">
@@ -103,6 +128,23 @@ function nextPhoto() {
   currentIndex.value = (currentIndex.value + 1) % photos.length
 }
 
+const lightboxOpen = ref(false)
+
+function openLightbox() {
+  lightboxOpen.value = true
+}
+
+function closeLightbox() {
+  lightboxOpen.value = false
+}
+
+function handleKeydown(event) {
+  if (!lightboxOpen.value) return
+  if (event.key === 'Escape') closeLightbox()
+  if (event.key === 'ArrowLeft') prevPhoto()
+  if (event.key === 'ArrowRight') nextPhoto()
+}
+
 const closingEl = ref(null)
 const closingInView = ref(false)
 
@@ -123,9 +165,11 @@ onMounted(() => {
     { threshold: 0.2 }
   )
   if (closingEl.value) observer.observe(closingEl.value)
+  window.addEventListener('keydown', handleKeydown)
 })
 
 onBeforeUnmount(() => {
   observer?.disconnect()
+  window.removeEventListener('keydown', handleKeydown)
 })
 </script>

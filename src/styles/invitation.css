@@ -59,6 +59,20 @@
   height: 100svh;
   min-height: 700px;
 }
+
+/* Splash exit: fade out in place, revealing the invitation underneath */
+.splash-leave-active {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  transition: opacity 0.7s ease;
+}
+
+.splash-leave-to {
+  opacity: 0;
+}
 .invitation-section--quran { height: 530px; overflow: visible; }
 .invitation-section--couple { height: 1600px; }
 .invitation-section--save-date { height: 550px; background: #fff; }
@@ -223,14 +237,6 @@
 .event-card .maps-button {
   font-family: var(--font-jost);
   font-size: 13px;
-}
-
-/* Footer section */
-.invitation-section--footer p {
-  font-family: var(--font-script);
-  color: var(--footer-brown);
-  margin: 0;
-  text-align: center;
 }
 
 /* Form label text (visual-only, no actual form controls) */
@@ -1623,6 +1629,77 @@
   transform: scale(1.08);
 }
 
+.gallery-main-photo-button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+/* ----- Gallery lightbox (fullscreen enlarge) ----- */
+
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 40px 20px;
+}
+
+.gallery-lightbox-photo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.gallery-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.gallery-lightbox-nav--prev {
+  left: 16px;
+}
+
+.gallery-lightbox-nav--next {
+  right: 16px;
+}
+
 /* ----- Gallery top divider (bridges the Wishes section seam) ----- */
 
 .gallery-top-divider {
@@ -1839,45 +1916,61 @@ left: 0;
    FOOTER SECTION (333px)
    ============================================================ */
 
-/* footer-decor.png — real asset-export */
-.figma-asset.footer-decor {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 375px;
-  height: 333px;
-  object-fit: cover;
-  z-index: 0;
-}
-
 .footer-credit {
   position: absolute;
-  top: 60px;
+  top: 59px;
   left: 0;
   width: 100%;
+  text-align: center;
+  z-index: 1;
+}
+
+.footer-credit-label {
+  margin: 0;
   font-family: var(--font-script);
   font-size: 15px;
-  color: #fff7d7;
-  text-align: center;
-  margin: 0;
-  z-index: 1;
+  color: var(--footer-brown);
 }
 
-.footer-author {
-  position: absolute;
-  top: 90px;
-  left: 0;
-  width: 100%;
+.footer-credit-name {
+  margin: 2px 0 14px;
   font-family: var(--font-script);
   font-size: 24px;
-  color: #fff7d7;
-  text-align: center;
-  margin: 0;
-  z-index: 1;
+  color: var(--footer-brown);
 }
 
-.footer-author span {
+.footer-credit-name span {
   margin: 0 4px;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.footer-social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #dca74f;
+  color: #000;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.footer-social-icon:hover {
+  transform: scale(1.08);
+  opacity: 0.85;
+}
+
+.footer-divider {
+  width: 295px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(112, 48, 48, 0.13);
 }
 
 /* bottom-menu.png — real asset-export */
