@@ -95,17 +95,19 @@
 }
 
 /* Scroll-triggered reveal: each direct child of the section fades/slides in
-   on its own, staggered, the first time the section enters the viewport. */
+   on its own, staggered, the first time the section enters the viewport.
+   Uses the standalone `translate` property (not `transform`) so it doesn't
+   clobber an element's own transform (e.g. translateX(-50%) centering). */
 .reveal-on-scroll > * {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 1.4s ease, transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  translate: 0 28px;
+  transition: opacity 1.4s ease, translate 1.4s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
 .reveal-on-scroll.in-view > * {
   opacity: 1;
-  transform: translateY(0);
+  translate: 0 0;
 }
 
 .reveal-on-scroll > *:nth-child(1) { --reveal-delay: 0ms; }
