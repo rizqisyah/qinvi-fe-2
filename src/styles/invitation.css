@@ -556,19 +556,12 @@
   transform-origin: top center;
 }
 
-/* Parallax plane: `transform` carries only the cursor offset (scaled by
-   --depth) so it never collides with the inner layer's entrance/idle motion. */
+/* Depth slab wrapper: holds the layer's stacking order. The inner layer owns
+   all motion (entrance + idle sway), so the plane itself stays static. */
 .cover-plane {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  will-change: transform;
-  transform: translate3d(
-    calc(var(--px, 0) * var(--depth, 0) * -1px),
-    calc(var(--py, 0) * var(--depth, 0) * -1px),
-    0
-  );
-  transition: transform 0.5s ease-out;
 }
 
 /* Depth order (back -> front): arch, leaves, back flowers, HILL, front

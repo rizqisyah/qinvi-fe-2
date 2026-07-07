@@ -1,11 +1,8 @@
 <template>
   <div
-    ref="rootRef"
     class="cover-root"
     :class="{ 'is-ready': isReady }"
     data-section="cover"
-    @mousemove="onPointer"
-    @mouseleave="resetParallax"
   >
     <!-- 375x725 artwork stage, scaled to cover the viewport height. -->
     <div class="cover-stage" :style="{ '--cover-scale': coverScale }">
@@ -63,36 +60,10 @@ const STAGE_HEIGHT = 725
 const guestName = ref('Bapak/Ibu/Saudara/i')
 const isReady = ref(false)
 const coverScale = ref(1)
-const rootRef = ref(null)
 
 // Scale the fixed 375x725 artwork to cover the viewport height (never below 1).
 function updateScale() {
   coverScale.value = Math.max(1, window.innerHeight / STAGE_HEIGHT)
-}
-
-// Cursor parallax: publish a normalized -1..1 offset that each plane multiplies
-// by its own --depth. Uses `transform` on the plane so it never fights the
-// entrance (`translate`) or idle sway (`rotate`/`scale`) on the inner image.
-let rafId = 0
-function onPointer(e) {
-  const el = rootRef.value
-  if (!el) return
-  const r = el.getBoundingClientRect()
-  const nx = ((e.clientX - r.left) / r.width - 0.5) * 2
-  const ny = ((e.clientY - r.top) / r.height - 0.5) * 2
-  if (rafId) return
-  rafId = requestAnimationFrame(() => {
-    rafId = 0
-    el.style.setProperty('--px', nx.toFixed(3))
-    el.style.setProperty('--py', ny.toFixed(3))
-  })
-}
-
-function resetParallax() {
-  const el = rootRef.value
-  if (!el) return
-  el.style.setProperty('--px', '0')
-  el.style.setProperty('--py', '0')
 }
 
 onMounted(async () => {
@@ -111,6 +82,5 @@ onMounted(async () => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateScale)
-  if (rafId) cancelAnimationFrame(rafId)
 })
 </script>
