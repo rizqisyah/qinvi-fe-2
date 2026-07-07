@@ -533,7 +533,8 @@
    uncropped from Figma and positioned by its frame-relative bounds. Cream
    Union background; bleed past the 375-wide stage is clipped. */
 .cover-root {
-  position: relative;
+  display: grid;
+  place-items: center;
   width: 375px;
   height: 100svh;
   min-height: 725px;
@@ -542,18 +543,14 @@
   background: #fffed6;
 }
 
-/* Fixed-proportion artwork stage, scaled up to cover the viewport height.
-   Overflow past the 375px column is clipped by .cover-root. */
+/* Fixed-proportion artwork stage, centered and scaled to sit inside the column
+   with a small side margin. Leftover space is cream, matching the backdrop. */
 .cover-stage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  position: relative;
   width: 375px;
   height: 725px;
   transform: scale(var(--cover-scale, 1));
-  transform-origin: top center;
+  transform-origin: center center;
 }
 
 /* Depth slab wrapper: holds the layer's stacking order. The inner layer owns

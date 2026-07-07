@@ -82,14 +82,20 @@ import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 defineEmits(['open'])
 
 const STAGE_HEIGHT = 725
+// Sit just inside the 375px column so the side flowers keep a small margin
+// instead of getting clipped at the edges.
+const SIDE_FIT = 0.95
 
 const guestName = ref('Bapak/Ibu/Saudara/i')
 const isReady = ref(false)
 const coverScale = ref(1)
 
-// Scale the fixed 375x725 artwork to cover the viewport height (never below 1).
+// Scale toward filling the viewport height, but never wider than the column
+// (capped just below 1 for a side margin). The stage is centered vertically, so
+// any leftover space becomes cream that matches the backdrop.
 function updateScale() {
-  coverScale.value = Math.max(1, window.innerHeight / STAGE_HEIGHT)
+  const fitHeight = window.innerHeight / STAGE_HEIGHT
+  coverScale.value = Math.min(fitHeight, SIDE_FIT)
 }
 
 onMounted(async () => {
