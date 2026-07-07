@@ -32,7 +32,7 @@
 .invitation-canvas {
   position: relative;
   width: 375px;
-  height: 9385px;
+  height: 8667px;
   margin: 0 auto;
   overflow: hidden;
   background: var(--cream-bg);
@@ -64,8 +64,8 @@
 .invitation-section--save-date { height: 550px; background: #fff; }
 .invitation-section--events { height: 1085px; }
 .invitation-section--gift { height: 704px; }
-.invitation-section--rsvp { height: 572px; background: var(--cream-bg); }
-.invitation-section--wishes { height: 1664px; background: #d3c891; }
+.invitation-section--rsvp { height: 562px; background: var(--cream-bg); }
+.invitation-section--wishes { height: 956px; background: var(--cream-bg); }
 .invitation-section--gallery { height: 1600px; }
 .invitation-section--footer { height: 333px; }
 
@@ -1326,123 +1326,119 @@
 
 
 /* ============================================================
-   RSVP SECTION (572px) — gold background
+   RSVP SECTION — arch header image + real form, flush into Wishes card
    ============================================================ */
 
-/* rsvp-decor.png — Figma composite: RSVP group 2:2089 */
-.figma-asset.rsvp-decor {
-  position: absolute;
-  top: 0;
-  left: 24px;
+/* rsvp-header.png — cropped from rsvp-decor.png (arch + roses + heading + description) */
+.figma-asset.rsvp-header {
+  display: block;
   width: 332px;
-  height: 560px;
-  object-fit: contain;
-  z-index: 0;
-}
-
-.invitation-section--rsvp .script-heading {
-  position: absolute;
-  top: 30px;
-  left: 0;
-  width: 100%;
-  font-size: 48px;
-  z-index: 1;
-  color: #fff7d7;
-}
-
-.rsvp-description {
-  position: absolute;
-  top: 100px;
-  left: 24px;
-  width: 327px;
-  font-size: 16px;
-  text-align: center;
-  color: #fff7d7;
-  z-index: 1;
+  height: 255px;
+  margin: 0 auto;
 }
 
 .rsvp-form {
-  position: absolute;
-  top: 220px;
-  left: 24px;
-  width: 327px;
-  z-index: 1;
+  width: 332px;
+  margin: 0 auto;
+  padding: 20px 24px 24px;
+  background: var(--gold-rsvp);
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .rsvp-form .form-label {
   color: #fff7d7;
   margin-bottom: 4px;
+  text-align: left;
 }
 
 .rsvp-form .visual-input {
+  display: block;
   margin-bottom: 12px;
   width: 100%;
   border-radius: 4px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  pointer-events: auto;
+  font-family: var(--font-noto-sans);
+  font-size: 14px;
+  color: var(--brown-main);
 }
 
-.invitation-section--rsvp .send-button {
-  position: absolute;
-  top: 420px;
-  left: 50%;
-  transform: translateX(-50%);
+.rsvp-form .send-button {
+  margin-top: 8px;
   padding: 10px 40px;
-  z-index: 1;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.rsvp-attendance-label {
+  margin-bottom: 8px;
+}
+
+.rsvp-attendance-group {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.rsvp-attendance-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff7d7;
+  font-family: var(--font-noto-sans);
+  font-size: 14px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.rsvp-attendance-option input[type='radio'] {
+  pointer-events: auto;
+  accent-color: var(--brown-dark);
+  cursor: pointer;
 }
 
 
 /* ============================================================
-   WISHES SECTION (1664px)
+   WISHES SECTION — same card as RSVP, flush on top, rounded at bottom
    ============================================================ */
 
-/* wishes-bg.png — real asset-export */
-.figma-asset.wishes-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 375px;
-  height: 1664px;
-  object-fit: cover;
-  z-index: 0;
+.wishes-card {
+  width: 332px;
+  margin: 0 auto;
+  padding: 24px 24px 32px;
+  background: var(--gold-rsvp);
+  box-sizing: border-box;
+  border-radius: 0 0 24px 24px;
+  text-align: center;
 }
 
-.invitation-section--wishes .script-heading {
-  position: absolute;
-  top: 40px;
-  left: 0;
-  width: 100%;
+.wishes-card .script-heading {
   font-size: 40px;
   color: var(--white-soft);
-  z-index: 1;
+  margin-bottom: 12px;
 }
 
 .wishes-intro {
-  position: absolute;
-  top: 105px;
-  left: 24px;
-  width: 327px;
   font-size: 16px;
-  color: #e8eced;
+  color: #fff7d7;
   text-align: center;
-  z-index: 1;
+  margin-bottom: 20px;
+}
+
+.wishes-form {
+  text-align: left;
 }
 
 .wishes-prompt {
   margin: 20px 0 8px;
-  width: 286px;
   font-family: var(--font-cormorant);
   font-weight: 700;
   font-size: 16px;
   line-height: 22.4px;
-  color: var(--brown-main);
+  color: #fff7d7;
   text-align: left;
-}
-
-.wishes-form {
-  position: absolute;
-  top: 216px;
-  left: 42px;
-  width: 286px;
-  z-index: 1;
 }
 
 .wishes-form .form-label {
@@ -1452,7 +1448,7 @@
   font-weight: 700;
   font-size: 16px;
   line-height: 22.4px;
-  color: #e8eced;
+  color: #fff7d7;
 }
 
 .wishes-form .required-marker {
@@ -1481,38 +1477,37 @@
 
 /* Kirim Konfirmasi button — Jost 13px */
 .invitation-section--wishes .confirm-button {
-  position: absolute;
-  top: 448px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 16px 0 24px;
   padding: 8px 28px;
-  z-index: 1;
   pointer-events: auto;
   cursor: pointer;
 }
 
 /* Wishes list (static entries) */
 .wishes-list {
-  position: absolute;
-  top: 548px;
-  left: 24px;
-  width: 327px;
-  z-index: 1;
+  text-align: left;
 }
 
 .wish-item {
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   padding: 12px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 8px;
 }
 
 .wish-author {
   margin-bottom: 2px;
+  color: #fff7d7;
 }
 
 .wish-time {
   margin-bottom: 6px;
+  color: #e8dcc0;
+  font-size: 12px;
+}
+
+.wish-text {
+  color: #fff7d7;
 }
 
 
