@@ -90,20 +90,38 @@
   text-align: center;
 }
 
-/* Scroll-triggered reveal: each direct child of the section fades/slides in
-   on its own, staggered, the first time the section enters the viewport.
-   Uses the standalone `translate` property (not `transform`) so it doesn't
-   clobber an element's own transform (e.g. translateX(-50%) centering). */
+/* Scroll-triggered reveal: each direct child of the section reveals on its own,
+   staggered, the first time the section enters the viewport. Instead of every
+   child fading up from the bottom, children cycle through four directions by
+   position (up, from-left, from-right, zoom) so the whole page reveals with
+   variety. Everything sits in the centered 375px column on cream, so a slide/
+   zoom only ever exposes matching cream briefly. Standalone `translate`/`scale`
+   (not `transform`) so they compose with an element's own translateX(-50%). */
 .reveal-on-scroll > * {
   opacity: 0;
-  translate: 0 28px;
-  transition: opacity 1.4s ease, translate 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1.5s ease,
+    translate 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+    scale 1.5s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
+
+/* Direction cycle by position */
+.reveal-on-scroll > *:nth-child(4n + 1) { translate: 0 34px; }        /* up      */
+.reveal-on-scroll > *:nth-child(4n + 2) { translate: -44px 0; }       /* left    */
+.reveal-on-scroll > *:nth-child(4n + 3) { translate: 44px 0; }        /* right   */
+.reveal-on-scroll > *:nth-child(4n)     { translate: 0 16px; scale: 0.92; } /* zoom */
 
 .reveal-on-scroll.in-view > * {
   opacity: 1;
   translate: 0 0;
+  scale: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll > * {
+    translate: 0 0 !important;
+    scale: 1 !important;
+  }
 }
 
 .reveal-on-scroll > *:nth-child(1) { --reveal-delay: 0ms; }
