@@ -9,20 +9,26 @@
   >
     <!-- 375x725 artwork stage, scaled to cover the viewport height. -->
     <div class="cover-stage" :style="{ '--cover-scale': coverScale }">
-      <!-- Each decorative slab is a full-frame layer exported from Figma at its
-           true transform, so it can animate (entrance + idle sway + parallax)
-           independently while staying pixel-aligned. -->
-      <div class="cover-plane cover-plane-base" style="--depth: 4">
-        <img class="cover-layer enter-base" src="../../assets/figma/cover-base.webp" alt="" />
+      <!-- Depth-ordered slabs, each a full-frame layer exported at its true Figma
+           transform. Back flowers tuck behind the grass hill; foreground flowers
+           sit in front of it. Every slab animates independently. -->
+      <div class="cover-plane cover-plane-arch" style="--depth: 3">
+        <img class="cover-layer enter-arch" src="../../assets/figma/cover-arch.webp" alt="" />
       </div>
-      <div class="cover-plane cover-plane-bottom" style="--depth: 10">
-        <img class="cover-layer sway-bottom enter-bottom" src="../../assets/figma/cover-bottom.webp" alt="" />
+      <div class="cover-plane cover-plane-leaves" style="--depth: 8">
+        <img class="cover-layer sway-leaves enter-leaves" src="../../assets/figma/cover-leaves.webp" alt="" />
       </div>
-      <div class="cover-plane cover-plane-left" style="--depth: 16">
-        <img class="cover-layer sway-left enter-left" src="../../assets/figma/cover-left.webp" alt="" />
+      <div class="cover-plane cover-plane-backleft" style="--depth: 14">
+        <img class="cover-layer sway-left enter-left" src="../../assets/figma/cover-backleft.webp" alt="" />
       </div>
-      <div class="cover-plane cover-plane-right" style="--depth: 16">
-        <img class="cover-layer sway-right enter-right" src="../../assets/figma/cover-right.webp" alt="" />
+      <div class="cover-plane cover-plane-backright" style="--depth: 14">
+        <img class="cover-layer sway-right enter-right" src="../../assets/figma/cover-backright.webp" alt="" />
+      </div>
+      <div class="cover-plane cover-plane-hill" style="--depth: 6">
+        <img class="cover-layer enter-hill" src="../../assets/figma/cover-hill.webp" alt="" />
+      </div>
+      <div class="cover-plane cover-plane-front" style="--depth: 20">
+        <img class="cover-layer breathe-front enter-front" src="../../assets/figma/cover-front.webp" alt="" />
       </div>
       <div class="cover-plane cover-plane-mono" style="--depth: 7">
         <img class="cover-layer breathe-mono enter-mono" src="../../assets/figma/cover-monogram.webp" alt="" />
