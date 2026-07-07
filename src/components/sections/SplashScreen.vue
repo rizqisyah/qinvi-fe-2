@@ -1,5 +1,7 @@
 <template>
   <div class="cover-root" :class="{ 'is-ready': isReady }" data-section="cover">
+    <!-- 375x725 artwork stage, scaled to cover the viewport height. -->
+    <div class="cover-stage" :style="{ '--cover-scale': coverScale }">
     <!-- Garden-arch cover. Each decorative layer is exported full/uncropped from
          Figma and positioned by its frame-relative bounds so it can be animated
          individually later. z-index encodes the original Figma stacking order. -->
@@ -51,20 +53,29 @@
     <button class="cover-open-button" type="button" @click="$emit('open')">
       Open Invitation
     </button>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
 defineEmits(['open'])
 
+const STAGE_HEIGHT = 725
+
 const guestName = ref('Bapak/Ibu/Saudara/i')
 const isReady = ref(false)
+const coverScale = ref(1)
 
 // Per-layer hook for future staggered entrance animation (--i = Figma stack index).
 function revealStyle(index) {
   return { '--i': index }
+}
+
+// Scale the fixed 375x725 artwork to cover the viewport height (never below 1).
+function updateScale() {
+  coverScale.value = Math.max(1, window.innerHeight / STAGE_HEIGHT)
 }
 
 onMounted(async () => {
@@ -72,7 +83,13 @@ onMounted(async () => {
   if (guest) {
     guestName.value = guest
   }
+  updateScale()
+  window.addEventListener('resize', updateScale)
   await nextTick()
   isReady.value = true
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateScale)
 })
 </script>

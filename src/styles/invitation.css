@@ -49,9 +49,10 @@
 /* Section heights from measurement map */
 .invitation-section--hero { height: 700px; overflow: visible; background: var(--cream-bg); }
 
-/* When locked (cover showing), the canvas just wraps the 375x725 cover stage. */
+/* When locked (cover showing), the canvas fills the viewport height. */
 .invitation-canvas.is-locked {
-  height: 725px;
+  height: 100svh;
+  min-height: 725px;
   background: #fffed6;
 }
 
@@ -534,10 +535,25 @@
 .cover-root {
   position: relative;
   width: 375px;
-  height: 725px;
+  height: 100svh;
+  min-height: 725px;
   margin: 0 auto;
   overflow: hidden;
   background: #fffed6;
+}
+
+/* Fixed-proportion artwork stage, scaled up to cover the viewport height.
+   Overflow past the 375px column is clipped by .cover-root. */
+.cover-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 375px;
+  height: 725px;
+  transform: scale(var(--cover-scale, 1));
+  transform-origin: top center;
 }
 
 .cover-layer {
