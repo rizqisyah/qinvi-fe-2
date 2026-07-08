@@ -49,10 +49,13 @@
 /* Section heights from measurement map */
 .invitation-section--hero { height: 700px; overflow: visible; background: var(--cream-bg); }
 
-/* When locked (cover showing), the canvas fills the viewport height. */
+/* When locked (cover showing), the canvas fills the whole viewport so the cover
+   can bleed edge-to-edge; the 375 phone-frame only applies once opened. */
 .invitation-canvas.is-locked {
+  width: 100vw;
   height: 100svh;
   min-height: 725px;
+  box-shadow: none;
   background: #fffed6;
 }
 
@@ -623,7 +626,11 @@
 .cover-root {
   display: grid;
   place-items: center;
-  width: 375px;
+  /* Fill the full viewport width so the height-filling stage is only clipped at
+     the screen edge, not at the 375 column — keeps far more of the side
+     ornaments visible while the stage still covers the full height. */
+  width: 100vw;
+  max-width: 100vw;
   height: 100svh;
   min-height: 725px;
   margin: 0 auto;
