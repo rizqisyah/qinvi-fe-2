@@ -84,8 +84,8 @@
       <img class="closing-asset closing-anim closing-dahlia-crop-r" :style="delay(7)" :src="img('closing-dahlia-crop.png')" alt="" />
       <img class="closing-asset closing-anim closing-ranunculus-l" :style="delay(8)" :src="img('closing-ranunculus.png')" alt="" />
       <img class="closing-asset closing-anim closing-ranunculus-r" :style="delay(9)" :src="img('closing-ranunculus.png')" alt="" />
-      <img class="closing-asset closing-anim closing-monogram" :style="delay(10)" :src="img('closing-monogram.png')" alt="" />
-      <img class="closing-asset closing-anim closing-hashtag" :style="delay(11)" :src="img('closing-hashtag.png')" alt="#uniTEbyoursiDE" />
+      <img class="closing-asset closing-anim closing-monogram" :style="delay(10)" :src="logoUrl || img('closing-monogram.png')" alt="" />
+      <img class="closing-asset closing-anim closing-hashtag" :style="delay(11)" :src="hashtagUrl || img('closing-hashtag.png')" alt="#uniTEbyoursiDE" />
       <img class="closing-asset closing-anim closing-wax-seal" :style="delay(12)" :src="img('closing-wax-seal.png')" alt="" />
       <img class="closing-asset closing-anim closing-couple-arch" :style="delay(13)" :src="img('closing-couple-arch.png')" alt="Arif and Dita" />
       <img class="closing-asset closing-anim closing-dahlia-round-l" :style="delay(14)" :src="img('closing-dahlia-round.png')" alt="" />
@@ -115,7 +115,7 @@ import { useScrollReveal } from '../../composables/useScrollReveal'
 import { useWedding } from '../../composables/useWedding'
 
 const { rootRef, inView } = useScrollReveal()
-const { gallery } = useWedding()
+const { gallery, logoUrl, hashtagUrl } = useWedding()
 
 const FALLBACK_PHOTOS = [
   'gallery-photo-main.png',

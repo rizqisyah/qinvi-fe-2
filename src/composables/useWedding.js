@@ -56,6 +56,20 @@ const ucapan = computed(() => content.value?.ucapan ?? [])
 const countdownDate = computed(() => wedding.value?.countdown_date ?? null)
 const coupleTitle = computed(() => wedding.value?.title ?? null)
 
+// Theme has two layers: theme_config (theme defaults) and theme_override
+// (per-client customization). Overrides win, then config, then the wedding row.
+const themeConfig = computed(() => theme.value?.theme_config ?? null)
+const themeOverride = computed(() => theme.value?.theme_override ?? null)
+
+const logoUrl = computed(
+  () =>
+    themeOverride.value?.images?.logo_mempelai ||
+    themeConfig.value?.images?.logo_mempelai ||
+    wedding.value?.image_logo ||
+    ''
+)
+const hashtagUrl = computed(() => themeOverride.value?.words?.hashtag || '')
+
 // --- Actions ---
 
 async function sendRsvp({ name, phone, attendance, count }) {
@@ -112,6 +126,8 @@ export function useWedding() {
     ucapan,
     countdownDate,
     coupleTitle,
+    logoUrl,
+    hashtagUrl,
     // actions
     sendRsvp,
     sendUcapan,

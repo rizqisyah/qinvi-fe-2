@@ -2187,6 +2187,7 @@
   --closing-pos: translateX(-50%);
   width: 140px;
   height: 180px;
+  object-fit: contain;
 }
 
 .closing-hashtag {
@@ -2195,6 +2196,7 @@
   --closing-pos: translateX(-50%);
   width: 227px;
   height: 61px;
+  object-fit: contain;
 }
 
 .closing-wax-seal {
