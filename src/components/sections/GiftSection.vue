@@ -14,22 +14,61 @@
     <!-- Description -->
     <p class="text-body gift-description">Bagi yang ingin memberikan tanda kasih, dapat mengirimkan melalui fitur di bawah ini:</p>
 
-    <!-- BCA Logo -->
-    <img class="gift-bca-logo" :src="img('gift-bca-logo.png')" alt="BCA" />
+    <div
+      v-for="(acct, i) in accounts"
+      :key="acct.id"
+      class="gift-account"
+      :style="{ top: ACCOUNT_TOP + i * ACCOUNT_HEIGHT + 'px' }"
+    >
+      <!-- BCA has a real logo asset; other banks show their name as text. -->
+      <img v-if="isBca(acct.bank_name)" class="gift-bca-logo" :src="img('gift-bca-logo.png')" alt="BCA" />
+      <p v-else class="gift-bank-name">{{ acct.bank_name }}</p>
 
-    <!-- Rekening -->
-    <p class="gift-rekening">No. Rekening : 8715154435</p>
-    <p class="gift-an">A/n Muhammad Arif</p>
+      <p class="gift-rekening">No. Rekening : {{ acct.account_number }}</p>
+      <p class="gift-an">A/n {{ acct.account_name }}</p>
 
-    <button class="decor-button copy-button" type="button" disabled>Copy text</button>
+      <button class="decor-button copy-button" type="button" @click="copy(acct)">
+        {{ copiedId === acct.id ? 'Tersalin!' : 'Copy text' }}
+      </button>
+    </div>
   </section>
 </template>
 
 <script setup>
+import { ref, computed } from 'vue'
 import { useScrollReveal } from '../../composables/useScrollReveal'
+import { useWedding } from '../../composables/useWedding'
 
 const { rootRef, inView } = useScrollReveal()
+const { rekening } = useWedding()
 
-const img = (name) =>
-  new URL(`../../assets/figma/${name}`, import.meta.url).href
+// First account sits at the original Figma slot; extra accounts stack below.
+const ACCOUNT_TOP = 244
+const ACCOUNT_HEIGHT = 122
+
+const FALLBACK = [
+  { id: 'fallback', bank_name: 'BCA', account_number: '8715154435', account_name: 'Muhammad Arif' },
+]
+
+const accounts = computed(() => (rekening.value.length ? rekening.value : FALLBACK))
+
+const copiedId = ref(null)
+
+function isBca(name) {
+  return (name || '').trim().toUpperCase() === 'BCA'
+}
+
+async function copy(acct) {
+  try {
+    await navigator.clipboard.writeText(acct.account_number)
+    copiedId.value = acct.id
+    setTimeout(() => {
+      if (copiedId.value === acct.id) copiedId.value = null
+    }, 2000)
+  } catch {
+    // Clipboard blocked (insecure context / permissions); silently ignore.
+  }
+}
+
+const img = (name) => new URL(`../../assets/figma/${name}`, import.meta.url).href
 </script>

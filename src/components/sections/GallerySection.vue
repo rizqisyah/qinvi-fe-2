@@ -32,6 +32,8 @@
         </button>
       </div>
 
+      <p v-if="currentCaption" class="gallery-caption">{{ currentCaption }}</p>
+
       <div class="gallery-thumbnails">
         <button
           v-for="(photo, index) in photos"
@@ -42,7 +44,7 @@
           :aria-label="`Photo ${index + 1}`"
           @click="currentIndex = index"
         >
-          <img :src="img(photo)" alt="" />
+          <img :src="resolve(photo)" alt="" />
         </button>
       </div>
     </div>
@@ -108,32 +110,65 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useScrollReveal } from '../../composables/useScrollReveal'
+import { useWedding } from '../../composables/useWedding'
 
 const { rootRef, inView } = useScrollReveal()
+const { gallery } = useWedding()
 
-const photos = [
+const FALLBACK_PHOTOS = [
   'gallery-photo-main.png',
   'gallery-photo-1.png',
   'gallery-photo-2.png',
   'gallery-photo-3.png',
 ]
 
+// API entries carry absolute image URLs; the fallback list is local asset names.
+const photos = computed(() =>
+  gallery.value.length ? gallery.value.map((g) => g.image_url) : FALLBACK_PHOTOS
+)
+
+// Captions align 1:1 with photos (empty for the local fallback set).
+const captions = computed(() =>
+  gallery.value.length ? gallery.value.map((g) => g.caption || '') : []
+)
+
 const currentIndex = ref(0)
 
-const currentPhotoSrc = computed(() => img(photos[currentIndex.value]))
+const currentCaption = computed(() => captions.value[currentIndex.value] || '')
 
+// Keep the active index valid if the photo count changes after the fetch lands.
+watch(photos, (list) => {
+  if (currentIndex.value >= list.length) currentIndex.value = 0
+})
+
+const currentPhotoSrc = computed(() => resolve(photos.value[currentIndex.value]))
+
+function isAbsolute(src) {
+  return /^https?:\/\//i.test(src || '')
+}
+
+function resolve(src) {
+  if (!src) return ''
+  return isAbsolute(src) ? src : new URL(`../../assets/figma/${src}`, import.meta.url).href
+}
+
+// Kept for the closing-art assets below, which are always local files.
 function img(name) {
   return new URL(`../../assets/figma/${name}`, import.meta.url).href
 }
 
 function prevPhoto() {
-  currentIndex.value = (currentIndex.value - 1 + photos.length) % photos.length
+  const n = photos.value.length
+  if (!n) return
+  currentIndex.value = (currentIndex.value - 1 + n) % n
 }
 
 function nextPhoto() {
-  currentIndex.value = (currentIndex.value + 1) % photos.length
+  const n = photos.value.length
+  if (!n) return
+  currentIndex.value = (currentIndex.value + 1) % n
 }
 
 const lightboxOpen = ref(false)

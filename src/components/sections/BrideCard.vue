@@ -1,6 +1,8 @@
 <template>
   <div ref="rootRef" class="bride-block reveal-on-scroll" :class="{ 'in-view': inView }">
-    <img class="couple-asset couple-circle-bride" src="../../assets/figma/couple-circle-bride.png" alt="" />
+    <!-- Real photo when the API provides one; illustrated avatar otherwise. -->
+    <img v-if="photoUrl" class="couple-asset couple-photo couple-photo-bride" :src="photoUrl" :alt="fullName" />
+    <img v-else class="couple-asset couple-circle-bride" src="../../assets/figma/couple-circle-bride.png" alt="" />
     <img class="couple-asset couple-bg-bride" src="../../assets/figma/couple-bg-bride.png" alt="" />
     <img class="couple-asset couple-side-bride" src="../../assets/figma/couple-side-bride.png" alt="" />
     <img class="couple-asset couple-frame-bride" src="../../assets/figma/couple-frame-bride.png" alt="" />
@@ -11,15 +13,26 @@
     <img class="couple-asset couple-foliage couple-foliage-bride-r" src="../../assets/figma/couple-foliage-bride-r.png" alt="" />
 
     <div class="couple-card bride-card">
-      <p class="couple-short-name">Ayu</p>
-      <p class="couple-full-name">Ayu Shella Pratni</p>
-      <p class="couple-parent">Putri Pertama dari Bapak Heri<br />&amp; Ibu Sofie</p>
+      <p class="couple-short-name">{{ shortName }}</p>
+      <p class="couple-full-name">{{ fullName }}</p>
+      <p class="couple-parent">{{ parents }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useScrollReveal } from '../../composables/useScrollReveal'
+import { useWedding } from '../../composables/useWedding'
+import { parentLine } from '../../lib/format'
 
 const { rootRef, inView } = useScrollReveal()
+const { bride } = useWedding()
+
+const shortName = computed(() => bride.value?.nickname || 'Ayu')
+const fullName = computed(() => bride.value?.name || 'Ayu Shella Pratni')
+const photoUrl = computed(() => bride.value?.photo_url || '')
+const parents = computed(
+  () => parentLine(bride.value) || 'Putri Pertama dari Bapak Heri & Ibu Sofie'
+)
 </script>

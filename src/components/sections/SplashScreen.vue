@@ -59,7 +59,7 @@
 
       <!-- Real text + button (not baked into the artwork) -->
       <p class="cover-text cover-wedding-of enter-text" style="--enter-delay: 0.9s">The Wedding Of</p>
-      <p class="cover-text cover-couple enter-text" style="--enter-delay: 1.05s">Antonio &amp; Ayu</p>
+      <p class="cover-text cover-couple enter-text" style="--enter-delay: 1.05s">{{ coupleName }}</p>
 
       <p class="cover-text cover-dear enter-text" style="--enter-delay: 1.2s">Dear Mr / Mrs / Ms</p>
       <p class="cover-text cover-guest enter-text" style="--enter-delay: 1.35s">{{ guestName }}</p>
@@ -77,11 +77,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { useWedding } from '../../composables/useWedding'
 
 defineEmits(['open'])
 
 const STAGE_HEIGHT = 725
+
+const { coupleTitle, guest } = useWedding()
+
+const coupleName = computed(() => coupleTitle.value || 'Antonio & Ayu')
 
 const guestName = ref('Bapak/Ibu/Saudara/i')
 const isReady = ref(false)
@@ -96,9 +101,12 @@ function updateScale() {
 }
 
 onMounted(async () => {
-  const guest = new URLSearchParams(window.location.search).get('to')
-  if (guest) {
-    guestName.value = guest
+  // Priority: personalised `?to=` link, then an API-resolved guest, else default.
+  const toParam = new URLSearchParams(window.location.search).get('to')
+  if (toParam) {
+    guestName.value = toParam
+  } else if (guest.value?.name) {
+    guestName.value = guest.value.name
   }
   updateScale()
   window.addEventListener('resize', updateScale)

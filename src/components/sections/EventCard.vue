@@ -55,7 +55,15 @@
       <p class="events-address">{{ evt.address }}</p>
     </div>
 
-    <button class="decor-button events-maps-button" type="button" disabled>Maps</button>
+    <a
+      v-if="evt.mapsUrl"
+      class="decor-button events-maps-button"
+      :href="evt.mapsUrl"
+      target="_blank"
+      rel="noopener"
+      >Maps</a
+    >
+    <button v-else class="decor-button events-maps-button" type="button" disabled>Maps</button>
   </article>
 </template>
 

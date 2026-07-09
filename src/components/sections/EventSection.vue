@@ -1,22 +1,30 @@
 <template>
-  <section class="invitation-section invitation-section--events" data-section="events">
+  <section
+    class="invitation-section invitation-section--events"
+    data-section="events"
+    :style="{ height: sectionHeight + 'px' }"
+  >
     <EventCard v-for="evt in events" :key="evt.key" :evt="evt" />
   </section>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import EventCard from './EventCard.vue'
+import { useWedding } from '../../composables/useWedding'
 
-const events = [
+// Vertical rhythm from the original static layout: first card at 120px, each
+// following card 486px below.
+const FIRST_TOP = 120
+const CARD_GAP = 486
+// Rendered height of a single card (matches the original 606px..1085px band).
+const CARD_HEIGHT = 479
+
+// The two Figma art presets (akad + resepsi). API events are mapped onto these
+// by index; extra events reuse presets cyclically.
+const PRESETS = [
   {
-    key: 'akad',
     title: 'Akad Nikah',
-    date: 'Saturday, 19 April 2029',
-    time: '10.00 WIB - 12.00 WIB',
-    location: 'Rumah mempelai wanita',
-    address:
-      'Jl. Melati Raya No. 27, RT 004/RW 006, Kelurahan Cikini, Kecamatan Menteng, Jakarta Pusat, DKI Jakarta 10330',
-    top: 120,
     foliageTop: 20,
     foliageSide: 'left',
     assets: {
@@ -37,14 +45,7 @@ const events = [
     },
   },
   {
-    key: 'resep',
     title: 'Resepsi',
-    date: 'Saturday, 19 April 2029',
-    time: '10.00 WIB - 12.00 WIB',
-    location: 'Rumah mempelai wanita',
-    address:
-      'Jl. Melati Raya No. 27, RT 004/RW 006, Kelurahan Cikini, Kecamatan Menteng, Jakarta Pusat, DKI Jakarta 10330',
-    top: 606,
     foliageTop: 37,
     foliageSide: 'right',
     assets: {
@@ -65,4 +66,62 @@ const events = [
     },
   },
 ]
+
+// Fallback content shown when the API returns no events (keeps the design intact).
+const FALLBACK = [
+  {
+    title: 'Akad Nikah',
+    date: 'Saturday, 19 April 2029',
+    time: '10.00 WIB - 12.00 WIB',
+    location: 'Rumah mempelai wanita',
+    address:
+      'Jl. Melati Raya No. 27, RT 004/RW 006, Kelurahan Cikini, Kecamatan Menteng, Jakarta Pusat, DKI Jakarta 10330',
+    mapsUrl: '',
+  },
+  {
+    title: 'Resepsi',
+    date: 'Saturday, 19 April 2029',
+    time: '10.00 WIB - 12.00 WIB',
+    location: 'Rumah mempelai wanita',
+    address:
+      'Jl. Melati Raya No. 27, RT 004/RW 006, Kelurahan Cikini, Kecamatan Menteng, Jakarta Pusat, DKI Jakarta 10330',
+    mapsUrl: '',
+  },
+]
+
+const { acara } = useWedding()
+
+const events = computed(() => {
+  const source = acara.value.length
+    ? acara.value.map((a) => ({
+        title: a.title,
+        date: a.event_date,
+        time: a.event_time,
+        location: a.location_name,
+        address: a.address,
+        mapsUrl: a.maps_url || '',
+      }))
+    : FALLBACK
+
+  return source.map((evt, index) => {
+    const preset = PRESETS[index % PRESETS.length]
+    return {
+      key: `evt-${index}`,
+      title: evt.title || preset.title,
+      date: evt.date || '',
+      time: evt.time || '',
+      location: evt.location || '',
+      address: evt.address || '',
+      mapsUrl: evt.mapsUrl || '',
+      top: FIRST_TOP + index * CARD_GAP,
+      foliageTop: preset.foliageTop,
+      foliageSide: preset.foliageSide,
+      assets: preset.assets,
+    }
+  })
+})
+
+const sectionHeight = computed(
+  () => FIRST_TOP + Math.max(0, events.value.length - 1) * CARD_GAP + CARD_HEIGHT
+)
 </script>
