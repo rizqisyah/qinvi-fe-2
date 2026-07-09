@@ -1,4 +1,4 @@
-import { reactive, computed, readonly } from 'vue'
+import { reactive, ref, computed, readonly } from 'vue'
 import { getHome, submitRsvp, submitUcapan, resolveSlug } from '../lib/api'
 
 // Module-level singleton so any section can read the payload without prop
@@ -10,6 +10,9 @@ const state = reactive({
   error: null,
   data: null,
 })
+
+// Shared guest name so the RSVP and Wishes forms don't ask for it twice.
+const guestName = ref('')
 
 let inflight = null
 
@@ -66,15 +69,27 @@ async function sendRsvp({ name, phone, attendance, count }) {
 
 async function sendUcapan({ name, message }) {
   const res = await submitUcapan(state.slug, { guest_name: name, message })
-  // Optimistically prepend so the wishes list reflects the new entry.
-  if (content.value && Array.isArray(content.value.ucapan)) {
-    content.value.ucapan.unshift({
-      id: res?.data?.id ?? `local-${content.value.ucapan.length}`,
-      guest_name: name,
-      message,
-      created_at: new Date().toISOString(),
-    })
+  if (!content.value) return res
+
+  // The API may reply with the full refreshed list or just the created row;
+  // fall back to a hand-built entry so the wishes list updates either way.
+  const list = Array.isArray(res) ? res : Array.isArray(res?.data) ? res.data : null
+  if (list) {
+    content.value.ucapan = list
+    return res
   }
+
+  if (!Array.isArray(content.value.ucapan)) content.value.ucapan = []
+  const row =
+    res?.data && typeof res.data === 'object'
+      ? res.data
+      : {
+          id: `local-${content.value.ucapan.length}`,
+          guest_name: name,
+          message,
+          created_at: new Date().toISOString(),
+        }
+  content.value.ucapan.unshift(row)
   return res
 }
 
@@ -82,6 +97,7 @@ export function useWedding() {
   return {
     state: readonly(state),
     load,
+    guestName,
     // getters
     wedding,
     theme,

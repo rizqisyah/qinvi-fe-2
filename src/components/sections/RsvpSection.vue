@@ -39,9 +39,9 @@ import { useScrollReveal } from '../../composables/useScrollReveal'
 import { useWedding } from '../../composables/useWedding'
 
 const { rootRef, inView } = useScrollReveal()
-const { sendRsvp } = useWedding()
+// guestName is shared with the Wishes form so the name is only entered once.
+const { sendRsvp, guestName: name } = useWedding()
 
-const name = ref('')
 const phone = ref('')
 const attendance = ref('hadir')
 const guestCount = ref(1)

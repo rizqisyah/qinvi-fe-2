@@ -29,7 +29,8 @@ import { ref, computed } from 'vue'
 import { useWedding } from '../../composables/useWedding'
 import { relativeTimeId } from '../../lib/format'
 
-const { ucapan, sendUcapan } = useWedding()
+// guestName is shared with the RSVP form so the name is only entered once.
+const { ucapan, sendUcapan, guestName: name } = useWedding()
 
 const FALLBACK = [
   { id: 'f1', guest_name: 'Anggun', created_at: null, message: 'Happy wedding 💐 Semoga keluarga kecil kalian senantiasa diberkahi kebahagiaan, kecukupan, dan kesehatan ✨ Selamat beribadah bersama sampai jannah ya 🙏🏻' },
@@ -40,7 +41,6 @@ const FALLBACK = [
 
 const wishes = computed(() => (ucapan.value.length ? ucapan.value : FALLBACK))
 
-const name = ref('')
 const message = ref('')
 const submitting = ref(false)
 const feedback = ref('')
@@ -59,7 +59,6 @@ async function submit() {
     await sendUcapan({ name: name.value.trim(), message: message.value.trim() })
     feedback.value = 'Terima kasih atas ucapannya!'
     isError.value = false
-    name.value = ''
     message.value = ''
   } catch (err) {
     feedback.value = err instanceof Error ? err.message : 'Gagal mengirim ucapan.'
