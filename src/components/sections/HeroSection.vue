@@ -9,7 +9,7 @@
     <img class="hero-asset hero-home-2" src="../../assets/figma/hero-home-2.png" alt="" />
     <img class="hero-asset hero-arch" src="../../assets/figma/hero-arch.png" alt="" />
     <img class="hero-asset hero-medallion" src="../../assets/figma/hero-medallion.png" alt="" />
-    <img class="hero-asset hero-wreath" src="../../assets/figma/hero-wreath.png" alt="" />
+    <img class="hero-asset hero-wreath" :src="spousePhoto || heroCouple" alt="" />
     <img class="hero-asset hero-top-ornament" :src="logoUrl || heroLogo" alt="" />
     <img class="hero-asset hero-flower-left" src="../../assets/figma/hero-flower-left.png" alt="" />
     <img class="hero-asset hero-flower-right" src="../../assets/figma/hero-flower-right.png" alt="" />
@@ -40,12 +40,14 @@
 <script setup>
 import { useWedding } from '../../composables/useWedding'
 
-const { logoUrl, hashtagUrl } = useWedding()
+const { logoUrl, hashtagUrl, spousePhoto } = useWedding()
 
-// Despite their names, these two assets are the couple's monogram and their
-// wedding hashtag — both come from the API when the wedding defines them.
+// Despite their names, these three assets are the couple's monogram, their
+// wedding hashtag, and their portrait — all come from the API when the wedding
+// defines them.
 const heroLogo = new URL('../../assets/figma/hero-top-ornament.png', import.meta.url).href
 const heroHashtag = new URL('../../assets/figma/hero-title-script.png', import.meta.url).href
+const heroCouple = new URL('../../assets/figma/hero-wreath.png', import.meta.url).href
 
 defineProps({
   isReady: {

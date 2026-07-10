@@ -436,7 +436,7 @@
 .hero-home-2 { left: 0; top: 112px; width: 139px; height: 484px; }
 .hero-arch { left: 0; top: 211px; width: 375px; height: 328px; }
 .hero-medallion { left: 20px; top: 208px; width: 214px; height: 214px; }
-.hero-wreath { left: 4px; top: 194px; width: 363px; height: 363px; }
+.hero-wreath { left: 4px; top: 194px; width: 363px; height: 363px; object-fit: contain; }
 .hero-top-ornament { left: 136px; top: 73px; width: 97px; height: 124px; object-fit: contain; }
 .hero-flower-left { left: -193px; top: 226px; width: 385px; height: 385px; }
 .hero-flower-right { right: -193px; top: 226px; width: 385px; height: 385px; }
@@ -2246,6 +2246,7 @@ left: 0;
   left: 0;
   width: 375px;
   height: 435px;
+  object-fit: contain;
 }
 
 .closing-dahlia-round-l { top: 355px; left: -10px; width: 102px; height: 66px; }

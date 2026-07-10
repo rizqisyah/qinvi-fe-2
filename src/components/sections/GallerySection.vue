@@ -87,7 +87,7 @@
       <img class="closing-asset closing-anim closing-monogram" :style="delay(10)" :src="logoUrl || img('closing-monogram.png')" alt="" />
       <img class="closing-asset closing-anim closing-hashtag" :style="delay(11)" :src="hashtagUrl || img('closing-hashtag.png')" alt="#uniTEbyoursiDE" />
       <img class="closing-asset closing-anim closing-wax-seal" :style="delay(12)" :src="img('closing-wax-seal.png')" alt="" />
-      <img class="closing-asset closing-anim closing-couple-arch" :style="delay(13)" :src="img('closing-couple-arch.png')" alt="Arif and Dita" />
+      <img class="closing-asset closing-anim closing-couple-arch" :style="delay(13)" :src="spousePhoto || img('closing-couple-arch.png')" :alt="coupleTitle || ''" />
       <img class="closing-asset closing-anim closing-dahlia-round-l" :style="delay(14)" :src="img('closing-dahlia-round.png')" alt="" />
       <img class="closing-asset closing-anim closing-dahlia-round-r" :style="delay(15)" :src="img('closing-dahlia-round.png')" alt="" />
       <img class="closing-asset closing-anim closing-terrace" :style="delay(16)" :src="img('closing-terrace.png')" alt="" />
@@ -115,7 +115,7 @@ import { useScrollReveal } from '../../composables/useScrollReveal'
 import { useWedding } from '../../composables/useWedding'
 
 const { rootRef, inView } = useScrollReveal()
-const { gallery, logoUrl, hashtagUrl } = useWedding()
+const { gallery, logoUrl, hashtagUrl, spousePhoto, coupleTitle } = useWedding()
 
 const FALLBACK_PHOTOS = [
   'gallery-photo-main.png',

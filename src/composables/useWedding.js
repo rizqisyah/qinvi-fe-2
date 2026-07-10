@@ -1,5 +1,6 @@
 import { reactive, ref, computed, readonly } from 'vue'
 import { getHome, submitRsvp, submitUcapan, resolveSlug } from '../lib/api'
+import { sizedImage } from '../lib/image'
 
 // Module-level singleton so any section can read the payload without prop
 // drilling through the deep component tree.
@@ -76,6 +77,11 @@ const hashtagUrl = computed(() => words.value?.hashtag || '')
 const quoteText = computed(() => words.value?.quote_text || '')
 const quoteVerse = computed(() => words.value?.quote_verse || '')
 
+// Couple portrait. Widest box it lands in is 375px, so ~3x that covers the
+// densest screens; the source upload is several thousand pixels wide.
+const SPOUSE_PHOTO_WIDTH = 900
+const spousePhoto = computed(() => sizedImage(wedding.value?.image_spouse || '', SPOUSE_PHOTO_WIDTH))
+
 // --- Actions ---
 
 async function sendRsvp({ name, phone, attendance, count }) {
@@ -136,6 +142,7 @@ export function useWedding() {
     hashtagUrl,
     quoteText,
     quoteVerse,
+    spousePhoto,
     // actions
     sendRsvp,
     sendUcapan,
