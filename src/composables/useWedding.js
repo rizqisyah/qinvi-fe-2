@@ -69,7 +69,12 @@ const logoUrl = computed(
     themeConfig.value?.images?.logo_mempelai ||
     ''
 )
-const hashtagUrl = computed(() => themeOverride.value?.words?.hashtag || '')
+const words = computed(() => themeOverride.value?.words ?? null)
+
+const hashtagUrl = computed(() => words.value?.hashtag || '')
+// Arabic verse and its translation arrive as one newline-separated string.
+const quoteText = computed(() => words.value?.quote_text || '')
+const quoteVerse = computed(() => words.value?.quote_verse || '')
 
 // --- Actions ---
 
@@ -129,6 +134,8 @@ export function useWedding() {
     coupleTitle,
     logoUrl,
     hashtagUrl,
+    quoteText,
+    quoteVerse,
     // actions
     sendRsvp,
     sendUcapan,
