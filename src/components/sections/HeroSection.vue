@@ -10,7 +10,7 @@
     <img class="hero-asset hero-arch" src="../../assets/figma/hero-arch.png" alt="" />
     <img class="hero-asset hero-medallion" src="../../assets/figma/hero-medallion.png" alt="" />
     <img class="hero-asset hero-wreath" src="../../assets/figma/hero-wreath.png" alt="" />
-    <img class="hero-asset hero-top-ornament" src="../../assets/figma/hero-top-ornament.png" alt="" />
+    <img class="hero-asset hero-top-ornament" :src="logoUrl || heroLogo" alt="" />
     <img class="hero-asset hero-flower-left" src="../../assets/figma/hero-flower-left.png" alt="" />
     <img class="hero-asset hero-flower-right" src="../../assets/figma/hero-flower-right.png" alt="" />
     <img class="hero-asset hero-side-flower-right" src="../../assets/figma/hero-side-flower-right.png" alt="" />
@@ -25,7 +25,7 @@
     <img class="hero-asset hero-palm-right" src="../../assets/figma/hero-palm-right.png" alt="" />
     <img class="hero-asset hero-small-flower-right" src="../../assets/figma/hero-small-flower-right.png" alt="" />
     <img class="hero-asset hero-small-flower-left" src="../../assets/figma/hero-small-flower-left.png" alt="" />
-    <img class="hero-asset hero-title-script" src="../../assets/figma/hero-title-script.png" alt="The Wedding Of" />
+    <img class="hero-asset hero-title-script" :src="hashtagUrl || heroHashtag" alt="Wedding hashtag" />
     <img class="hero-asset hero-dot-left" src="../../assets/figma/hero-dot-left.png" alt="" />
     <img class="hero-asset hero-dot-right" src="../../assets/figma/hero-dot-right.png" alt="" />
     <img class="hero-asset hero-bud-right" src="../../assets/figma/hero-bud-right.png" alt="" />
@@ -38,6 +38,15 @@
 </template>
 
 <script setup>
+import { useWedding } from '../../composables/useWedding'
+
+const { logoUrl, hashtagUrl } = useWedding()
+
+// Despite their names, these two assets are the couple's monogram and their
+// wedding hashtag — both come from the API when the wedding defines them.
+const heroLogo = new URL('../../assets/figma/hero-top-ornament.png', import.meta.url).href
+const heroHashtag = new URL('../../assets/figma/hero-title-script.png', import.meta.url).href
+
 defineProps({
   isReady: {
     type: Boolean,

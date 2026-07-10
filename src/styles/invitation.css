@@ -437,7 +437,7 @@
 .hero-arch { left: 0; top: 211px; width: 375px; height: 328px; }
 .hero-medallion { left: 20px; top: 208px; width: 214px; height: 214px; }
 .hero-wreath { left: 4px; top: 194px; width: 363px; height: 363px; }
-.hero-top-ornament { left: 136px; top: 73px; width: 97px; height: 124px; }
+.hero-top-ornament { left: 136px; top: 73px; width: 97px; height: 124px; object-fit: contain; }
 .hero-flower-left { left: -193px; top: 226px; width: 385px; height: 385px; }
 .hero-flower-right { right: -193px; top: 226px; width: 385px; height: 385px; }
 .hero-side-flower-left { left: -70px; top: 440px; width: 139px; height: 90px; }
@@ -452,7 +452,7 @@
 .hero-palm-right { right: 0; top: 121px; width: 82px; height: 146px; }
 .hero-small-flower-left { left: 0; top: 330px; width: 88px; height: 88px; }
 .hero-small-flower-right { right: 0; top: 331px; width: 88px; height: 88px; }
-.hero-title-script { left: 63px; top: 571px; width: 250px; height: 67px; }
+.hero-title-script { left: 63px; top: 571px; width: 250px; height: 67px; object-fit: contain; }
 .hero-dot-left { left: -58px; top: 496px; width: 100px; height: 100px; }
 .hero-dot-right { right: -56px; top: 507px; width: 100px; height: 100px; }
 .hero-bud-right { left: 325px; top: 292px; width: 94px; height: 94px; }
