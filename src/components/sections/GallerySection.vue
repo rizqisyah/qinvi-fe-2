@@ -113,9 +113,11 @@
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useScrollReveal } from '../../composables/useScrollReveal'
 import { useWedding } from '../../composables/useWedding'
+import { useLightbox } from '../../composables/useLightbox'
 
 const { rootRef, inView } = useScrollReveal()
 const { gallery, logoUrl, hashtagUrl, spousePhoto, coupleTitle } = useWedding()
+const { lightboxOpen } = useLightbox()
 
 const FALLBACK_PHOTOS = [
   'gallery-photo-main.png',
@@ -171,8 +173,6 @@ function nextPhoto() {
   currentIndex.value = (currentIndex.value + 1) % n
 }
 
-const lightboxOpen = ref(false)
-
 function openLightbox() {
   lightboxOpen.value = true
 }
@@ -214,5 +214,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   observer?.disconnect()
   window.removeEventListener('keydown', handleKeydown)
+  lightboxOpen.value = false
 })
 </script>

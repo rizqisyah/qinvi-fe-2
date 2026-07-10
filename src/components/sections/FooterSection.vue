@@ -24,8 +24,6 @@
       </div>
       <div class="footer-divider"></div>
     </div>
-    <!-- bottom-menu.png — real asset-export -->
-    <img class="figma-asset bottom-menu" src="../../assets/figma/bottom-menu.png" alt="" />
   </section>
 </template>
 

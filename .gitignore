@@ -1,2 +1,10 @@
 node_modules/
 dist/
+
+# Scratch space for Figma exports and slicing experiments
+.figma-tmp/
+
+# Local secrets; .env.example is the tracked template
+.env
+.env.local
+.env.*.local

@@ -17,6 +17,7 @@
       <GallerySection />
       <FooterSection />
       <MusicPlayer />
+      <BottomNav />
     </template>
   </div>
 </template>
@@ -37,6 +38,7 @@ import GallerySection from './sections/GallerySection.vue'
 import VideoSection from './sections/VideoSection.vue'
 import FooterSection from './sections/FooterSection.vue'
 import MusicPlayer from './sections/MusicPlayer.vue'
+import BottomNav from './sections/BottomNav.vue'
 
 const isOpen = ref(false)
 const { load, wedding } = useWedding()
