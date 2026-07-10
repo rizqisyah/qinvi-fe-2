@@ -1720,6 +1720,13 @@
   color: var(--brown-main);
 }
 
+/* Guest count is locked when the guest declines. */
+.rsvp-form .visual-input:disabled {
+  background: #eae6df;
+  color: #9a938a;
+  cursor: not-allowed;
+}
+
 .rsvp-form .send-button {
   margin-top: 8px;
   padding: 10px 40px;

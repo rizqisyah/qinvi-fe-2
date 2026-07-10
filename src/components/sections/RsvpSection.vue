@@ -24,7 +24,14 @@
         </label>
       </div>
       <label class="form-label" for="rsvp-count">Jumlah Tamu:</label>
-      <input id="rsvp-count" v-model.number="guestCount" class="visual-input rsvp-count" type="number" min="1" />
+      <input
+        id="rsvp-count"
+        v-model.number="guestCount"
+        class="visual-input rsvp-count"
+        type="number"
+        min="0"
+        :disabled="!isAttending"
+      />
       <p v-if="feedback" class="rsvp-feedback" :class="{ 'is-error': isError }">{{ feedback }}</p>
       <button class="decor-button send-button" type="submit" :disabled="submitting">
         {{ submitting ? 'Mengirim...' : 'Send' }}
@@ -34,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useScrollReveal } from '../../composables/useScrollReveal'
 import { useWedding } from '../../composables/useWedding'
 
@@ -45,6 +52,13 @@ const { sendRsvp, guestName: name } = useWedding()
 const phone = ref('')
 const attendance = ref('hadir')
 const guestCount = ref(1)
+
+const isAttending = computed(() => attendance.value === 'hadir')
+
+// A guest who declines brings nobody, so the count is locked at zero.
+watch(isAttending, (attending) => {
+  guestCount.value = attending ? 1 : 0
+})
 const submitting = ref(false)
 const feedback = ref('')
 const isError = ref(false)
@@ -63,7 +77,7 @@ async function submit() {
       name: name.value.trim(),
       phone: phone.value.trim(),
       attendance: attendance.value,
-      count: guestCount.value,
+      count: isAttending.value ? guestCount.value : 0,
     })
     feedback.value = 'Terima kasih, konfirmasi kehadiran terkirim.'
     isError.value = false

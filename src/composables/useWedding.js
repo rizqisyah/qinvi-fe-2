@@ -85,11 +85,14 @@ const spousePhoto = computed(() => sizedImage(wedding.value?.image_spouse || '',
 // --- Actions ---
 
 async function sendRsvp({ name, phone, attendance, count }) {
+  // A declining guest legitimately sends 0, so an empty field — not a zero —
+  // is what falls back to 1.
+  const parsed = Number(count)
   return submitRsvp(state.slug, {
     guest_name: name,
     phone,
     attendance_status: attendance,
-    guest_count: Number(count) || 1,
+    guest_count: Number.isFinite(parsed) && parsed >= 0 ? parsed : 1,
   })
 }
 
