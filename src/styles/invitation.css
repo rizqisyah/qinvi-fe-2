@@ -676,6 +676,31 @@
   opacity: 1;
 }
 
+/* API logo (logo_mempelai), pinned to the box the baked monogram occupies in
+   the 375x725 stage (measured from the artwork's alpha bounds). */
+.cover-logo {
+  position: absolute;
+  left: 136px;
+  top: 124px;
+  width: 97px;
+  height: 139px;
+  object-fit: contain;
+  opacity: 0;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.is-ready .cover-logo {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* The baked layer sways around the monogram's spot in the full frame; a
+   standalone logo pivots on itself. */
+.is-ready .cover-logo.breathe-mono {
+  transform-origin: center center;
+}
+
 .enter-arch,
 .enter-hill,
 .enter-mono {

@@ -52,9 +52,17 @@
       <div class="cover-plane" style="z-index: 31"><img class="cover-fl cover-n291" src="../../assets/figma/cover-n291.webp" alt="" /></div>
       <div class="cover-plane" style="z-index: 32"><img class="cover-fl cover-n296" src="../../assets/figma/cover-n296.webp" alt="" /></div>
 
-      <!-- monogram (z 33) -->
+      <!-- monogram (z 33) — the local artwork bakes the monogram into a
+           full-frame layer, so the API logo is placed as its own element
+           pinned to the same box instead of swapping the layer's src. -->
       <div class="cover-plane cover-plane-mono" style="z-index: 33">
-        <img class="cover-layer breathe-mono enter-mono" src="../../assets/figma/cover-monogram.webp" alt="" />
+        <img
+          v-if="logoUrl"
+          class="cover-logo breathe-mono enter-mono"
+          :src="logoUrl"
+          alt=""
+        />
+        <img v-else class="cover-layer breathe-mono enter-mono" src="../../assets/figma/cover-monogram.webp" alt="" />
       </div>
 
       <!-- Real text + button (not baked into the artwork) -->
@@ -84,7 +92,7 @@ defineEmits(['open'])
 
 const STAGE_HEIGHT = 725
 
-const { coupleTitle, guest } = useWedding()
+const { coupleTitle, guest, logoUrl } = useWedding()
 
 const coupleName = computed(() => coupleTitle.value || 'Antonio & Ayu')
 
