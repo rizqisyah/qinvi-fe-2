@@ -57,6 +57,15 @@ const ucapan = computed(() => content.value?.ucapan ?? [])
 const countdownDate = computed(() => wedding.value?.countdown_date ?? null)
 const coupleTitle = computed(() => wedding.value?.title ?? null)
 
+// The cover greets the couple by the names they go by, not their full legal
+// names; falls back to the wedding title when either nickname is missing.
+const coupleNickname = computed(() => {
+  const groomNick = groom.value?.nickname?.trim()
+  const brideNick = bride.value?.nickname?.trim()
+  if (!groomNick || !brideNick) return coupleTitle.value
+  return `${groomNick} & ${brideNick}`
+})
+
 // Theme has two layers: the theme's own defaults (theme.theme_config) and the
 // per-wedding customization (wedding.theme_override). Overrides win.
 // `wedding.image_logo` is deliberately not a fallback here — it holds a paper
@@ -141,6 +150,7 @@ export function useWedding() {
     ucapan,
     countdownDate,
     coupleTitle,
+    coupleNickname,
     logoUrl,
     hashtagUrl,
     quoteText,

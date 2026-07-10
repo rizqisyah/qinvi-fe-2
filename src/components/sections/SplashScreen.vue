@@ -92,9 +92,9 @@ defineEmits(['open'])
 
 const STAGE_HEIGHT = 725
 
-const { coupleTitle, guest, logoUrl } = useWedding()
+const { coupleNickname, guest, logoUrl } = useWedding()
 
-const coupleName = computed(() => coupleTitle.value || 'Antonio & Ayu')
+const coupleName = computed(() => coupleNickname.value || 'Antonio & Ayu')
 
 const guestName = ref('Bapak/Ibu/Saudara/i')
 const isReady = ref(false)
