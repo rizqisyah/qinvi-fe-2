@@ -1223,16 +1223,33 @@
    offset, then sways on its own timing. `translate` = entrance, `rotate` = idle
    sway. Cropped textures (~22MB total vs ~294MB full-frame) keep the phone
    compositor from thrashing — no blink, smooth motion. */
+@keyframes cover-fade-in-standard {
+  from {
+    opacity: 0;
+    transform: scale(0.88) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+  }
+}
+
+.cover-plane-fl {
+  opacity: 0;
+  transform: scale(0.88) translateZ(0);
+  transform-origin: center center;
+  backface-visibility: hidden;
+}
+
+.is-ready .cover-plane-fl {
+  animation: cover-fade-in-standard 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 .cover-fl {
   position: absolute;
   display: block;
-  opacity: 0;
-  translate: var(--ex, 0) var(--ey, 0);
-  transition: opacity 1.5s ease, translate 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: 0.3s;
-  /* Pre-promote to GPU layer & start slightly scaled down for a natural bloom appearance */
-  transform: scale(0.88) translateZ(0);
-  transform-origin: center center;
+  opacity: 1;
+  transform-origin: inherit;
   backface-visibility: hidden;
 }
 
@@ -4230,58 +4247,4 @@
 .invitation-section--wishes {
   height: auto !important;
   padding: 0 0 40px !important;
-}
-
-/* Custom keyframes for cover-n275 and cover-n277 to bypass browser transition bugs */
-@keyframes cover-fade-in-left {
-  to {
-    opacity: 1;
-    transform: scale(1) translateZ(0);
-    translate: 0 0;
-  }
-}
-@keyframes cover-fade-in-right {
-  to {
-    opacity: 1;
-    transform: scale(1) translateZ(0);
-    translate: 0 0;
-  }
-}
-
-.cover-n275 {
-  position: absolute;
-  display: block;
-  left: 0.0px;
-  top: 225.7px;
-  width: 44.0px;
-  height: 168.0px;
-  transform-origin: top center;
-  opacity: 0;
-  transform: scale(0.88) translateZ(0);
-  translate: -34px 6px;
-  backface-visibility: hidden;
-}
-
-.is-ready .cover-n275 {
-  animation: cover-fade-in-left 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards, cover-swayv 6.5s ease-in-out infinite alternate-reverse !important;
-  animation-delay: 1.135s, 2.635s !important;
-}
-
-.cover-n277 {
-  position: absolute;
-  display: block;
-  left: 331.0px;
-  top: 215.7px;
-  width: 44.0px;
-  height: 168.0px;
-  transform-origin: top center;
-  opacity: 0;
-  transform: scale(0.88) translateZ(0);
-  translate: 34px 6px;
-  backface-visibility: hidden;
-}
-
-.is-ready .cover-n277 {
-  animation: cover-fade-in-right 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards, cover-swayv 6.5s ease-in-out infinite alternate-reverse !important;
-  animation-delay: 1.19s, 2.69s !important;
 }
