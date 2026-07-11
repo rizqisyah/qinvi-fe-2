@@ -1,32 +1,43 @@
 <template>
-  <div class="invitation-canvas" :class="{ 'is-locked': isLocked }" aria-label="Antonio and Ayu wedding invitation">
-    <Transition name="splash" @after-leave="onSplashLeave">
-      <SplashScreen v-if="!isOpen" @open="openInvitation" />
-    </Transition>
-
-    <!-- v-show keeps sections pre-rendered in the DOM so opening the
-         invitation never triggers a sudden layout reflow (flicker).
-         The wrapper fades in via CSS opacity once contentVisible is true. -->
-    <div
-      v-show="isOpen"
-      class="invitation-content"
-      :class="{ 'is-visible': contentVisible }"
-    >
-      <VideoSection v-if="wedding?.video_url" />
-      <HeroSection :is-ready="isHeroReady" :is-open="true" />
-      <QuranSection />
-      <CoupleSection />
-      <SaveDateSection />
-      <EventSection />
-      <GiftSection v-if="rekening && rekening.length > 0" />
-      <RsvpSection />
-      <WishesSection />
-      <GallerySection />
-      <FooterSection />
+  <div class="invitation-canvas" :class="{ 'is-locked': isLocked || state.error }" aria-label="Antonio and Ayu wedding invitation">
+    <!-- Error/Restricted State Overlay -->
+    <div v-if="state.error" class="restricted-overlay">
+      <div class="restricted-box">
+        <div class="restricted-icon">🔒</div>
+        <h2 class="restricted-title">Akses Terbatas</h2>
+        <p class="restricted-message">{{ state.error }}</p>
+      </div>
     </div>
 
-    <!-- Keep BottomNav outside invitation-content to avoid CSS transform position:fixed containment bug -->
-    <BottomNav v-if="isOpen" />
+    <template v-else>
+      <Transition name="splash" @after-leave="onSplashLeave">
+        <SplashScreen v-if="!isOpen" @open="openInvitation" />
+      </Transition>
+
+      <!-- v-show keeps sections pre-rendered in the DOM so opening the
+           invitation never triggers a sudden layout reflow (flicker).
+           The wrapper fades in via CSS opacity once contentVisible is true. -->
+      <div
+        v-show="isOpen"
+        class="invitation-content"
+        :class="{ 'is-visible': contentVisible }"
+      >
+        <VideoSection v-if="wedding?.video_url" />
+        <HeroSection :is-ready="isHeroReady" :is-open="true" />
+        <QuranSection />
+        <CoupleSection />
+        <SaveDateSection />
+        <EventSection />
+        <GiftSection v-if="rekening && rekening.length > 0" />
+        <RsvpSection />
+        <WishesSection />
+        <GallerySection />
+        <FooterSection />
+      </div>
+
+      <!-- Keep BottomNav outside invitation-content to avoid CSS transform position:fixed containment bug -->
+      <BottomNav v-if="isOpen" />
+    </template>
   </div>
 </template>
 

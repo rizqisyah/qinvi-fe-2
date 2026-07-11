@@ -4248,3 +4248,67 @@
   height: auto !important;
   padding: 0 0 40px !important;
 }
+
+/* 11. Restricted access overlay */
+.restricted-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100svh;
+  background: var(--cream-bg);
+  padding: 24px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.restricted-box {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(116, 46, 46, 0.15);
+  border-radius: 24px;
+  padding: 40px 24px;
+  max-width: 320px;
+  box-shadow: 0 8px 32px rgba(116, 46, 46, 0.08);
+  animation: restrict-fade-in 0.6s ease-out forwards;
+}
+
+@keyframes restrict-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.restricted-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  animation: lock-bounce 2s ease-in-out infinite alternate;
+}
+
+@keyframes lock-bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+
+.restricted-title {
+  font-family: var(--font-playfair-sc), serif;
+  font-size: 22px;
+  color: #742e2e;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.restricted-message {
+  font-family: var(--font-overlock), sans-serif;
+  font-size: 14px;
+  color: #844711;
+  line-height: 1.6;
+  margin: 0;
+}
