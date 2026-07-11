@@ -25,11 +25,3 @@ input,
 textarea {
   font: inherit;
 }
-
-.app-shell {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
