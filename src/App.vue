@@ -187,8 +187,8 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
   }
 
   .cover-root {
-    width: 375px !important;
-    max-width: 375px !important;
+    width: 100% !important;
+    max-width: 100% !important;
     height: 100% !important;
     overflow: visible !important;
     background: #fffed6 !important;
