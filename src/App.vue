@@ -56,8 +56,8 @@ onUnmounted(() => {
 })
 
 const leftBackgroundStyle = computed(() => {
-  const img = wedding.value?.image_bg1 || wedding.value?.image_cover || ''
-  return img ? { backgroundImage: `url(${img})` } : {}
+  const img = wedding.value?.image_bg1 || wedding.value?.image_cover || 'https://ik.imagekit.io/AdminQinvi2/3d/3d/AdliJoya/BAE_7289.webp?updatedAt=1743676227985'
+  return { backgroundImage: `url(${img})` }
 })
 
 const words = computed(() => wedding.value?.theme_override?.words || null)
