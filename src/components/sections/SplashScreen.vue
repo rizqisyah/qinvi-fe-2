@@ -6,11 +6,6 @@
     data-section="cover"
   >
     <!-- 375x725 artwork stage, scaled to cover the viewport height. -->
-    <div style="position: absolute; top: 10px; left: 10px; z-index: 99999; background: rgba(0,0,0,0.85); color: #00ff00; padding: 10px; font-family: monospace; font-size: 11px; pointer-events: none; border-radius: 4px; line-height: 1.4;">
-      Scale: {{ coverScale }}<br />
-      Left Style: {{ JSON.stringify(leftFlowerStyle) }}<br />
-      Right Style: {{ JSON.stringify(rightFlowerStyle) }}
-    </div>
     <div class="cover-stage" :style="{ '--cover-scale': coverScale }">
       <!-- Every flower/leaf is its own full-frame layer, exported at its true
            Figma transform, so each blooms and sways on its own. Back flowers
@@ -37,8 +32,8 @@
       <div class="cover-plane" style="z-index: 16"><img class="cover-fl cover-n312" :style="staggerDelay(14)" decoding="async" src="../../assets/figma/cover-n312.webp" alt="" /></div>
       <div class="cover-plane" style="z-index: 17"><img class="cover-fl cover-n309" :style="staggerDelay(15)" decoding="async" src="../../assets/figma/cover-n309.webp" alt="" /></div>
       <div class="cover-plane" style="z-index: 18"><img class="cover-fl cover-n274" :style="staggerDelay(16)" decoding="async" src="../../assets/figma/cover-n274.webp" alt="" /></div>
-      <div class="cover-plane" style="z-index: 9999"><img style="position: absolute; left: 0px; top: 225.7px; width: 44px; height: 168px; opacity: 1;" decoding="async" src="../../assets/figma/cover-n275.webp" alt="" /></div>
-      <div class="cover-plane" style="z-index: 9999"><img style="position: absolute; left: 331px; top: 215.7px; width: 44px; height: 168px; opacity: 1;" decoding="async" src="../../assets/figma/cover-n277.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 19"><img class="cover-fl cover-n275" :style="leftFlowerStyle" decoding="async" src="../../assets/figma/cover-n275.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 20"><img class="cover-fl cover-n277" :style="rightFlowerStyle" decoding="async" src="../../assets/figma/cover-n277.webp" alt="" /></div>
 
       <!-- grass hill (z 21): back flowers behind, front flowers ahead -->
       <div class="cover-plane cover-plane-hill" style="z-index: 21">
@@ -112,25 +107,23 @@ const isReady = ref(false)
 const coverScale = ref(1)
 
 const leftFlowerStyle = computed(() => {
-  if (typeof window === 'undefined') return staggerDelay(17)
+  if (typeof window === 'undefined') return {}
   const width = window.innerWidth >= 768 ? 480 : (coverRoot.value?.clientWidth || window.innerWidth)
   const overflow = 375 - width / coverScale.value
   const viewportLeftInStage = overflow > 0 ? overflow / 2 : 0
   return {
-    left: `${viewportLeftInStage}px`,
-    ...staggerDelay(17)
+    left: `${viewportLeftInStage}px`
   }
 })
 
 const rightFlowerStyle = computed(() => {
-  if (typeof window === 'undefined') return staggerDelay(18)
+  if (typeof window === 'undefined') return {}
   const width = window.innerWidth >= 768 ? 480 : (coverRoot.value?.clientWidth || window.innerWidth)
   const overflow = 375 - width / coverScale.value
   const viewportLeftInStage = overflow > 0 ? overflow / 2 : 0
   const leftPos = 331 - viewportLeftInStage
   return {
-    left: `${leftPos}px`,
-    ...staggerDelay(18)
+    left: `${leftPos}px`
   }
 })
 
