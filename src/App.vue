@@ -187,10 +187,11 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
   }
 
   .cover-root {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(-50% + 50vw) !important;
     height: 100% !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     background: #fffed6 !important;
   }
 
