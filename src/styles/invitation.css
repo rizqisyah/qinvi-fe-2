@@ -47,7 +47,11 @@
 }
 
 /* Section heights from measurement map */
-.invitation-section--hero { height: 700px; overflow: visible; background: var(--cream-bg); }
+.invitation-section--hero {
+  height: 700px;
+  overflow: visible;
+  background: var(--cream-bg);
+}
 
 /* When locked (cover showing), the canvas fills the whole viewport so the cover
    can bleed edge-to-edge; the 375 phone-frame only applies once opened. */
@@ -89,19 +93,55 @@
     opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
 }
+
 .invitation-content.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
-.invitation-section--quran { height: 530px; overflow: visible; }
-.invitation-section--couple { height: 1600px; }
-.invitation-section--save-date { height: 550px; background: #fff; }
-.invitation-section--events { height: 1085px; }
-.invitation-section--gift { height: 704px; }
-.invitation-section--rsvp { height: 562px; background: var(--cream-bg); }
-.invitation-section--wishes { height: 956px; background: var(--cream-bg); }
-.invitation-section--gallery { height: 1600px; }
-.invitation-section--footer { height: 333px; }
+
+.invitation-section--quran {
+  height: 530px;
+  overflow: visible;
+}
+
+.invitation-section--couple {
+  height: 1600px;
+}
+
+.invitation-section--save-date {
+  height: 550px;
+  background: var(--cream-bg);
+}
+
+.invitation-section--events {
+  height: 1085px;
+}
+
+.invitation-section--gift {
+  height: 704px;
+}
+
+.invitation-section--rsvp {
+  height: auto;
+  background: var(--cream-bg);
+  padding: 40px 0;
+  overflow: visible;
+}
+
+.invitation-section--wishes {
+  height: auto;
+  background: var(--cream-bg);
+  padding: 0 0 40px;
+  overflow: visible;
+}
+
+.invitation-section--gallery {
+  height: 1600px;
+}
+
+.invitation-section--footer {
+  height: 333px;
+}
 
 /* ----- Reusable Utilities ----- */
 
@@ -121,7 +161,7 @@
    variety. Everything sits in the centered 375px column on cream, so a slide/
    zoom only ever exposes matching cream briefly. Standalone `translate`/`scale`
    (not `transform`) so they compose with an element's own translateX(-50%). */
-.reveal-on-scroll > * {
+.reveal-on-scroll>* {
   opacity: 0;
   transition: opacity 1.5s ease,
     translate 1.5s cubic-bezier(0.16, 1, 0.3, 1),
@@ -130,50 +170,144 @@
 }
 
 /* Direction cycle by position */
-.reveal-on-scroll > *:nth-child(4n + 1) { translate: 0 34px; }        /* up      */
-.reveal-on-scroll > *:nth-child(4n + 2) { translate: -44px 0; }       /* left    */
-.reveal-on-scroll > *:nth-child(4n + 3) { translate: 44px 0; }        /* right   */
-.reveal-on-scroll > *:nth-child(4n)     { translate: 0 16px; scale: 0.92; } /* zoom */
+.reveal-on-scroll>*:nth-child(4n + 1) {
+  translate: 0 34px;
+}
 
-.reveal-on-scroll.in-view > * {
+/* up      */
+.reveal-on-scroll>*:nth-child(4n + 2) {
+  translate: -44px 0;
+}
+
+/* left    */
+.reveal-on-scroll>*:nth-child(4n + 3) {
+  translate: 44px 0;
+}
+
+/* right   */
+.reveal-on-scroll>*:nth-child(4n) {
+  translate: 0 16px;
+  scale: 0.92;
+}
+
+/* zoom */
+
+.reveal-on-scroll.in-view>* {
   opacity: 1;
   translate: 0 0;
   scale: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal-on-scroll > * {
+  .reveal-on-scroll>* {
     translate: 0 0 !important;
     scale: 1 !important;
   }
 }
 
-.reveal-on-scroll > *:nth-child(1) { --reveal-delay: 0ms; }
-.reveal-on-scroll > *:nth-child(2) { --reveal-delay: 130ms; }
-.reveal-on-scroll > *:nth-child(3) { --reveal-delay: 260ms; }
-.reveal-on-scroll > *:nth-child(4) { --reveal-delay: 390ms; }
-.reveal-on-scroll > *:nth-child(5) { --reveal-delay: 520ms; }
-.reveal-on-scroll > *:nth-child(6) { --reveal-delay: 650ms; }
-.reveal-on-scroll > *:nth-child(7) { --reveal-delay: 780ms; }
-.reveal-on-scroll > *:nth-child(8) { --reveal-delay: 910ms; }
-.reveal-on-scroll > *:nth-child(9) { --reveal-delay: 1040ms; }
-.reveal-on-scroll > *:nth-child(10) { --reveal-delay: 1170ms; }
-.reveal-on-scroll > *:nth-child(11) { --reveal-delay: 1300ms; }
-.reveal-on-scroll > *:nth-child(12) { --reveal-delay: 1430ms; }
-.reveal-on-scroll > *:nth-child(13) { --reveal-delay: 1560ms; }
-.reveal-on-scroll > *:nth-child(14) { --reveal-delay: 1690ms; }
-.reveal-on-scroll > *:nth-child(15) { --reveal-delay: 1820ms; }
-.reveal-on-scroll > *:nth-child(16) { --reveal-delay: 1950ms; }
-.reveal-on-scroll > *:nth-child(17) { --reveal-delay: 2080ms; }
-.reveal-on-scroll > *:nth-child(18) { --reveal-delay: 2210ms; }
-.reveal-on-scroll > *:nth-child(19) { --reveal-delay: 2340ms; }
-.reveal-on-scroll > *:nth-child(20) { --reveal-delay: 2470ms; }
-.reveal-on-scroll > *:nth-child(21) { --reveal-delay: 2600ms; }
-.reveal-on-scroll > *:nth-child(22) { --reveal-delay: 2730ms; }
-.reveal-on-scroll > *:nth-child(23) { --reveal-delay: 2860ms; }
-.reveal-on-scroll > *:nth-child(24) { --reveal-delay: 2990ms; }
-.reveal-on-scroll > *:nth-child(25) { --reveal-delay: 3120ms; }
-.reveal-on-scroll > *:nth-child(26) { --reveal-delay: 3250ms; }
+.reveal-on-scroll>*:nth-child(1) {
+  --reveal-delay: 0ms;
+}
+
+.reveal-on-scroll>*:nth-child(2) {
+  --reveal-delay: 130ms;
+}
+
+.reveal-on-scroll>*:nth-child(3) {
+  --reveal-delay: 260ms;
+}
+
+.reveal-on-scroll>*:nth-child(4) {
+  --reveal-delay: 390ms;
+}
+
+.reveal-on-scroll>*:nth-child(5) {
+  --reveal-delay: 520ms;
+}
+
+.reveal-on-scroll>*:nth-child(6) {
+  --reveal-delay: 650ms;
+}
+
+.reveal-on-scroll>*:nth-child(7) {
+  --reveal-delay: 780ms;
+}
+
+.reveal-on-scroll>*:nth-child(8) {
+  --reveal-delay: 910ms;
+}
+
+.reveal-on-scroll>*:nth-child(9) {
+  --reveal-delay: 1040ms;
+}
+
+.reveal-on-scroll>*:nth-child(10) {
+  --reveal-delay: 1170ms;
+}
+
+.reveal-on-scroll>*:nth-child(11) {
+  --reveal-delay: 1300ms;
+}
+
+.reveal-on-scroll>*:nth-child(12) {
+  --reveal-delay: 1430ms;
+}
+
+.reveal-on-scroll>*:nth-child(13) {
+  --reveal-delay: 1560ms;
+}
+
+.reveal-on-scroll>*:nth-child(14) {
+  --reveal-delay: 1690ms;
+}
+
+.reveal-on-scroll>*:nth-child(15) {
+  --reveal-delay: 1820ms;
+}
+
+.reveal-on-scroll>*:nth-child(16) {
+  --reveal-delay: 1950ms;
+}
+
+.reveal-on-scroll>*:nth-child(17) {
+  --reveal-delay: 2080ms;
+}
+
+.reveal-on-scroll>*:nth-child(18) {
+  --reveal-delay: 2210ms;
+}
+
+.reveal-on-scroll>*:nth-child(19) {
+  --reveal-delay: 2340ms;
+}
+
+.reveal-on-scroll>*:nth-child(20) {
+  --reveal-delay: 2470ms;
+}
+
+.reveal-on-scroll>*:nth-child(21) {
+  --reveal-delay: 2600ms;
+}
+
+.reveal-on-scroll>*:nth-child(22) {
+  --reveal-delay: 2730ms;
+}
+
+.reveal-on-scroll>*:nth-child(23) {
+  --reveal-delay: 2860ms;
+}
+
+.reveal-on-scroll>*:nth-child(24) {
+  --reveal-delay: 2990ms;
+}
+
+.reveal-on-scroll>*:nth-child(25) {
+  --reveal-delay: 3120ms;
+}
+
+.reveal-on-scroll>*:nth-child(26) {
+  --reveal-delay: 3250ms;
+}
 
 /* ============================================================
    Akad & Resepsi cards: slow, varied, staggered reveals.
@@ -183,7 +317,7 @@
    transform (e.g. the Maps button's translateX(-50%) centering). */
 
 /* Slower base; animate every transformed property; keep per-asset delay. */
-.events-card.reveal-on-scroll > * {
+.events-card.reveal-on-scroll>* {
   transition-property: opacity, translate, scale, rotate, filter;
   transition-duration: 1.7s;
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
@@ -192,7 +326,7 @@
 
 /* Rest state — everything settles home (higher specificity wins over the
    per-asset hidden states below). */
-.events-card.reveal-on-scroll.in-view > * {
+.events-card.reveal-on-scroll.in-view>* {
   translate: 0 0;
   scale: 1;
   rotate: 0deg;
@@ -200,44 +334,121 @@
 }
 
 /* Surfaces zoom up softly */
-.events-card .events-card-bg   { translate: 0 0; scale: 0.92; --reveal-delay: 0ms; }
-.events-card .events-circle-bg { translate: 0 0; scale: 0.82; --reveal-delay: 120ms; transition-duration: 1.9s; }
+.events-card .events-card-bg {
+  translate: 0 0;
+  scale: 0.92;
+  --reveal-delay: 0ms;
+}
+
+.events-card .events-circle-bg {
+  translate: 0 0;
+  scale: 0.82;
+  --reveal-delay: 120ms;
+  transition-duration: 1.9s;
+}
 
 /* The message reads early: fade up through a soft blur */
-.events-card .events-text-wrap { translate: 0 30px; filter: blur(8px); --reveal-delay: 420ms; transition-duration: 1.9s; }
+.events-card .events-text-wrap {
+  translate: 0 30px;
+  filter: blur(8px);
+  --reveal-delay: 420ms;
+  transition-duration: 1.9s;
+}
 
 /* Foliage grows out from the edge it hangs off */
-.events-card .events-foliage--left  { transform-origin: bottom left;  translate: -36px 16px; scale: 0.82; rotate: -5deg; --reveal-delay: 650ms; transition-duration: 1.9s; }
-.events-card .events-foliage--right { transform-origin: bottom right; translate:  36px 16px; scale: 0.82; rotate:  5deg; --reveal-delay: 650ms; transition-duration: 1.9s; }
+.events-card .events-foliage--left {
+  transform-origin: bottom left;
+  translate: -36px 16px;
+  scale: 0.82;
+  rotate: -5deg;
+  --reveal-delay: 650ms;
+  transition-duration: 1.9s;
+}
+
+.events-card .events-foliage--right {
+  transform-origin: bottom right;
+  translate: 36px 16px;
+  scale: 0.82;
+  rotate: 5deg;
+  --reveal-delay: 650ms;
+  transition-duration: 1.9s;
+}
 
 /* Left decos slide in from the left, right decos from the right — inward */
-.events-card .events-deco1-left    { translate: -60px 0;   --reveal-delay: 800ms; }
-.events-card .events-deco1-right   { translate:  60px 0;   --reveal-delay: 900ms; }
-.events-card .events-flower1-left  { translate: -56px 8px; scale: 0.9; --reveal-delay: 1050ms; }
-.events-card .events-flower1-right { translate:  56px 8px; scale: 0.9; --reveal-delay: 1150ms; }
-.events-card .events-deco2-left    { translate: -60px 0;   --reveal-delay: 1300ms; }
-.events-card .events-deco2-right   { translate:  60px 0;   --reveal-delay: 1400ms; }
+.events-card .events-deco1-left {
+  translate: -60px 0;
+  --reveal-delay: 800ms;
+}
+
+.events-card .events-deco1-right {
+  translate: 60px 0;
+  --reveal-delay: 900ms;
+}
+
+.events-card .events-flower1-left {
+  translate: -56px 8px;
+  scale: 0.9;
+  --reveal-delay: 1050ms;
+}
+
+.events-card .events-flower1-right {
+  translate: 56px 8px;
+  scale: 0.9;
+  --reveal-delay: 1150ms;
+}
+
+.events-card .events-deco2-left {
+  translate: -60px 0;
+  --reveal-delay: 1300ms;
+}
+
+.events-card .events-deco2-right {
+  translate: 60px 0;
+  --reveal-delay: 1400ms;
+}
 
 /* Small circular sprigs drop from above with a slight turn */
-.events-card .events-circ1-left    { translate: 0 -44px; rotate: -8deg; --reveal-delay: 1550ms; }
-.events-card .events-circ1-right   { translate: 0 -44px; rotate:  8deg; --reveal-delay: 1650ms; }
-.events-card .events-deco3-left    { translate: -60px 0; --reveal-delay: 1800ms; }
-.events-card .events-deco3-right   { translate:  60px 0; --reveal-delay: 1900ms; }
+.events-card .events-circ1-left {
+  translate: 0 -44px;
+  rotate: -8deg;
+  --reveal-delay: 1550ms;
+}
+
+.events-card .events-circ1-right {
+  translate: 0 -44px;
+  rotate: 8deg;
+  --reveal-delay: 1650ms;
+}
+
+.events-card .events-deco3-left {
+  translate: -60px 0;
+  --reveal-delay: 1800ms;
+}
+
+.events-card .events-deco3-right {
+  translate: 60px 0;
+  --reveal-delay: 1900ms;
+}
 
 /* Wax seal stamps in last with a springy pop */
 .events-card .events-wax-seal {
-  translate: 0 0; scale: 0.5; rotate: -14deg;
+  translate: 0 0;
+  scale: 0.5;
+  rotate: -14deg;
   --reveal-delay: 2100ms;
   transition-duration: 0.85s;
   transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Maps button eases up at the very end */
-.events-card .events-maps-button { translate: 0 26px; --reveal-delay: 2300ms; }
+.events-card .events-maps-button {
+  translate: 0 26px;
+  --reveal-delay: 2300ms;
+}
 
 /* Respect reduced-motion: keep the fade, drop the movement */
 @media (prefers-reduced-motion: reduce) {
-  .events-card.reveal-on-scroll > * {
+  .events-card.reveal-on-scroll>* {
     translate: 0 0 !important;
     scale: 1 !important;
     rotate: 0deg !important;
@@ -452,32 +663,190 @@
   pointer-events: none;
 }
 
-.hero-home-1 { left: 245px; top: 112px; width: 130px; height: 484px; }
-.hero-extra-right { right: -48px; top: 212px; width: 229px; height: 261px; }
-.hero-home-2 { left: 0; top: 112px; width: 139px; height: 484px; }
-.hero-arch { left: 0; top: 211px; width: 375px; height: 328px; }
-.hero-medallion { left: 20px; top: 208px; width: 214px; height: 214px; }
-.hero-wreath { left: 4px; top: 194px; width: 363px; height: 363px; object-fit: contain; }
-.hero-top-ornament { left: 136px; top: 73px; width: 97px; height: 124px; object-fit: contain; }
-.hero-flower-left { left: -193px; top: 226px; width: 385px; height: 385px; }
-.hero-flower-right { right: -193px; top: 226px; width: 385px; height: 385px; }
-.hero-side-flower-left { left: -70px; top: 440px; width: 139px; height: 90px; }
-.hero-side-flower-right { right: -70px; top: 440px; width: 139px; height: 90px; }
-.hero-lantern-left { left: -99px; top: 386px; width: 198px; height: 198px; }
-.hero-lantern-right { right: -99px; top: 386px; width: 198px; height: 198px; }
-.hero-leaf-left { left: 0; top: 332px; width: 73px; height: 131px; }
-.hero-leaf-right { right: 0; top: 342px; width: 73px; height: 131px; }
-.hero-leaf-left-back { left: 0; top: 315px; width: 68px; height: 121px; }
-.hero-leaf-right-back { right: 0; top: 314px; width: 68px; height: 121px; }
-.hero-palm-left { left: 0; top: 121px; width: 82px; height: 146px; }
-.hero-palm-right { right: 0; top: 121px; width: 82px; height: 146px; }
-.hero-small-flower-left { left: 0; top: 330px; width: 88px; height: 88px; }
-.hero-small-flower-right { right: 0; top: 331px; width: 88px; height: 88px; }
-.hero-title-script { left: 63px; top: 571px; width: 250px; height: 67px; object-fit: contain; }
-.hero-dot-left { left: -58px; top: 496px; width: 100px; height: 100px; }
-.hero-dot-right { right: -56px; top: 507px; width: 100px; height: 100px; }
-.hero-bud-right { left: 325px; top: 292px; width: 94px; height: 94px; }
-.hero-bud-left { left: 50px; top: 295px; width: 94px; height: 94px; }
+.hero-home-1 {
+  left: 245px;
+  top: 112px;
+  width: 130px;
+  height: 484px;
+}
+
+.hero-extra-right {
+  right: -48px;
+  top: 212px;
+  width: 229px;
+  height: 261px;
+}
+
+.hero-home-2 {
+  left: 0;
+  top: 112px;
+  width: 139px;
+  height: 484px;
+}
+
+.hero-arch {
+  left: 0;
+  top: 211px;
+  width: 375px;
+  height: 328px;
+}
+
+.hero-medallion {
+  left: 20px;
+  top: 208px;
+  width: 214px;
+  height: 214px;
+}
+
+.hero-wreath {
+  left: 4px;
+  top: 194px;
+  width: 363px;
+  height: 363px;
+  object-fit: contain;
+}
+
+.hero-top-ornament {
+  left: 136px;
+  top: 73px;
+  width: 97px;
+  height: 124px;
+  object-fit: contain;
+}
+
+.hero-flower-left {
+  left: -193px;
+  top: 226px;
+  width: 385px;
+  height: 385px;
+}
+
+.hero-flower-right {
+  right: -193px;
+  top: 226px;
+  width: 385px;
+  height: 385px;
+}
+
+.hero-side-flower-left {
+  left: -70px;
+  top: 440px;
+  width: 139px;
+  height: 90px;
+}
+
+.hero-side-flower-right {
+  right: -70px;
+  top: 440px;
+  width: 139px;
+  height: 90px;
+}
+
+.hero-lantern-left {
+  left: -99px;
+  top: 386px;
+  width: 198px;
+  height: 198px;
+}
+
+.hero-lantern-right {
+  right: -99px;
+  top: 386px;
+  width: 198px;
+  height: 198px;
+}
+
+.hero-leaf-left {
+  left: 0;
+  top: 332px;
+  width: 73px;
+  height: 131px;
+}
+
+.hero-leaf-right {
+  right: 0;
+  top: 342px;
+  width: 73px;
+  height: 131px;
+}
+
+.hero-leaf-left-back {
+  left: 0;
+  top: 315px;
+  width: 68px;
+  height: 121px;
+}
+
+.hero-leaf-right-back {
+  right: 0;
+  top: 314px;
+  width: 68px;
+  height: 121px;
+}
+
+.hero-palm-left {
+  left: 0;
+  top: 121px;
+  width: 82px;
+  height: 146px;
+}
+
+.hero-palm-right {
+  right: 0;
+  top: 121px;
+  width: 82px;
+  height: 146px;
+}
+
+.hero-small-flower-left {
+  left: 0;
+  top: 330px;
+  width: 88px;
+  height: 88px;
+}
+
+.hero-small-flower-right {
+  right: 0;
+  top: 331px;
+  width: 88px;
+  height: 88px;
+}
+
+.hero-title-script {
+  left: 63px;
+  top: 571px;
+  width: 250px;
+  height: 67px;
+  object-fit: contain;
+}
+
+.hero-dot-left {
+  left: -58px;
+  top: 496px;
+  width: 100px;
+  height: 100px;
+}
+
+.hero-dot-right {
+  right: -56px;
+  top: 507px;
+  width: 100px;
+  height: 100px;
+}
+
+.hero-bud-right {
+  left: 325px;
+  top: 292px;
+  width: 94px;
+  height: 94px;
+}
+
+.hero-bud-left {
+  left: 50px;
+  top: 295px;
+  width: 94px;
+  height: 94px;
+}
 
 /* Hero opening: layered, slow, romantic reveal. */
 .invitation-section--hero .hero-asset {
@@ -491,15 +860,37 @@
   animation: heroReveal 1400ms var(--ease-out-quint, cubic-bezier(0.22, 1, 0.36, 1)) var(--hero-delay, 0ms) forwards;
 }
 
-.hero-home-1 { --hero-delay: 80ms; }
-.hero-home-2 { --hero-delay: 180ms; }
+.hero-home-1 {
+  --hero-delay: 80ms;
+}
 
-.hero-palm-left { --hero-delay: 360ms; }
-.hero-palm-right { --hero-delay: 460ms; }
-.hero-flower-left { --hero-delay: 620ms; }
-.hero-flower-right { --hero-delay: 720ms; }
-.hero-side-flower-left { --hero-delay: 860ms; }
-.hero-side-flower-right { --hero-delay: 960ms; }
+.hero-home-2 {
+  --hero-delay: 180ms;
+}
+
+.hero-palm-left {
+  --hero-delay: 360ms;
+}
+
+.hero-palm-right {
+  --hero-delay: 460ms;
+}
+
+.hero-flower-left {
+  --hero-delay: 620ms;
+}
+
+.hero-flower-right {
+  --hero-delay: 720ms;
+}
+
+.hero-side-flower-left {
+  --hero-delay: 860ms;
+}
+
+.hero-side-flower-right {
+  --hero-delay: 960ms;
+}
 
 .hero-palm-left,
 .hero-palm-right,
@@ -521,18 +912,49 @@
     heroGoyang 4200ms ease-in-out calc(var(--hero-delay) + 1700ms) infinite alternate;
 }
 
-.hero-arch { --hero-delay: 1080ms; }
-.hero-medallion { --hero-delay: 1260ms; }
-.hero-wreath { --hero-delay: 1440ms; }
+.hero-arch {
+  --hero-delay: 1080ms;
+}
 
-.hero-leaf-left { --hero-delay: 1180ms; }
-.hero-leaf-right { --hero-delay: 1280ms; }
-.hero-leaf-left-back { --hero-delay: 1360ms; }
-.hero-leaf-right-back { --hero-delay: 1460ms; }
-.hero-lantern-left { --hero-delay: 1560ms; }
-.hero-lantern-right { --hero-delay: 1660ms; }
-.hero-small-flower-left { --hero-delay: 1760ms; }
-.hero-small-flower-right { --hero-delay: 1860ms; }
+.hero-medallion {
+  --hero-delay: 1260ms;
+}
+
+.hero-wreath {
+  --hero-delay: 1440ms;
+}
+
+.hero-leaf-left {
+  --hero-delay: 1180ms;
+}
+
+.hero-leaf-right {
+  --hero-delay: 1280ms;
+}
+
+.hero-leaf-left-back {
+  --hero-delay: 1360ms;
+}
+
+.hero-leaf-right-back {
+  --hero-delay: 1460ms;
+}
+
+.hero-lantern-left {
+  --hero-delay: 1560ms;
+}
+
+.hero-lantern-right {
+  --hero-delay: 1660ms;
+}
+
+.hero-small-flower-left {
+  --hero-delay: 1760ms;
+}
+
+.hero-small-flower-right {
+  --hero-delay: 1860ms;
+}
 
 .hero-leaf-left,
 .hero-leaf-right,
@@ -606,35 +1028,85 @@
 }
 
 @keyframes heroButtonReveal {
-  0% { opacity: 0; transform: translate3d(-50%, 14px, 0); }
-  100% { opacity: 1; transform: translate3d(-50%, 0, 0); }
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, 14px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 @keyframes heroReveal {
-  0% { opacity: 0; transform: translate3d(0, 18px, 0) scale(0.985); filter: blur(2px); }
-  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); filter: blur(0); }
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.985);
+    filter: blur(2px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
 }
 
 @keyframes heroMonogram {
-  0% { opacity: 0; transform: translate3d(0, -12px, 0) scale(0.92); filter: blur(2px); }
-  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); filter: blur(0); }
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -12px, 0) scale(0.92);
+    filter: blur(2px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
 }
 
 @keyframes heroTitle {
-  0% { opacity: 0; transform: translate3d(0, 12px, 0) scale(0.96); filter: blur(2px); }
-  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); filter: blur(0); }
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(0.96);
+    filter: blur(2px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
 }
 
 @keyframes heroGoyang {
-  0% { transform: rotate(-3.2deg) translate3d(-2px, 0, 0); }
-  50% { transform: rotate(3.6deg) translate3d(2px, -1px, 0); }
-  100% { transform: rotate(-2.4deg) translate3d(-1px, 1px, 0); }
+  0% {
+    transform: rotate(-3.2deg) translate3d(-2px, 0, 0);
+  }
+
+  50% {
+    transform: rotate(3.6deg) translate3d(2px, -1px, 0);
+  }
+
+  100% {
+    transform: rotate(-2.4deg) translate3d(-1px, 1px, 0);
+  }
 }
 
 @keyframes heroGoyangSmall {
-  0% { transform: rotate(2.2deg) translate3d(1px, 0, 0); }
-  50% { transform: rotate(-2.8deg) translate3d(-1px, -1px, 0); }
-  100% { transform: rotate(1.7deg) translate3d(1px, 1px, 0); }
+  0% {
+    transform: rotate(2.2deg) translate3d(1px, 0, 0);
+  }
+
+  50% {
+    transform: rotate(-2.8deg) translate3d(-1px, -1px, 0);
+  }
+
+  100% {
+    transform: rotate(1.7deg) translate3d(1px, 1px, 0);
+  }
 }
 
 /* ============================================================
@@ -728,9 +1200,19 @@
   transition: opacity 1.1s ease, translate 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.enter-arch { translate: 0 12px; }
-.enter-hill { translate: 0 30px; transition-delay: 0.1s; }
-.enter-mono { translate: 0 -24px; transition-delay: 0.6s; }
+.enter-arch {
+  translate: 0 12px;
+}
+
+.enter-hill {
+  translate: 0 30px;
+  transition-delay: 0.1s;
+}
+
+.enter-mono {
+  translate: 0 -24px;
+  transition-delay: 0.6s;
+}
 
 .is-ready .cover-layer[class*="enter-"] {
   translate: 0 0;
@@ -768,113 +1250,755 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cover-fl { animation: none !important; }
+  .cover-fl {
+    animation: none !important;
+  }
 }
 
 /* Shared idle sway; amplitude/origin/timing come from each element's own rule. */
 @keyframes cover-swayv {
-  0% { rotate: calc(var(--amp, 1deg) * -1); }
-  100% { rotate: var(--amp, 1deg); }
+  0% {
+    rotate: calc(var(--amp, 1deg) * -1);
+  }
+
+  100% {
+    rotate: var(--amp, 1deg);
+  }
 }
 
 @keyframes cover-float {
-  0%, 100% { scale: 0.994; }
-  50% { scale: 1.012; }
+
+  0%,
+  100% {
+    scale: 0.994;
+  }
+
+  50% {
+    scale: 1.012;
+  }
 }
 
 /* --- Per-flower entrance + idle sway (generated) --- */
-.cover-n287{--ex:-34px;--ey:6px;transform-origin:top left;animation-duration:8.2s;animation-delay:1.50s;--amp:1.5deg;}
-.is-ready .cover-n287{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n288{--ex:34px;--ey:6px;transform-origin:top right;animation-duration:8.8s;animation-delay:1.55s;--amp:1.1deg;}
-.is-ready .cover-n288{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
-.cover-n304{--ex:0px;--ey:-22px;transform-origin:top center;animation-duration:7.1s;animation-delay:1.60s;--amp:1.1deg;}
-.is-ready .cover-n304{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n306{--ex:0px;--ey:-22px;transform-origin:top center;animation-duration:7.7s;animation-delay:1.65s;--amp:1.1deg;}
-.is-ready .cover-n306{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
-.cover-n259{--ex:-34px;--ey:6px;transform-origin:top left;animation-duration:7.1s;animation-delay:1.70s;--amp:1.5deg;}
-.is-ready .cover-n259{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n263{--ex:-34px;--ey:6px;transform-origin:top left;animation-duration:7.7s;animation-delay:1.75s;--amp:1.5deg;}
-.is-ready .cover-n263{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
-.cover-n260{--ex:34px;--ey:6px;transform-origin:top right;animation-duration:8.2s;animation-delay:1.80s;--amp:1.1deg;}
-.is-ready .cover-n260{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n265{--ex:34px;--ey:6px;transform-origin:top right;animation-duration:6.0s;animation-delay:1.85s;--amp:1.1deg;}
-.is-ready .cover-n265{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n266{--ex:-34px;--ey:6px;transform-origin:top left;animation-duration:6.5s;animation-delay:1.90s;--amp:1.5deg;}
-.is-ready .cover-n266{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
-.cover-n295{--ex:-34px;--ey:6px;transform-origin:top left;animation-duration:7.1s;animation-delay:1.95s;--amp:1.5deg;}
-.is-ready .cover-n295{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n268{--ex:34px;--ey:6px;transform-origin:top right;animation-duration:7.7s;animation-delay:2.00s;--amp:1.1deg;}
-.is-ready .cover-n268{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
-.cover-n273{--ex:-34px;--ey:6px;transform-origin:top left;animation-duration:8.2s;animation-delay:2.05s;--amp:1.5deg;}
-.is-ready .cover-n273{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n308{--ex:0px;--ey:-22px;transform-origin:top center;animation-duration:8.8s;animation-delay:2.10s;--amp:1.5deg;}
-.is-ready .cover-n308{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
-.cover-n310{--ex:-34px;--ey:6px;transform-origin:top left;animation-duration:6.0s;animation-delay:2.15s;--amp:1.5deg;}
-.is-ready .cover-n310{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n312{--ex:34px;--ey:6px;transform-origin:top right;animation-duration:6.5s;animation-delay:2.20s;--amp:1.1deg;}
-.is-ready .cover-n312{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
-.cover-n309{--ex:0px;--ey:-22px;transform-origin:top center;animation-duration:7.1s;animation-delay:2.25s;--amp:1.1deg;}
-.is-ready .cover-n309{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n274{--ex:34px;--ey:6px;transform-origin:top right;animation-duration:8.8s;animation-delay:2.30s;--amp:1.1deg;}
-.is-ready .cover-n274{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
-.cover-n275{--ex:-34px;--ey:6px;transform-origin:top left;animation-duration:6.5s;animation-delay:2.35s;--amp:1.5deg;}
-.is-ready .cover-n275{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
-.cover-n277{--ex:34px;--ey:6px;transform-origin:top right;animation-duration:7.1s;animation-delay:2.40s;--amp:1.1deg;}
-.is-ready .cover-n277{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n298{--ex:20px;--ey:40px;transform-origin:bottom right;animation-duration:8.2s;animation-delay:2.50s;--amp:1.1deg;}
-.is-ready .cover-n298{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n294{--ex:20px;--ey:40px;transform-origin:bottom right;animation-duration:8.8s;animation-delay:2.55s;--amp:1.1deg;}
-.is-ready .cover-n294{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
-.cover-n293{--ex:20px;--ey:40px;transform-origin:bottom right;animation-duration:7.7s;animation-delay:2.60s;--amp:1.1deg;}
-.is-ready .cover-n293{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
-.cover-n297{--ex:20px;--ey:40px;transform-origin:bottom right;animation-duration:8.2s;animation-delay:2.65s;--amp:1.1deg;}
-.is-ready .cover-n297{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n292{--ex:20px;--ey:40px;transform-origin:bottom right;animation-duration:6.0s;animation-delay:2.70s;--amp:1.1deg;}
-.is-ready .cover-n292{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n278{--ex:-20px;--ey:40px;transform-origin:bottom left;animation-duration:7.7s;animation-delay:2.75s;--amp:1.1deg;}
-.is-ready .cover-n278{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
-.cover-n280{--ex:20px;--ey:40px;transform-origin:bottom right;animation-duration:8.2s;animation-delay:2.80s;--amp:1.1deg;}
-.is-ready .cover-n280{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n289{--ex:20px;--ey:40px;transform-origin:bottom right;animation-duration:6.0s;animation-delay:2.85s;--amp:1.1deg;}
-.is-ready .cover-n289{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n290{--ex:-20px;--ey:40px;transform-origin:bottom left;animation-duration:6.5s;animation-delay:2.90s;--amp:1.1deg;}
-.is-ready .cover-n290{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
-.cover-n291{--ex:-20px;--ey:40px;transform-origin:bottom left;animation-duration:7.1s;animation-delay:2.95s;--amp:1.1deg;}
-.is-ready .cover-n291{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate;}
-.cover-n296{--ex:20px;--ey:40px;transform-origin:bottom right;animation-duration:7.7s;animation-delay:3.00s;--amp:1.1deg;}
-.is-ready .cover-n296{animation-name:cover-swayv;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate-reverse;}
+.cover-n287 {
+  --ex: -34px;
+  --ey: 6px;
+  transform-origin: top left;
+  animation-duration: 8.2s;
+  animation-delay: 1.50s;
+  --amp: 1.5deg;
+}
+
+.is-ready .cover-n287 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n288 {
+  --ex: 34px;
+  --ey: 6px;
+  transform-origin: top right;
+  animation-duration: 8.8s;
+  animation-delay: 1.55s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n288 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cover-n304 {
+  --ex: 0px;
+  --ey: -22px;
+  transform-origin: top center;
+  animation-duration: 7.1s;
+  animation-delay: 1.60s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n304 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n306 {
+  --ex: 0px;
+  --ey: -22px;
+  transform-origin: top center;
+  animation-duration: 7.7s;
+  animation-delay: 1.65s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n306 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cover-n259 {
+  --ex: -34px;
+  --ey: 6px;
+  transform-origin: top left;
+  animation-duration: 7.1s;
+  animation-delay: 1.70s;
+  --amp: 1.5deg;
+}
+
+.is-ready .cover-n259 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n263 {
+  --ex: -34px;
+  --ey: 6px;
+  transform-origin: top left;
+  animation-duration: 7.7s;
+  animation-delay: 1.75s;
+  --amp: 1.5deg;
+}
+
+.is-ready .cover-n263 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cover-n260 {
+  --ex: 34px;
+  --ey: 6px;
+  transform-origin: top right;
+  animation-duration: 8.2s;
+  animation-delay: 1.80s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n260 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n265 {
+  --ex: 34px;
+  --ey: 6px;
+  transform-origin: top right;
+  animation-duration: 6.0s;
+  animation-delay: 1.85s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n265 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n266 {
+  --ex: -34px;
+  --ey: 6px;
+  transform-origin: top left;
+  animation-duration: 6.5s;
+  animation-delay: 1.90s;
+  --amp: 1.5deg;
+}
+
+.is-ready .cover-n266 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cover-n295 {
+  --ex: -34px;
+  --ey: 6px;
+  transform-origin: top left;
+  animation-duration: 7.1s;
+  animation-delay: 1.95s;
+  --amp: 1.5deg;
+}
+
+.is-ready .cover-n295 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n268 {
+  --ex: 34px;
+  --ey: 6px;
+  transform-origin: top right;
+  animation-duration: 7.7s;
+  animation-delay: 2.00s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n268 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cover-n273 {
+  --ex: -34px;
+  --ey: 6px;
+  transform-origin: top left;
+  animation-duration: 8.2s;
+  animation-delay: 2.05s;
+  --amp: 1.5deg;
+}
+
+.is-ready .cover-n273 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n308 {
+  --ex: 0px;
+  --ey: -22px;
+  transform-origin: top center;
+  animation-duration: 8.8s;
+  animation-delay: 2.10s;
+  --amp: 1.5deg;
+}
+
+.is-ready .cover-n308 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cover-n310 {
+  --ex: -34px;
+  --ey: 6px;
+  transform-origin: top left;
+  animation-duration: 6.0s;
+  animation-delay: 2.15s;
+  --amp: 1.5deg;
+}
+
+.is-ready .cover-n310 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n312 {
+  --ex: 34px;
+  --ey: 6px;
+  transform-origin: top right;
+  animation-duration: 6.5s;
+  animation-delay: 2.20s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n312 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cover-n309 {
+  --ex: 0px;
+  --ey: -22px;
+  transform-origin: top center;
+  animation-duration: 7.1s;
+  animation-delay: 2.25s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n309 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n274 {
+  --ex: 34px;
+  --ey: 6px;
+  transform-origin: top right;
+  animation-duration: 8.8s;
+  animation-delay: 2.30s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n274 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cover-n275 {
+  --ex: -34px;
+  --ey: 6px;
+  transform-origin: top left;
+  animation-duration: 6.5s;
+  animation-delay: 2.35s;
+  --amp: 1.5deg;
+}
+
+.is-ready .cover-n275 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cover-n277 {
+  --ex: 34px;
+  --ey: 6px;
+  transform-origin: top right;
+  animation-duration: 7.1s;
+  animation-delay: 2.40s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n277 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n298 {
+  --ex: 20px;
+  --ey: 40px;
+  transform-origin: bottom right;
+  animation-duration: 8.2s;
+  animation-delay: 2.50s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n298 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n294 {
+  --ex: 20px;
+  --ey: 40px;
+  transform-origin: bottom right;
+  animation-duration: 8.8s;
+  animation-delay: 2.55s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n294 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cover-n293 {
+  --ex: 20px;
+  --ey: 40px;
+  transform-origin: bottom right;
+  animation-duration: 7.7s;
+  animation-delay: 2.60s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n293 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cover-n297 {
+  --ex: 20px;
+  --ey: 40px;
+  transform-origin: bottom right;
+  animation-duration: 8.2s;
+  animation-delay: 2.65s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n297 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n292 {
+  --ex: 20px;
+  --ey: 40px;
+  transform-origin: bottom right;
+  animation-duration: 6.0s;
+  animation-delay: 2.70s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n292 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n278 {
+  --ex: -20px;
+  --ey: 40px;
+  transform-origin: bottom left;
+  animation-duration: 7.7s;
+  animation-delay: 2.75s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n278 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cover-n280 {
+  --ex: 20px;
+  --ey: 40px;
+  transform-origin: bottom right;
+  animation-duration: 8.2s;
+  animation-delay: 2.80s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n280 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n289 {
+  --ex: 20px;
+  --ey: 40px;
+  transform-origin: bottom right;
+  animation-duration: 6.0s;
+  animation-delay: 2.85s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n289 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n290 {
+  --ex: -20px;
+  --ey: 40px;
+  transform-origin: bottom left;
+  animation-duration: 6.5s;
+  animation-delay: 2.90s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n290 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.cover-n291 {
+  --ex: -20px;
+  --ey: 40px;
+  transform-origin: bottom left;
+  animation-duration: 7.1s;
+  animation-delay: 2.95s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n291 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.cover-n296 {
+  --ex: 20px;
+  --ey: 40px;
+  transform-origin: bottom right;
+  animation-duration: 7.7s;
+  animation-delay: 3.00s;
+  --amp: 1.1deg;
+}
+
+.is-ready .cover-n296 {
+  animation-name: cover-swayv;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
 
 /* --- Per-flower content-box position + sway pivot (generated by crop) --- */
-.cover-n287{left:0.0px;top:405.3px;width:187.0px;height:138.3px;transform-origin:bottom center;}
-.cover-n288{left:184.0px;top:411.3px;width:191.0px;height:138.3px;transform-origin:bottom center;}
-.cover-n304{left:0.0px;top:0.0px;width:164.7px;height:205.0px;transform-origin:top center;}
-.cover-n306{left:212.3px;top:0.0px;width:162.7px;height:203.0px;transform-origin:top center;}
-.cover-n259{left:0.0px;top:285.3px;width:118.7px;height:287.3px;transform-origin:bottom center;}
-.cover-n263{left:0.0px;top:331.3px;width:46.7px;height:96.3px;transform-origin:top center;}
-.cover-n260{left:257.3px;top:285.3px;width:117.7px;height:287.3px;transform-origin:bottom center;}
-.cover-n265{left:328.3px;top:331.3px;width:46.7px;height:96.3px;transform-origin:top center;}
-.cover-n266{left:0.0px;top:163.7px;width:23.7px;height:78.3px;transform-origin:top center;}
-.cover-n295{left:9.3px;top:395.3px;width:45.3px;height:84.7px;transform-origin:bottom center;}
-.cover-n268{left:348.3px;top:163.7px;width:26.7px;height:78.3px;transform-origin:top center;}
-.cover-n273{left:0.0px;top:428.0px;width:61.7px;height:184.7px;transform-origin:bottom center;}
-.cover-n308{left:0.0px;top:0.0px;width:94.3px;height:177.7px;transform-origin:top center;}
-.cover-n310{left:50.3px;top:32.0px;width:45.3px;height:84.7px;transform-origin:top center;}
-.cover-n312{left:271.3px;top:32.0px;width:45.3px;height:84.7px;transform-origin:top center;}
-.cover-n309{left:285.7px;top:0.0px;width:89.3px;height:177.7px;transform-origin:top center;}
-.cover-n274{left:313.3px;top:428.0px;width:61.7px;height:184.7px;transform-origin:bottom center;}
-.cover-n275{left:0.0px;top:225.7px;width:44.0px;height:168.0px;transform-origin:top center;}
-.cover-n277{left:331.0px;top:215.7px;width:44.0px;height:168.0px;transform-origin:top center;}
-.cover-n298{left:0.0px;top:596.3px;width:134.7px;height:128.7px;transform-origin:bottom center;}
-.cover-n294{left:170.3px;top:626.3px;width:204.7px;height:98.7px;transform-origin:bottom center;}
-.cover-n293{left:269.3px;top:658.7px;width:105.7px;height:66.3px;transform-origin:bottom center;}
-.cover-n297{left:79.7px;top:662.0px;width:88.3px;height:63.0px;transform-origin:bottom center;}
-.cover-n292{left:0.0px;top:640.0px;width:111.3px;height:85.0px;transform-origin:bottom center;}
-.cover-n278{left:0.0px;top:569.7px;width:37.7px;height:101.7px;transform-origin:bottom center;}
-.cover-n280{left:339.3px;top:569.7px;width:35.7px;height:101.7px;transform-origin:bottom center;}
-.cover-n289{left:317.0px;top:597.0px;width:58.0px;height:112.0px;transform-origin:bottom center;}
-.cover-n290{left:0.0px;top:644.0px;width:52.3px;height:81.0px;transform-origin:bottom center;}
-.cover-n291{left:26.0px;top:678.0px;width:89.3px;height:47.0px;transform-origin:bottom center;}
-.cover-n296{left:136.3px;top:651.7px;width:112.7px;height:73.3px;transform-origin:bottom center;}
+.cover-n287 {
+  left: 0.0px;
+  top: 405.3px;
+  width: 187.0px;
+  height: 138.3px;
+  transform-origin: bottom center;
+}
+
+.cover-n288 {
+  left: 184.0px;
+  top: 411.3px;
+  width: 191.0px;
+  height: 138.3px;
+  transform-origin: bottom center;
+}
+
+.cover-n304 {
+  left: 0.0px;
+  top: 0.0px;
+  width: 164.7px;
+  height: 205.0px;
+  transform-origin: top center;
+}
+
+.cover-n306 {
+  left: 212.3px;
+  top: 0.0px;
+  width: 162.7px;
+  height: 203.0px;
+  transform-origin: top center;
+}
+
+.cover-n259 {
+  left: 0.0px;
+  top: 285.3px;
+  width: 118.7px;
+  height: 287.3px;
+  transform-origin: bottom center;
+}
+
+.cover-n263 {
+  left: 0.0px;
+  top: 331.3px;
+  width: 46.7px;
+  height: 96.3px;
+  transform-origin: top center;
+}
+
+.cover-n260 {
+  left: 257.3px;
+  top: 285.3px;
+  width: 117.7px;
+  height: 287.3px;
+  transform-origin: bottom center;
+}
+
+.cover-n265 {
+  left: 328.3px;
+  top: 331.3px;
+  width: 46.7px;
+  height: 96.3px;
+  transform-origin: top center;
+}
+
+.cover-n266 {
+  left: 0.0px;
+  top: 163.7px;
+  width: 23.7px;
+  height: 78.3px;
+  transform-origin: top center;
+}
+
+.cover-n295 {
+  left: 9.3px;
+  top: 395.3px;
+  width: 45.3px;
+  height: 84.7px;
+  transform-origin: bottom center;
+}
+
+.cover-n268 {
+  left: 348.3px;
+  top: 163.7px;
+  width: 26.7px;
+  height: 78.3px;
+  transform-origin: top center;
+}
+
+.cover-n273 {
+  left: 0.0px;
+  top: 428.0px;
+  width: 61.7px;
+  height: 184.7px;
+  transform-origin: bottom center;
+}
+
+.cover-n308 {
+  left: 0.0px;
+  top: 0.0px;
+  width: 94.3px;
+  height: 177.7px;
+  transform-origin: top center;
+}
+
+.cover-n310 {
+  left: 50.3px;
+  top: 32.0px;
+  width: 45.3px;
+  height: 84.7px;
+  transform-origin: top center;
+}
+
+.cover-n312 {
+  left: 271.3px;
+  top: 32.0px;
+  width: 45.3px;
+  height: 84.7px;
+  transform-origin: top center;
+}
+
+.cover-n309 {
+  left: 285.7px;
+  top: 0.0px;
+  width: 89.3px;
+  height: 177.7px;
+  transform-origin: top center;
+}
+
+.cover-n274 {
+  left: 313.3px;
+  top: 428.0px;
+  width: 61.7px;
+  height: 184.7px;
+  transform-origin: bottom center;
+}
+
+.cover-n275 {
+  left: 0.0px;
+  top: 225.7px;
+  width: 44.0px;
+  height: 168.0px;
+  transform-origin: top center;
+}
+
+.cover-n277 {
+  left: 331.0px;
+  top: 215.7px;
+  width: 44.0px;
+  height: 168.0px;
+  transform-origin: top center;
+}
+
+.cover-n298 {
+  left: 0.0px;
+  top: 596.3px;
+  width: 134.7px;
+  height: 128.7px;
+  transform-origin: bottom center;
+}
+
+.cover-n294 {
+  left: 170.3px;
+  top: 626.3px;
+  width: 204.7px;
+  height: 98.7px;
+  transform-origin: bottom center;
+}
+
+.cover-n293 {
+  left: 269.3px;
+  top: 658.7px;
+  width: 105.7px;
+  height: 66.3px;
+  transform-origin: bottom center;
+}
+
+.cover-n297 {
+  left: 79.7px;
+  top: 662.0px;
+  width: 88.3px;
+  height: 63.0px;
+  transform-origin: bottom center;
+}
+
+.cover-n292 {
+  left: 0.0px;
+  top: 640.0px;
+  width: 111.3px;
+  height: 85.0px;
+  transform-origin: bottom center;
+}
+
+.cover-n278 {
+  left: 0.0px;
+  top: 569.7px;
+  width: 37.7px;
+  height: 101.7px;
+  transform-origin: bottom center;
+}
+
+.cover-n280 {
+  left: 339.3px;
+  top: 569.7px;
+  width: 35.7px;
+  height: 101.7px;
+  transform-origin: bottom center;
+}
+
+.cover-n289 {
+  left: 317.0px;
+  top: 597.0px;
+  width: 58.0px;
+  height: 112.0px;
+  transform-origin: bottom center;
+}
+
+.cover-n290 {
+  left: 0.0px;
+  top: 644.0px;
+  width: 52.3px;
+  height: 81.0px;
+  transform-origin: bottom center;
+}
+
+.cover-n291 {
+  left: 26.0px;
+  top: 678.0px;
+  width: 89.3px;
+  height: 47.0px;
+  transform-origin: bottom center;
+}
+
+.cover-n296 {
+  left: 136.3px;
+  top: 651.7px;
+  width: 112.7px;
+  height: 73.3px;
+  transform-origin: bottom center;
+}
 
 /* Real text + button overlaid on the artwork */
 .cover-text {
@@ -991,15 +2115,78 @@
   pointer-events: none;
 }
 
-.quran-card { left: -15px; top: 120px; width: 406px; height: 406px; z-index: 2; }
-.quran-seal { left: 138px; top: 114px; width: 92px; height: 92px; z-index: 4; }
-.quran-foliage-right { right: 0; top: 19px; width: 178px; height: 317px; z-index: 3; }
-.quran-foliage-right-back { right: 0; top: 14px; width: 178px; height: 317px; z-index: 3; }
-.quran-foliage-left-back { left: 0; top: 14px; width: 178px; height: 317px; z-index: 3; }
-.quran-lantern-left { left: -99px; top: 328px; width: 198px; height: 198px; z-index: 3; }
-.quran-lantern-right { right: -99px; top: 328px; width: 198px; height: 198px; z-index: 3; }
-.quran-flower-left { left: -83px; top: 254px; width: 165px; height: 165px; z-index: 5; }
-.quran-flower-right { right: -83px; top: 254px; width: 165px; height: 165px; z-index: 5; }
+.quran-card {
+  left: -15px;
+  top: 120px;
+  width: 406px;
+  height: 406px;
+  z-index: 2;
+}
+
+.quran-seal {
+  left: 138px;
+  top: 114px;
+  width: 92px;
+  height: 92px;
+  z-index: 4;
+}
+
+.quran-foliage-right {
+  right: 0;
+  top: 19px;
+  width: 178px;
+  height: 317px;
+  z-index: 3;
+}
+
+.quran-foliage-right-back {
+  right: 0;
+  top: 14px;
+  width: 178px;
+  height: 317px;
+  z-index: 3;
+}
+
+.quran-foliage-left-back {
+  left: 0;
+  top: 14px;
+  width: 178px;
+  height: 317px;
+  z-index: 3;
+}
+
+.quran-lantern-left {
+  left: -99px;
+  top: 328px;
+  width: 198px;
+  height: 198px;
+  z-index: 3;
+}
+
+.quran-lantern-right {
+  right: -99px;
+  top: 328px;
+  width: 198px;
+  height: 198px;
+  z-index: 3;
+}
+
+.quran-flower-left {
+  left: -83px;
+  top: 254px;
+  width: 165px;
+  height: 165px;
+  z-index: 5;
+}
+
+.quran-flower-right {
+  right: -83px;
+  top: 254px;
+  width: 165px;
+  height: 165px;
+  z-index: 5;
+}
+
 .quran-lantern-left,
 .quran-lantern-right,
 .quran-flower-left,
@@ -1007,7 +2194,14 @@
   transform-origin: 50% 96%;
   animation: heroGoyangSmall 3600ms ease-in-out 0ms infinite alternate;
 }
-.quran-divider { left: 128px; top: 449px; width: 120px; height: 33px; z-index: 6; }
+
+.quran-divider {
+  left: 128px;
+  top: 449px;
+  width: 120px;
+  height: 33px;
+  z-index: 6;
+}
 
 .quran-text-wrap {
   position: absolute;
@@ -1060,11 +2254,37 @@
 
 /* Groom/Bride are split into their own components, each an independent
    reveal-on-scroll scope positioned over its own half of the section. */
-.groom-block { position: absolute; top: 0; left: 0; width: 375px; height: 800px; }
-.bride-block { position: absolute; top: 800px; left: 0; width: 375px; height: 800px; }
+.groom-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 800px;
+}
 
-.couple-circle-groom { left: -4px; top: 174px; width: 383px; height: 383px; z-index: 1; }
-.couple-circle-bride { left: 1px; top: 208px; width: 383px; height: 383px; z-index: 1; }
+.bride-block {
+  position: absolute;
+  top: 800px;
+  left: 0;
+  width: 375px;
+  height: 800px;
+}
+
+.couple-circle-groom {
+  left: -4px;
+  top: 174px;
+  width: 383px;
+  height: 383px;
+  z-index: 1;
+}
+
+.couple-circle-bride {
+  left: 1px;
+  top: 208px;
+  width: 383px;
+  height: 383px;
+  z-index: 1;
+}
 
 /* Real photo variant: shown at its natural shape (no crop/ring), sized large
    over the portrait region. Scenery sits behind, foreground flowers frame the base. */
@@ -1073,45 +2293,199 @@
   height: auto;
   z-index: 3;
 }
-.couple-photo-groom { left: 27px; top: 200px; }
-.couple-photo-bride { left: 27px; top: 234px; }
-.couple-bg-groom { left: -124px; top: 239px; width: 623px; height: 308px; z-index: 0; }
-.couple-bg-bride { left: -119px; top: 273px; width: 623px; height: 308px; z-index: 0; }
-.couple-side-groom { left: 178px; top: 81px; width: 208px; height: 370px; z-index: 2; }
-.couple-side-bride { left: 0; top: 121px; width: 208px; height: 370px; z-index: 2; }
-.couple-frame-groom { left: -189px; top: 202px; width: 348px; height: 348px; z-index: 2; }
-.couple-frame-bride { left: -184px; top: 236px; width: 348px; height: 348px; z-index: 0; }
 
-.couple-fl-groom-l { left: -50px; top: 376px; width: 187px; height: 187px; z-index: 4; }
-.couple-fl-groom-r { right: -50px; top: 376px; width: 187px; height: 187px; z-index: 4; }
-.couple-fl-bride-l { left: -50px; top: 410px; width: 187px; height: 187px; z-index: 4; }
-.couple-fl-bride-r { right: -50px; top: 410px; width: 187px; height: 187px; z-index: 4; }
+.couple-photo-groom {
+  left: 27px;
+  top: 200px;
+}
+
+.couple-photo-bride {
+  left: 27px;
+  top: 234px;
+}
+
+.couple-bg-groom {
+  left: -124px;
+  top: 239px;
+  width: 623px;
+  height: 308px;
+  z-index: 0;
+}
+
+.couple-bg-bride {
+  left: -119px;
+  top: 273px;
+  width: 623px;
+  height: 308px;
+  z-index: 0;
+}
+
+.couple-side-groom {
+  left: 178px;
+  top: 81px;
+  width: 208px;
+  height: 370px;
+  z-index: 2;
+}
+
+.couple-side-bride {
+  left: 0;
+  top: 121px;
+  width: 208px;
+  height: 370px;
+  z-index: 2;
+}
+
+.couple-frame-groom {
+  left: -189px;
+  top: 202px;
+  width: 348px;
+  height: 348px;
+  z-index: 2;
+}
+
+.couple-frame-bride {
+  left: -184px;
+  top: 236px;
+  width: 348px;
+  height: 348px;
+  z-index: 0;
+}
+
+.couple-fl-groom-l {
+  left: -50px;
+  top: 376px;
+  width: 187px;
+  height: 187px;
+  z-index: 4;
+}
+
+.couple-fl-groom-r {
+  right: -50px;
+  top: 376px;
+  width: 187px;
+  height: 187px;
+  z-index: 4;
+}
+
+.couple-fl-bride-l {
+  left: -50px;
+  top: 410px;
+  width: 187px;
+  height: 187px;
+  z-index: 4;
+}
+
+.couple-fl-bride-r {
+  right: -50px;
+  top: 410px;
+  width: 187px;
+  height: 187px;
+  z-index: 4;
+}
 
 /* Foliage */
-.couple-foliage-groom-l { left: -20px; top: 180px; width: 178px; height: 317px; z-index: 2; }
-.couple-foliage-groom-r { right: 0; top: 150px; width: 178px; height: 317px; z-index: 2; }
-.couple-foliage-bride-l { left: 0; top: 130px; width: 178px; height: 317px; z-index: 2; }
-.couple-foliage-bride-r { right: -20px; top: 180px; width: 178px; height: 317px; z-index: 2; }
+.couple-foliage-groom-l {
+  left: -20px;
+  top: 180px;
+  width: 178px;
+  height: 317px;
+  z-index: 2;
+}
 
-.couple-ornament { left: 108px; top: 728px; width: 160px; height: 284px; z-index: 1; }
+.couple-foliage-groom-r {
+  right: 0;
+  top: 150px;
+  width: 178px;
+  height: 317px;
+  z-index: 2;
+}
+
+.couple-foliage-bride-l {
+  left: 0;
+  top: 130px;
+  width: 178px;
+  height: 317px;
+  z-index: 2;
+}
+
+.couple-foliage-bride-r {
+  right: -20px;
+  top: 180px;
+  width: 178px;
+  height: 317px;
+  z-index: 2;
+}
+
+.couple-ornament {
+  left: 108px;
+  top: 728px;
+  width: 160px;
+  height: 284px;
+  z-index: 1;
+}
 
 /* Small flowers + leaves */
-.couple-fl2-groom-l { left: -83px; top: 427px; width: 165px; height: 165px; z-index: 4; }
-.couple-fl2-groom-r { right: -83px; top: 427px; width: 165px; height: 165px; z-index: 4; }
-.couple-leaf-groom-l { left: -44px; top: 336px; width: 87px; height: 154px; z-index: 3; }
-.couple-leaf-groom-r { right: -44px; top: 336px; width: 87px; height: 154px; z-index: 3; }
-.couple-leaf-bride-l { left: -44px; top: 370px; width: 87px; height: 154px; z-index: 3; }
-.couple-leaf-bride-r { right: -44px; top: 370px; width: 87px; height: 154px; z-index: 3; }
+.couple-fl2-groom-l {
+  left: -83px;
+  top: 427px;
+  width: 165px;
+  height: 165px;
+  z-index: 4;
+}
+
+.couple-fl2-groom-r {
+  right: -83px;
+  top: 427px;
+  width: 165px;
+  height: 165px;
+  z-index: 4;
+}
+
+.couple-leaf-groom-l {
+  left: -44px;
+  top: 336px;
+  width: 87px;
+  height: 154px;
+  z-index: 3;
+}
+
+.couple-leaf-groom-r {
+  right: -44px;
+  top: 336px;
+  width: 87px;
+  height: 154px;
+  z-index: 3;
+}
+
+.couple-leaf-bride-l {
+  left: -44px;
+  top: 370px;
+  width: 87px;
+  height: 154px;
+  z-index: 3;
+}
+
+.couple-leaf-bride-r {
+  right: -44px;
+  top: 370px;
+  width: 87px;
+  height: 154px;
+  z-index: 3;
+}
 
 /* Edge flower + small flower windy animation */
-.couple-fl-groom-l, .couple-fl-groom-r,
-.couple-fl-bride-l, .couple-fl-bride-r,
-.couple-fl2-groom-l, .couple-fl2-groom-r {
+.couple-fl-groom-l,
+.couple-fl-groom-r,
+.couple-fl-bride-l,
+.couple-fl-bride-r,
+.couple-fl2-groom-l,
+.couple-fl2-groom-r {
   transform-origin: 50% 96%;
   animation: heroGoyangSmall 3600ms ease-in-out 0ms infinite alternate;
 }
 
-.invitation-section--couple > .script-heading {
+.invitation-section--couple>.script-heading {
   position: absolute;
   top: 40px;
   left: 0;
@@ -1187,16 +2561,85 @@
   pointer-events: none;
 }
 
-.save-bg { left: -289px; top: 1px; width: 976px; height: 457px; z-index: 0; }
-.save-leaf-l { left: 20px; top: 128px; width: 94px; height: 125px; z-index: 1; }
-.save-leaf-r { right: 0; top: 128px; width: 103px; height: 125px; z-index: 1; }
-.save-leaf2-l { left: 0px; top: 207px; width: 26px; height: 46px; z-index: 1; }
-.save-leaf2-r { right: 0; top: 207px; width: 28px; height: 46px; z-index: 1; }
-.save-band-l { left: 92px; top: 310px; width: 425px; height: 239px; z-index: 1; }
-.save-band-r { right: 100px; top: 316px; width: 425px; height: 239px; z-index: 1; }
-.save-flower-l { left: 0px; top: 239px; width: 35px; height: 57px; z-index: 1; }
-.save-flower-r { right: 0; top: 239px; width: 32px; height: 57px; z-index: 1; }
-.save-divider { left: 128px; top: 177px; width: 120px; height: 30px; z-index: 1; }
+.save-bg {
+  left: -289px;
+  top: 1px;
+  width: 976px;
+  height: 457px;
+  z-index: 0;
+}
+
+.save-leaf-l {
+  left: 20px;
+  top: 128px;
+  width: 94px;
+  height: 125px;
+  z-index: 1;
+}
+
+.save-leaf-r {
+  right: 0;
+  top: 128px;
+  width: 103px;
+  height: 125px;
+  z-index: 1;
+}
+
+.save-leaf2-l {
+  left: 0px;
+  top: 207px;
+  width: 26px;
+  height: 46px;
+  z-index: 1;
+}
+
+.save-leaf2-r {
+  right: 0;
+  top: 207px;
+  width: 28px;
+  height: 46px;
+  z-index: 1;
+}
+
+.save-band-l {
+  left: 92px;
+  top: 310px;
+  width: 425px;
+  height: 239px;
+  z-index: 1;
+}
+
+.save-band-r {
+  right: 100px;
+  top: 316px;
+  width: 425px;
+  height: 239px;
+  z-index: 1;
+}
+
+.save-flower-l {
+  left: 0px;
+  top: 239px;
+  width: 35px;
+  height: 57px;
+  z-index: 1;
+}
+
+.save-flower-r {
+  right: 0;
+  top: 239px;
+  width: 32px;
+  height: 57px;
+  z-index: 1;
+}
+
+.save-divider {
+  left: 128px;
+  top: 177px;
+  width: 120px;
+  height: 30px;
+  z-index: 1;
+}
 
 .invitation-section--save-date .script-heading {
   position: absolute;
@@ -1228,7 +2671,7 @@
   justify-content: center;
   width: 66.56px;
   height: 68.23px;
-  background: rgba(255,255,255,0.58);
+  background: rgba(255, 255, 255, 0.58);
   border: 1px solid #732222;
   border-radius: 10px;
   color: #732222;
@@ -1345,7 +2788,8 @@
 .events-divider {
   width: 22px;
   height: 31px;
-  top: 194px; /* relative to text-wrap start — handled in text-wrap */
+  top: 194px;
+  /* relative to text-wrap start — handled in text-wrap */
   left: 50%;
   margin-left: -11px;
   z-index: 10;
@@ -1455,7 +2899,8 @@
 .events-deco1-left {
   width: 73px;
   height: 60px;
-  top: 159px; /* local inside card */
+  top: 159px;
+  /* local inside card */
   left: 0px;
   z-index: 0;
 }
@@ -1569,12 +3014,35 @@
   z-index: 2;
 }
 
-.gift-flower-tr { left: 300px; top: -9px; }
-.gift-flower-tl { left: 77px; top: -9px; }
-.gift-flower-mr { right: -277px; top: 65px; }
-.gift-flower-ml { left: -109px; top: 65px; }
-.gift-flower-br { right: -103px; top: 375px; }
-.gift-flower-bl { left: 56px; top: 375px; }
+.gift-flower-tr {
+  left: 300px;
+  top: -9px;
+}
+
+.gift-flower-tl {
+  left: 77px;
+  top: -9px;
+}
+
+.gift-flower-mr {
+  right: -277px;
+  top: 65px;
+}
+
+.gift-flower-ml {
+  left: -109px;
+  top: 65px;
+}
+
+.gift-flower-br {
+  right: -103px;
+  top: 375px;
+}
+
+.gift-flower-bl {
+  left: 56px;
+  top: 375px;
+}
 
 .gift-flower2 {
   position: absolute;
@@ -1584,8 +3052,15 @@
   z-index: 2;
 }
 
-.gift-flower2-mr { right: -111px; top: 127px; }
-.gift-flower2-ml { left: 40px; top: 127px; }
+.gift-flower2-mr {
+  right: -111px;
+  top: 127px;
+}
+
+.gift-flower2-ml {
+  left: 40px;
+  top: 127px;
+}
 
 /* --- White card background: Figma 698:185 --- */
 .gift-card {
@@ -1624,8 +3099,8 @@
 .invitation-section--gift .gift-title {
   position: absolute;
   top: 100px;
-  left: 40px;
-  width: 251px;
+  left: 0;
+  width: 375px;
   margin: 0;
   font-family: var(--font-script);
   font-size: 48px;
@@ -1639,8 +3114,10 @@
 .invitation-section--gift .gift-description {
   position: absolute;
   top: 173px;
-  left: 21px;
-  width: 334px;
+  left: 0;
+  width: 375px;
+  padding: 0 32px;
+  box-sizing: border-box;
   margin: 0;
   font-family: var(--font-eb-garamond);
   font-size: 16px;
@@ -1710,212 +3187,349 @@
 }
 
 
+
 /* ============================================================
-   RSVP SECTION — arch header image + real form, flush into Wishes card
+   LIGHT-THEME RSVP & WISHES SECTION (Matches fe-clevert-ivana)
    ============================================================ */
 
-/* rsvp-header.png — cropped from rsvp-decor.png (arch + roses + heading + description) */
-.figma-asset.rsvp-header {
-  display: block;
-  width: 332px;
-  height: 255px;
-  margin: 0 auto;
-}
-
+/* 1. Container adjustments: apply Java arch card background & shadow directly */
 .rsvp-form {
+  position: relative;
   width: 332px;
   margin: 0 auto;
-  padding: 20px 24px 24px;
-  background: var(--gold-rsvp);
+  background-color: #ffffff;
+  border-top-left-radius: 166px;
+  border-top-right-radius: 166px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   box-sizing: border-box;
+  padding: 60px 24px 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   text-align: center;
 }
 
-.rsvp-form .form-label {
-  color: #fff7d7;
-  margin-bottom: 4px;
-  text-align: left;
-}
-
-.rsvp-form .visual-input {
-  display: block;
-  margin-bottom: 12px;
-  width: 100%;
-  border-radius: 4px;
-  padding: 0 12px;
+.wishes-card {
+  width: 332px;
+  margin: 0 auto;
+  padding: 24px 24px 32px !important;
+  background-color: #ffffff !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 24px !important;
+  border-bottom-right-radius: 24px !important;
   box-sizing: border-box;
-  pointer-events: auto;
-  font-family: var(--font-noto-sans);
-  font-size: 14px;
-  color: var(--brown-main);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+  color: #55391c !important;
 }
 
-/* Guest count is locked when the guest declines. */
-.rsvp-form .visual-input:disabled {
-  background: #eae6df;
-  color: #9a938a;
-  cursor: not-allowed;
+/* 2. Title and headings styling */
+.rsvp-title,
+.wishes-card .script-heading {
+  font-family: var(--font-script) !important;
+  font-size: 38px !important;
+  color: #844711 !important;
+  margin-bottom: 8px !important;
+  text-align: center !important;
 }
 
-.rsvp-form .send-button {
-  margin-top: 8px;
-  padding: 10px 40px;
-  pointer-events: auto;
-  cursor: pointer;
+.rsvp-desc,
+.wishes-intro {
+  font-family: var(--font-eb-garamond) !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  color: #8d4417 !important;
+  text-align: center !important;
+  margin-bottom: 24px !important;
+}
+
+.wishes-prompt {
+  font-family: var(--font-eb-garamond) !important;
+  font-size: 14px !important;
+  color: #55391c !important;
+  margin: 16px 0 8px !important;
+}
+
+/* 3. Label styling */
+.rsvp-form .form-label,
+.wishes-form .form-label {
+  display: block !important;
+  font-family: var(--font-eb-garamond) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  color: #55391c !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  margin: 0 0 6px !important;
+  text-align: left !important;
 }
 
 .rsvp-attendance-label {
-  margin-bottom: 8px;
+  display: block !important;
+  font-family: var(--font-eb-garamond) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  color: #55391c !important;
+  margin-bottom: 8px !important;
+  text-align: left !important;
 }
 
+/* 4. Form inputs (white background, thin border, dark text) */
+.rsvp-form .visual-input,
+.wishes-form .visual-input {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 40px !important;
+  background: #ffffff !important;
+  border: 1px solid #dcd5c5 !important;
+  border-radius: 4px !important;
+  padding: 0 12px !important;
+  font-family: var(--font-noto-sans) !important;
+  font-size: 13.5px !important;
+  color: #55391c !important;
+  margin-bottom: 16px !important;
+}
+
+.wishes-form .wishes-message {
+  height: 96px !important;
+  padding: 8px 12px !important;
+}
+
+/* 5. Radio Buttons for Attendance */
 .rsvp-attendance-group {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 16px;
+  display: flex !important;
+  gap: 24px !important;
+  margin-bottom: 16px !important;
 }
 
 .rsvp-attendance-option {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #fff7d7;
-  font-family: var(--font-noto-sans);
-  font-size: 14px;
-  pointer-events: auto;
-  cursor: pointer;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  color: #55391c !important;
+  font-family: var(--font-noto-sans) !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
 }
 
 .rsvp-attendance-option input[type='radio'] {
-  pointer-events: auto;
-  accent-color: var(--brown-dark);
-  cursor: pointer;
+  accent-color: #844711 !important;
 }
 
-/* Submit status message shared by RSVP + Wishes forms */
+/* 6. Gold Pill Buttons */
+.rsvp-form .send-button,
+.wishes-form .confirm-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  margin: 16px auto 0 !important;
+  width: 100% !important;
+  height: 40px !important;
+  border-radius: 20px !important;
+  background: #E5D9B6 !important;
+  border: 1px solid #ffffff !important;
+  color: #55391c !important;
+  font-family: var(--font-noto-sans) !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08) !important;
+  transition: background-color 0.2s, transform 0.15s !important;
+}
+
+.rsvp-form .send-button:hover,
+.wishes-form .confirm-button:hover {
+  background: #dcd0a9 !important;
+}
+
+/* 7. Scrollable Wishes List (transparent items, thin divider lines) */
+.wishes-list {
+  max-height: 384px !important;
+  overflow-y: auto !important;
+  text-align: left !important;
+  padding-right: 4px !important;
+}
+
+.wish-item {
+  background: transparent !important;
+  padding: 8px 0 !important;
+  margin-bottom: 8px !important;
+  border-radius: 0 !important;
+}
+
+.wish-author {
+  font-family: var(--font-noto-sans) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  color: #55391c !important;
+  margin-bottom: 2px !important;
+}
+
+.wish-time {
+  font-family: var(--font-noto-sans) !important;
+  font-size: 11px !important;
+  color: #ababab !important;
+  margin-bottom: 6px !important;
+}
+
+.wish-text {
+  font-family: var(--font-noto-sans) !important;
+  font-weight: 300 !important;
+  font-size: 13px !important;
+  color: #55391c !important;
+  line-height: 1.5 !important;
+}
+
+.wish-divider {
+  border: 0 !important;
+  border-top: 1px solid #eae1d4 !important;
+  margin: 12px 0 0 !important;
+}
+
+/* 8. Wishes Success Modal Popup */
+.fixed-modal-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 1000 !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
+}
+
+.success-modal-card {
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  max-width: 320px !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.success-modal-icon-wrapper {
+  margin: 0 auto 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 48px !important;
+  width: 48px !important;
+  border-radius: 50% !important;
+  background: #d1fae5 !important;
+}
+
+.success-modal-icon {
+  height: 24px !important;
+  width: 24px !important;
+  color: #059669 !important;
+}
+
+.success-modal-title {
+  font-family: var(--font-jost) !important;
+  font-weight: 700 !important;
+  font-size: 18px !important;
+  color: #1f2937 !important;
+  margin: 0 0 8px !important;
+}
+
+.success-modal-desc {
+  font-family: var(--font-noto-sans) !important;
+  font-size: 13.5px !important;
+  color: #6b7280 !important;
+  line-height: 1.5 !important;
+  margin: 0 0 24px !important;
+}
+
+.success-modal-close-btn {
+  background: #E5D9B6 !important;
+  border: 1px solid #ffffff !important;
+  color: #55391c !important;
+  border-radius: 20px !important;
+  padding: 8px 24px !important;
+  font-family: var(--font-noto-sans) !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  width: 100% !important;
+  cursor: pointer !important;
+}
+
+.success-modal-close-btn:hover {
+  background: #dcd0a9 !important;
+}
+
+/* 9. Flower Ornaments on RSVP Card */
+.rsvp-card-flower {
+  position: absolute;
+  width: 70px;
+  height: auto;
+  z-index: 12;
+  pointer-events: none;
+}
+
+.rsvp-card-flower--left {
+  left: -20px;
+  top: 60px;
+}
+
+.rsvp-card-flower--right {
+  right: -20px;
+  top: 60px;
+}
+
 .rsvp-feedback,
 .wishes-feedback {
   margin: 4px 0 0;
   font-family: var(--font-noto-sans);
   font-size: 13px;
-  color: #eafbe0;
+  color: #5a7a47;
   text-align: center;
 }
 
 .rsvp-feedback.is-error,
 .wishes-feedback.is-error {
-  color: #ffd8d0;
+  color: #c44b3f;
 }
 
-
-/* ============================================================
-   WISHES SECTION — same card as RSVP, flush on top, rounded at bottom
-   ============================================================ */
-
-.wishes-card {
-  width: 332px;
-  margin: 0 auto;
-  padding: 24px 24px 32px;
-  background: var(--gold-rsvp);
-  box-sizing: border-box;
-  border-radius: 0 0 24px 24px;
+/* RSVP Already Submitted Success State */
+.rsvp-success-message {
   text-align: center;
+  padding: 20px 0;
 }
 
-.wishes-card .script-heading {
-  font-size: 40px;
-  color: var(--white-soft);
-  margin-bottom: 12px;
+.rsvp-success-icon-wrapper {
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  background: #d1fae5;
 }
 
-.wishes-intro {
-  font-size: 16px;
-  color: #fff7d7;
-  text-align: center;
-  margin-bottom: 20px;
+.rsvp-success-icon {
+  height: 24px;
+  width: 24px;
+  color: #059669;
 }
 
-.wishes-form {
-  text-align: left;
-}
-
-.wishes-prompt {
-  margin: 20px 0 8px;
-  font-family: var(--font-cormorant);
+.rsvp-success-title {
+  font-family: var(--font-jost);
   font-weight: 700;
-  font-size: 16px;
-  line-height: 22.4px;
-  color: #fff7d7;
-  text-align: left;
+  font-size: 18px;
+  color: #55391c;
+  margin: 0 0 6px;
 }
 
-.wishes-form .form-label {
-  display: block;
-  margin-bottom: 8px;
-  font-family: var(--font-cormorant);
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 22.4px;
-  color: #fff7d7;
-}
-
-.wishes-form .required-marker {
-  margin-left: 2px;
-  color: #f56c6c;
-}
-
-.wishes-form .visual-input {
-  width: 100%;
-  border-radius: 4px;
-  border: 0;
-  outline: 0;
-  background: #ffffff;
-  color: var(--brown-main);
+.rsvp-success-desc {
   font-family: var(--font-noto-sans);
-  font-size: 14px;
-  pointer-events: auto;
-  box-sizing: border-box;
-  padding: 8px 12px;
+  font-size: 13px;
+  color: #8d4417;
+  line-height: 1.5;
 }
 
-.wishes-form .wishes-message {
-  height: 84px;
-  resize: none;
-}
 
-/* Kirim Konfirmasi button — Jost 13px */
-.invitation-section--wishes .confirm-button {
-  margin: 16px 0 24px;
-  padding: 8px 28px;
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-/* Wishes list (static entries) */
-.wishes-list {
-  text-align: left;
-}
-
-.wish-item {
-  margin-bottom: 12px;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
-}
-
-.wish-author {
-  margin-bottom: 2px;
-  color: #fff7d7;
-}
-
-.wish-time {
-  margin-bottom: 6px;
-  color: #e8dcc0;
-  font-size: 12px;
-}
-
-.wish-text {
-  color: #fff7d7;
-}
 
 
 /* ============================================================
@@ -2139,7 +3753,8 @@
   position: absolute;
   display: block;
   pointer-events: none;
-  --closing-pos: ; /* empty by default so var(--closing-pos) never inserts an invalid "none" token next to rotate()/translate() */
+  --closing-pos: ;
+  /* empty by default so var(--closing-pos) never inserts an invalid "none" token next to rotate()/translate() */
 }
 
 /* Fade + rise in, staggered per layer, once the closing composition scrolls into view.
@@ -2168,26 +3783,51 @@
 /* Gentle continuous sway for flower layers, once the composition has faded in.
    Keyframes carry --closing-pos themselves so l/r mirroring survives the animation. */
 @keyframes closingSway {
-  0% { transform: var(--closing-pos) rotate(-2.4deg); }
-  50% { transform: var(--closing-pos) rotate(2.6deg); }
-  100% { transform: var(--closing-pos) rotate(-1.8deg); }
+  0% {
+    transform: var(--closing-pos) rotate(-2.4deg);
+  }
+
+  50% {
+    transform: var(--closing-pos) rotate(2.6deg);
+  }
+
+  100% {
+    transform: var(--closing-pos) rotate(-1.8deg);
+  }
 }
 
 @keyframes closingSwaySmall {
-  0% { transform: var(--closing-pos) rotate(1.8deg); }
-  50% { transform: var(--closing-pos) rotate(-2deg); }
-  100% { transform: var(--closing-pos) rotate(1.4deg); }
+  0% {
+    transform: var(--closing-pos) rotate(1.8deg);
+  }
+
+  50% {
+    transform: var(--closing-pos) rotate(-2deg);
+  }
+
+  100% {
+    transform: var(--closing-pos) rotate(1.4deg);
+  }
 }
 
-.closing-dahlia-stem-l, .closing-dahlia-stem-r,
-.closing-orchid-l, .closing-orchid-r,
-.closing-dahlia-crop-l, .closing-dahlia-crop-r,
-.closing-ranunculus-l, .closing-ranunculus-r,
-.closing-dahlia-round-l, .closing-dahlia-round-r,
-.closing-lily-l, .closing-lily-r,
-.closing-dahlia-stem2-l, .closing-dahlia-stem2-r,
-.closing-orchid2-l, .closing-orchid2-r,
-.closing-vase-l, .closing-vase-r {
+.closing-dahlia-stem-l,
+.closing-dahlia-stem-r,
+.closing-orchid-l,
+.closing-orchid-r,
+.closing-dahlia-crop-l,
+.closing-dahlia-crop-r,
+.closing-ranunculus-l,
+.closing-ranunculus-r,
+.closing-dahlia-round-l,
+.closing-dahlia-round-r,
+.closing-lily-l,
+.closing-lily-r,
+.closing-dahlia-stem2-l,
+.closing-dahlia-stem2-r,
+.closing-orchid2-l,
+.closing-orchid2-r,
+.closing-vase-l,
+.closing-vase-r {
   transform-origin: 50% 96%;
 }
 
@@ -2216,32 +3856,105 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .closing-dahlia-stem-l, .closing-dahlia-stem-r,
-  .closing-orchid-l, .closing-orchid-r,
-  .closing-dahlia-crop-l, .closing-dahlia-crop-r,
-  .closing-ranunculus-l, .closing-ranunculus-r,
-  .closing-dahlia-round-l, .closing-dahlia-round-r,
-  .closing-lily-l, .closing-lily-r,
-  .closing-dahlia-stem2-l, .closing-dahlia-stem2-r,
-  .closing-orchid2-l, .closing-orchid2-r,
-  .closing-vase-l, .closing-vase-r {
+
+  .closing-dahlia-stem-l,
+  .closing-dahlia-stem-r,
+  .closing-orchid-l,
+  .closing-orchid-r,
+  .closing-dahlia-crop-l,
+  .closing-dahlia-crop-r,
+  .closing-ranunculus-l,
+  .closing-ranunculus-r,
+  .closing-dahlia-round-l,
+  .closing-dahlia-round-r,
+  .closing-lily-l,
+  .closing-lily-r,
+  .closing-dahlia-stem2-l,
+  .closing-dahlia-stem2-r,
+  .closing-orchid2-l,
+  .closing-orchid2-r,
+  .closing-vase-l,
+  .closing-vase-r {
     animation: none !important;
   }
 }
 
 /* layers added below one at a time, dictated from Figma */
 
-.closing-tree-l { top: 180px; left: 0px; width: 152px; height: 270px; }
-.closing-tree-r { top: 180px; right: 0px; width: 152px; height: 270px; --closing-pos: scaleX(-1); }
+.closing-tree-l {
+  top: 180px;
+  left: 0px;
+  width: 152px;
+  height: 270px;
+}
 
-.closing-dahlia-stem-l { top: 0; left: -25px; width: 100px; height: 150px; }
-.closing-dahlia-stem-r { top: 0; right: -25px; width: 100px; height: 150px; --closing-pos: scaleX(-1); }
-.closing-orchid-l { top: 50px; left: -100px; width: 168px; height: 163px; }
-.closing-orchid-r { top: 50px; right: -100px; width: 168px; height: 163px; --closing-pos: scaleX(-1); }
-.closing-dahlia-crop-l { top: 130px; left: -30px; width: 82px; height: 108px; }
-.closing-dahlia-crop-r { top: 130px; right: -30px; width: 82px; height: 108px; --closing-pos: scaleX(-1); }
-.closing-ranunculus-l { top: 160px; left: -20px; width: 110px; height: 138px; }
-.closing-ranunculus-r { top: 160px; right: -20px; width: 110px; height: 138px; --closing-pos: scaleX(-1); }
+.closing-tree-r {
+  top: 180px;
+  right: 0px;
+  width: 152px;
+  height: 270px;
+  --closing-pos: scaleX(-1);
+}
+
+.closing-dahlia-stem-l {
+  top: 0;
+  left: -25px;
+  width: 100px;
+  height: 150px;
+}
+
+.closing-dahlia-stem-r {
+  top: 0;
+  right: -25px;
+  width: 100px;
+  height: 150px;
+  --closing-pos: scaleX(-1);
+}
+
+.closing-orchid-l {
+  top: 50px;
+  left: -100px;
+  width: 168px;
+  height: 163px;
+}
+
+.closing-orchid-r {
+  top: 50px;
+  right: -100px;
+  width: 168px;
+  height: 163px;
+  --closing-pos: scaleX(-1);
+}
+
+.closing-dahlia-crop-l {
+  top: 130px;
+  left: -30px;
+  width: 82px;
+  height: 108px;
+}
+
+.closing-dahlia-crop-r {
+  top: 130px;
+  right: -30px;
+  width: 82px;
+  height: 108px;
+  --closing-pos: scaleX(-1);
+}
+
+.closing-ranunculus-l {
+  top: 160px;
+  left: -20px;
+  width: 110px;
+  height: 138px;
+}
+
+.closing-ranunculus-r {
+  top: 160px;
+  right: -20px;
+  width: 110px;
+  height: 138px;
+  --closing-pos: scaleX(-1);
+}
 
 .closing-monogram {
   top: 0;
@@ -2270,12 +3983,12 @@
   z-index: 1;
 }
 
-.closing-terrace {                                                                    
-top: 521px;
-left: 0;
+.closing-terrace {
+  top: 521px;
+  left: 0;
   width: 375px;
   height: 254px;
-  }
+}
 
 
 .closing-couple-arch {
@@ -2286,16 +3999,84 @@ left: 0;
   object-fit: contain;
 }
 
-.closing-dahlia-round-l { top: 355px; left: -10px; width: 102px; height: 66px; }
-.closing-dahlia-round-r { top: 355px; right: -10px; width: 102px; height: 66px; --closing-pos: scaleX(-1); }
-.closing-lily-l { top: 400px; z-index: 1; left: -20px; width: 114px; height: 114px; }
-.closing-lily-r { top: 400px; z-index: 1; right: -20px; width: 114px; height: 114px; --closing-pos: scaleX(-1); }
-.closing-dahlia-stem2-l { top: 450px; z-index: 0; left: -10px; width: 82px; height: 108px; }
-.closing-dahlia-stem2-r { top: 450px; z-index: 0; right: -10px; width: 82px; height: 108px; --closing-pos: scaleX(-1); }
-.closing-orchid2-l { top: 478px; left: -60px; width: 168px; height: 163px; }
-.closing-orchid2-r { top: 478px; right: -60px; width: 168px; height: 163px; --closing-pos: scaleX(-1); }
-.closing-vase-l { top: 561px; left: -60px; width: 187px; height: 187px; }
-.closing-vase-r { top: 561px; right: -60px; width: 187px; height: 187px; --closing-pos: scaleX(-1); }
+.closing-dahlia-round-l {
+  top: 355px;
+  left: -10px;
+  width: 102px;
+  height: 66px;
+}
+
+.closing-dahlia-round-r {
+  top: 355px;
+  right: -10px;
+  width: 102px;
+  height: 66px;
+  --closing-pos: scaleX(-1);
+}
+
+.closing-lily-l {
+  top: 400px;
+  z-index: 1;
+  left: -20px;
+  width: 114px;
+  height: 114px;
+}
+
+.closing-lily-r {
+  top: 400px;
+  z-index: 1;
+  right: -20px;
+  width: 114px;
+  height: 114px;
+  --closing-pos: scaleX(-1);
+}
+
+.closing-dahlia-stem2-l {
+  top: 450px;
+  z-index: 0;
+  left: -10px;
+  width: 82px;
+  height: 108px;
+}
+
+.closing-dahlia-stem2-r {
+  top: 450px;
+  z-index: 0;
+  right: -10px;
+  width: 82px;
+  height: 108px;
+  --closing-pos: scaleX(-1);
+}
+
+.closing-orchid2-l {
+  top: 478px;
+  left: -60px;
+  width: 168px;
+  height: 163px;
+}
+
+.closing-orchid2-r {
+  top: 478px;
+  right: -60px;
+  width: 168px;
+  height: 163px;
+  --closing-pos: scaleX(-1);
+}
+
+.closing-vase-l {
+  top: 561px;
+  left: -60px;
+  width: 187px;
+  height: 187px;
+}
+
+.closing-vase-r {
+  top: 561px;
+  right: -60px;
+  width: 187px;
+  height: 187px;
+  --closing-pos: scaleX(-1);
+}
 
 .closing-thanks {
   position: absolute;
@@ -2386,4 +4167,65 @@ left: 0;
   width: 295px;
   margin: 0 auto;
   border-top: 1px solid rgba(112, 48, 48, 0.13);
+}
+
+.footer-credit-label {
+  margin: 0;
+  font-family: var(--font-script);
+  font-size: 15px;
+  color: var(--footer-brown);
+}
+
+.footer-credit-name {
+  margin: 2px 0 14px;
+  font-family: var(--font-script);
+  font-size: 24px;
+  color: var(--footer-brown);
+}
+
+.footer-credit-name span {
+  margin: 0 4px;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.footer-social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #dca74f;
+  color: #000;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.footer-social-icon:hover {
+  transform: scale(1.08);
+  opacity: 0.85;
+}
+
+.footer-divider {
+  width: 295px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(112, 48, 48, 0.13);
+}
+
+
+
+/* 10. Section layout — auto height, no fixed dimensions */
+.invitation-section--rsvp {
+  height: auto !important;
+  padding: 40px 0 !important;
+}
+
+.invitation-section--wishes {
+  height: auto !important;
+  padding: 0 0 40px !important;
 }

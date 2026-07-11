@@ -169,7 +169,6 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
     position: relative;
     background: #fffed6; /* Matches the splash screen default background to prevent loading flash */
     box-shadow: -8px 0 32px rgba(0, 0, 0, 0.3);
-    scrollbar-gutter: stable; /* Keeps layout stable when scrollbar appears on desktop */
   }
 
   /* Zoom canvas to 480px width on desktop (375 * 1.28 = 480) with auto height */
@@ -233,16 +232,19 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
     box-shadow: none !important;
   }
 
-  /* When locked, we apply the dynamically calculated locked-height divided by the scale factor */
+  /* When locked, canvas fills viewport with zoom=1 so cover flowers aren't clipped by zoom coordinate system */
   .invitation-canvas.is-locked {
-    height: var(--locked-height, 100vh) !important;
+    width: 100vw !important;
+    height: 100svh !important;
     overflow: hidden !important;
+    zoom: 1 !important;
   }
 
   .cover-root {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
     height: 100% !important;
+    overflow: visible !important;
   }
 }
 

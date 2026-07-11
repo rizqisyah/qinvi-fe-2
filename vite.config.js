@@ -10,7 +10,9 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [vue()],
+    base: mode === 'production' ? '/TemaBlusingGarden/' : '/',
     server: {
+      port: 5174,
       proxy: {
         '/api': {
           target,

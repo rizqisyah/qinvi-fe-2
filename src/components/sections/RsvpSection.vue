@@ -5,49 +5,71 @@
     :class="{ 'in-view': inView }"
     data-section="rsvp"
   >
-    <!-- rsvp-header.png — cropped from rsvp-decor.png: arch + roses + heading + description only -->
-    <img class="figma-asset rsvp-header" src="../../assets/figma/rsvp-header.png" alt="" />
-    <form class="rsvp-form" @submit.prevent="submit">
-      <label class="form-label" for="rsvp-name">Nama:</label>
-      <input id="rsvp-name" v-model="name" class="visual-input rsvp-name" type="text" />
-      <label class="form-label" for="rsvp-phone">No Hp:</label>
-      <input id="rsvp-phone" v-model="phone" class="visual-input rsvp-phone" type="tel" />
-      <span class="form-label rsvp-attendance-label">Kehadiran</span>
-      <div class="rsvp-attendance-group" role="radiogroup" aria-label="Kehadiran">
-        <label class="rsvp-attendance-option">
-          <input v-model="attendance" type="radio" name="rsvp-attendance" value="hadir" />
-          <span>Hadir</span>
-        </label>
-        <label class="rsvp-attendance-option">
-          <input v-model="attendance" type="radio" name="rsvp-attendance" value="tidak_hadir" />
-          <span>Tidak Hadir</span>
-        </label>
+    <!-- The form wrapper itself has the arch shape and gold background -->
+    <div class="rsvp-form">
+      <!-- Decorative flower assets -->
+      <img class="rsvp-card-flower rsvp-card-flower--left" src="../../assets/figma/events-flower1-rsvp-left.png" alt="" />
+      <img class="rsvp-card-flower rsvp-card-flower--right" src="../../assets/figma/events-flower1-rsvp-right.png" alt="" />
+      
+      <!-- Live HTML Header -->
+      <h2 class="rsvp-title">Rsvp</h2>
+      <p class="rsvp-desc">
+        Kehadiran Bapak/Ibu/Saudara/i akan menjadi kehormatan besar bagi kami dan keluarga.
+        Mohon konfirmasi kehadiran Anda melalui formulir reservasi di bawah:
+      </p>
+
+      <!-- Already RSVP'd Success Message -->
+      <div v-if="alreadyRsvp" class="rsvp-success-message">
+        <div class="rsvp-success-icon-wrapper">
+          <svg class="rsvp-success-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <p class="rsvp-success-title">Terima Kasih!</p>
+        <p class="rsvp-success-desc">Anda telah melakukan konfirmasi kehadiran untuk undangan ini.</p>
       </div>
-      <label class="form-label" for="rsvp-count">Jumlah Tamu:</label>
-      <input
-        id="rsvp-count"
-        v-model.number="guestCount"
-        class="visual-input rsvp-count"
-        type="number"
-        min="0"
-        :disabled="!isAttending"
-      />
-      <p v-if="feedback" class="rsvp-feedback" :class="{ 'is-error': isError }">{{ feedback }}</p>
-      <button class="decor-button send-button" type="submit" :disabled="submitting">
-        {{ submitting ? 'Mengirim...' : 'Send' }}
-      </button>
-    </form>
+
+      <!-- RSVP Form Fields -->
+      <form v-else @submit.prevent="submit">
+        <label class="form-label" for="rsvp-name">Nama:</label>
+        <input id="rsvp-name" v-model="name" class="visual-input rsvp-name" type="text" placeholder="Nama Anda" required />
+        
+        <label class="form-label" for="rsvp-phone">No Hp:</label>
+        <input id="rsvp-phone" v-model="phone" class="visual-input rsvp-phone" type="tel" placeholder="Nomor Handphone" required />
+        
+        <span class="form-label rsvp-attendance-label">Kehadiran</span>
+        <div class="rsvp-attendance-group" role="radiogroup" aria-label="Kehadiran">
+          <label class="rsvp-attendance-option">
+            <input v-model="attendance" type="radio" name="rsvp-attendance" value="hadir" required />
+            <span>Hadir</span>
+          </label>
+          <label class="rsvp-attendance-option">
+            <input v-model="attendance" type="radio" name="rsvp-attendance" value="tidak_hadir" required />
+            <span>Tidak Hadir</span>
+          </label>
+        </div>
+        
+        <template v-if="isAttending">
+          <label class="form-label" for="rsvp-count">Jumlah Tamu:</label>
+          <input id="rsvp-count" v-model.number="guestCount" class="visual-input rsvp-count" type="number" min="1" placeholder="Jumlah Tamu" required />
+        </template>
+        
+        <p v-if="feedback" class="rsvp-feedback" :class="{ 'is-error': isError }">{{ feedback }}</p>
+        <button class="decor-button send-button" type="submit" :disabled="submitting">
+          {{ submitting ? 'Mengirim...' : 'Send' }}
+        </button>
+      </form>
+    </div>
   </section>
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useScrollReveal } from '../../composables/useScrollReveal'
 import { useWedding } from '../../composables/useWedding'
 
 const { rootRef, inView } = useScrollReveal()
-// guestName is shared with the Wishes form so the name is only entered once.
-const { sendRsvp, guestName: name } = useWedding()
+const { sendRsvp, guestName: name, guest } = useWedding()
 
 const phone = ref('')
 const attendance = ref('hadir')
@@ -55,13 +77,38 @@ const guestCount = ref(1)
 
 const isAttending = computed(() => attendance.value === 'hadir')
 
-// A guest who declines brings nobody, so the count is locked at zero.
 watch(isAttending, (attending) => {
   guestCount.value = attending ? 1 : 0
 })
+
+const slug = window.location.pathname.split('/').filter(Boolean).pop() || 'indah-budi'
+const toParam = new URLSearchParams(window.location.search).get('to') || 'general'
+const storageKey = `rsvp_${slug}_${toParam}`
+
+const alreadyRsvp = ref(false)
 const submitting = ref(false)
 const feedback = ref('')
 const isError = ref(false)
+
+onMounted(() => {
+  let localSaved = false
+  try {
+    localSaved = localStorage.getItem(storageKey) === 'true'
+  } catch (e) {
+    console.warn('localStorage access blocked:', e)
+  }
+  alreadyRsvp.value = localSaved || guest.value?.has_rsvp === true
+})
+
+watch(
+  guest,
+  (g) => {
+    if (g?.has_rsvp) {
+      alreadyRsvp.value = true
+    }
+  },
+  { immediate: true }
+)
 
 async function submit() {
   if (!name.value.trim()) {
@@ -79,7 +126,13 @@ async function submit() {
       attendance: attendance.value,
       count: isAttending.value ? guestCount.value : 0,
     })
-    feedback.value = 'Terima kasih, konfirmasi kehadiran terkirim.'
+    try {
+      localStorage.setItem(storageKey, 'true')
+    } catch (e) {
+      console.warn('localStorage access blocked:', e)
+    }
+    alreadyRsvp.value = true
+    feedback.value = ''
     isError.value = false
   } catch (err) {
     feedback.value = err instanceof Error ? err.message : 'Gagal mengirim RSVP.'

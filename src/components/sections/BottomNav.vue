@@ -140,7 +140,6 @@ const ITEMS = [
   { section: 'hero', label: 'Home' },
   { section: 'couple', label: 'Mempelai' },
   { section: 'events', label: 'Acara' },
-  { section: 'gallery', label: 'Gallery' },
 ]
 
 // Fraction of the viewport a section must have scrolled past to become active.

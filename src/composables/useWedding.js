@@ -24,7 +24,13 @@ async function load() {
 
   inflight = (async () => {
     try {
-      state.data = await getHome(state.slug)
+      const toParam = new URLSearchParams(window.location.search).get('to') || ''
+      state.data = await getHome(state.slug, toParam)
+      if (state.data?.guest?.guest_name) {
+        guestName.value = state.data.guest.guest_name
+      }
+      // Apply theme styles dynamically
+      applyTheme(state.data?.theme, state.data?.wedding)
       state.loaded = true
     } catch (err) {
       state.error = err instanceof Error ? err.message : 'Gagal memuat undangan'
@@ -35,6 +41,184 @@ async function load() {
   })()
 
   return inflight
+}
+
+/**
+ * Dynamically apply theme color and font configuration variables to the document root.
+ */
+function applyTheme(themeData, weddingData) {
+  if (typeof document === 'undefined') return
+
+  const root = document.documentElement
+  const cfg = themeData?.theme_config
+  let override = {}
+  try {
+    override = typeof weddingData?.theme_override === 'string'
+      ? JSON.parse(weddingData.theme_override)
+      : weddingData?.theme_override || {}
+  } catch (e) {
+    override = {}
+  }
+
+  // Colors mapping: ONLY apply if explicitly customized in theme_override
+  const colors = override.colors || {}
+
+  if (colors.bg_body) {
+    root.style.setProperty('--cream-bg', colors.bg_body)
+  } else {
+    root.style.removeProperty('--cream-bg')
+  }
+
+  if (colors.primary) {
+    root.style.setProperty('--brown-main', colors.primary)
+    root.style.setProperty('--gold-rsvp', colors.primary)
+  } else {
+    root.style.removeProperty('--brown-main')
+    root.style.removeProperty('--gold-rsvp')
+  }
+
+  if (colors.text_body) {
+    root.style.setProperty('--brown-dark', colors.text_body)
+  } else {
+    root.style.removeProperty('--brown-dark')
+  }
+
+  if (colors.accent) {
+    root.style.setProperty('--red-deep', colors.accent)
+  } else {
+    root.style.removeProperty('--red-deep')
+  }
+
+  if (colors.secondary) {
+    root.style.setProperty('--gold-pale', colors.secondary)
+  } else {
+    root.style.removeProperty('--gold-pale')
+  }
+
+  if (colors.text_dark) {
+    root.style.setProperty('--footer-brown', colors.text_dark)
+  } else {
+    root.style.removeProperty('--footer-brown')
+  }
+
+  if (colors.text_light) {
+    root.style.setProperty('--white-soft', colors.text_light)
+  } else {
+    root.style.removeProperty('--white-soft')
+  }
+
+  // Fonts mapping: ONLY apply if explicitly customized in theme_override
+  const fonts = override.fonts || {}
+
+  const cleanFont = (fontStr) => {
+    if (!fontStr) return ''
+    return fontStr.replace(/''/g, "'").replace(/"/g, "'").replace(/\+/g, ' ')
+  }
+
+  if (fonts.accent) {
+    root.style.setProperty('--font-script', cleanFont(fonts.accent))
+  } else {
+    root.style.removeProperty('--font-script')
+  }
+
+  if (fonts.script) {
+    root.style.setProperty('--font-playball', cleanFont(fonts.script))
+  } else {
+    root.style.removeProperty('--font-playball')
+  }
+
+  if (fonts.body) {
+    root.style.setProperty('--font-eb-garamond', cleanFont(fonts.body))
+  } else {
+    root.style.removeProperty('--font-eb-garamond')
+  }
+
+  if (fonts.italic) {
+    root.style.setProperty('--font-cormorant', cleanFont(fonts.italic))
+  } else {
+    root.style.removeProperty('--font-cormorant')
+  }
+
+  if (fonts.headline) {
+    root.style.setProperty('--font-playfair-sc', cleanFont(fonts.headline))
+  } else {
+    root.style.removeProperty('--font-playfair-sc')
+  }
+
+  // Handle custom fonts injection if any
+  if (override.fonts_custom) {
+    Object.entries(override.fonts_custom).forEach(([_, val]) => {
+      if (val && val.url && val.family) {
+        injectCustomFont(val.family, val.url)
+      }
+    })
+  }
+}
+
+/**
+ * Dynamically inject custom font styles to the document head.
+ */
+function injectCustomFont(family, url) {
+  if (typeof document === 'undefined') return
+  const cleanFamily = family.replace(/['"]/g, "").replace(/\+/g, " ").trim()
+  const id = `custom-font-${cleanFamily.replace(/\s+/g, "-")}`
+  if (document.getElementById(id)) return
+
+  if (url.includes("fonts.googleapis.com")) {
+    const link = document.createElement("link")
+    link.id = id
+    link.rel = "stylesheet"
+    link.href = url
+    document.head.appendChild(link)
+  } else {
+    const style = document.createElement("style")
+    style.id = id
+    style.textContent = `@font-face { font-family: '${cleanFamily}'; src: url('${url}'); font-display: swap; }`
+    document.head.appendChild(style)
+  }
+}
+
+// Listen for live preview messages from the admin dashboard ("Mode Imajinasi")
+if (typeof window !== 'undefined') {
+  window.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'QINVI_PREVIEW_UPDATE') {
+      console.log('RECEIVED PREVIEW UPDATE:', event.data)
+      const { wedding, theme, refetch } = event.data
+
+      if (wedding) {
+        // Parse theme_override if it is a string
+        let resolvedWedding = { ...wedding }
+        if (typeof resolvedWedding.theme_override === 'string') {
+          try {
+            resolvedWedding.theme_override = JSON.parse(resolvedWedding.theme_override)
+          } catch (e) {
+            console.error('Failed to parse theme_override:', e)
+          }
+        }
+        
+        state.data = {
+          ...state.data,
+          wedding: resolvedWedding
+        }
+      }
+
+      if (theme) {
+        state.data = {
+          ...state.data,
+          theme
+        }
+      }
+
+      // Re-apply theme styles dynamically
+      applyTheme(state.data?.theme, state.data?.wedding)
+
+      if (refetch) {
+        // Force refetch from the API to get updated content (pengantin, acara, gallery, etc.)
+        state.loaded = false
+        load()
+      }
+    }
+  })
 }
 
 // --- Derived getters (all null-safe; sections fall back to their static copy) ---

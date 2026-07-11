@@ -51,7 +51,7 @@ const isOpen = ref(false)
 const isLocked = ref(true)
 const isHeroReady = ref(false)
 const contentVisible = ref(false)
-const { load, wedding, rekening } = useWedding()
+const { load, wedding, guest, rekening } = useWedding()
 
 // Fetch the payload up-front while the splash cover is showing so every
 // section has data by the time the invitation opens.
@@ -73,22 +73,59 @@ function setMeta(attr, key, content) {
 
 // Push SEO metadata from the API into the document head once loaded.
 watch(
-  wedding,
-  (w) => {
-    const seo = w?.seo_settings
-    if (!seo) return
+  [wedding, guest],
+  ([w, g]) => {
+    if (!w) return
 
-    if (seo.title) document.title = seo.title
-    setMeta('name', 'description', seo.description)
-    if (Array.isArray(seo.keywords) && seo.keywords.length) {
-      setMeta('name', 'keywords', seo.keywords.join(', '))
+    // 1. Title Resolution
+    let resolvedTitle = w.title
+    if (g && g.custom_og_title) {
+      resolvedTitle = g.custom_og_title
+    } else if (g && g.guest_name) {
+      const parentTitle = w.seo_settings?.title || w.title
+      resolvedTitle = `${parentTitle}`
+    } else if (w.seo_settings?.title) {
+      resolvedTitle = w.seo_settings.title
     }
+    document.title = resolvedTitle
 
-    const og = seo.og || {}
-    setMeta('property', 'og:title', og.title || seo.title)
-    setMeta('property', 'og:description', og.description || seo.description)
-    setMeta('property', 'og:image', og.image)
+    // 2. Description Resolution
+    let resolvedDescription = `Undangan Pernikahan untuk menghadiri acara ${w.title}`
+    if (g && g.custom_og_description) {
+      resolvedDescription = g.custom_og_description
+    } else if (w.seo_settings?.description) {
+      resolvedDescription = w.seo_settings.description
+    } else if (w.seo_settings?.og?.description) {
+      resolvedDescription = w.seo_settings.og.description
+    }
+    setMeta('name', 'description', resolvedDescription)
+
+    // 3. Image Resolution
+    let resolvedImage = w.image_cover || ''
+    if (g && g.custom_og_image) {
+      resolvedImage = g.custom_og_image
+    } else if (w.seo_settings?.og?.image) {
+      resolvedImage = w.seo_settings.og.image
+    } else if (w.seo_settings?.twitter?.image) {
+      resolvedImage = w.seo_settings.twitter.image
+    }
+    setMeta('property', 'og:image', resolvedImage)
+    setMeta('name', 'twitter:image', resolvedImage)
+
+    // 4. Keywords Resolution
+    let resolvedKeywords = `wedding, invitation, pernikahan, ${w.title}`
+    if (Array.isArray(w.seo_settings?.keywords)) {
+      resolvedKeywords = w.seo_settings.keywords.join(', ')
+    }
+    setMeta('name', 'keywords', resolvedKeywords)
+
+    // 5. Other Meta
+    setMeta('property', 'og:title', resolvedTitle)
+    setMeta('property', 'og:description', resolvedDescription)
     setMeta('property', 'og:type', 'website')
+    setMeta('name', 'twitter:card', 'summary_large_image')
+    setMeta('name', 'twitter:title', resolvedTitle)
+    setMeta('name', 'twitter:description', resolvedDescription)
   },
   { immediate: true }
 )

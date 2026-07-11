@@ -50,10 +50,12 @@ async function request(path, options = {}) {
 /**
  * Fetch the full home payload (wedding, theme, guest, content) for a slug.
  * @param {string} slug
+ * @param {string} [to]
  * @returns {Promise<any>} the `data` object from the envelope
  */
-export async function getHome(slug) {
-  const payload = await request(`/v1/service/menu/getHome/${encodeURIComponent(slug)}`)
+export async function getHome(slug, to = '') {
+  const query = to ? `?to=${encodeURIComponent(to)}` : ''
+  const payload = await request(`/v1/service/menu/getHome/${encodeURIComponent(slug)}${query}`)
   return payload?.data ?? null
 }
 

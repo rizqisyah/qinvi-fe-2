@@ -102,12 +102,13 @@ const coverRoot = ref(null)
 const isReady = ref(false)
 const coverScale = ref(1)
 
-// Scale the stage to fill the full viewport height. On tall/narrow screens
-// the stage width exceeds 375px — the excess is clipped by
-// `.cover-root { overflow: hidden }`, keeping the cover full-bleed.
+// Scale the stage to fill the viewport. On wider screens the stage
+// exceeds the width and flowers at the edges are clipped at the screen
+// bounds — the canvas (100vw, overflow:hidden) handles the clip.
 function updateScale() {
   const height = coverRoot.value?.clientHeight || window.innerHeight
-  coverScale.value = height / STAGE_HEIGHT
+  const width = coverRoot.value?.clientWidth || document.documentElement.clientWidth
+  coverScale.value = Math.max(height / STAGE_HEIGHT, width / 375)
 }
 
 function staggerDelay(index) {
@@ -120,8 +121,8 @@ onMounted(async () => {
   const toParam = new URLSearchParams(window.location.search).get('to')
   if (toParam) {
     guestName.value = toParam
-  } else if (guest.value?.name) {
-    guestName.value = guest.value.name
+  } else if (guest.value?.guest_name) {
+    guestName.value = guest.value.guest_name
   }
   
   // Wait for DOM to paint so clientHeight is fully populated
