@@ -62,7 +62,7 @@ const isOpen = ref(false)
 const isLocked = ref(true)
 const isHeroReady = ref(false)
 const contentVisible = ref(false)
-const { load, wedding, guest, rekening } = useWedding()
+const { load, wedding, guest, rekening, state } = useWedding()
 
 // Fetch the payload up-front while the splash cover is showing so every
 // section has data by the time the invitation opens.
