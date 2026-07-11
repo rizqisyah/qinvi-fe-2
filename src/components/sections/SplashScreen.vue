@@ -94,6 +94,7 @@ import monogramSrc from '../../assets/figma/cover-monogram.webp'
 
 defineEmits(['open'])
 
+const STAGE_WIDTH = 375
 const STAGE_HEIGHT = 725
 
 const { coupleNickname, guest, logoUrl } = useWedding()
@@ -105,13 +106,10 @@ const coverRoot = ref(null)
 const isReady = ref(false)
 const coverScale = ref(1)
 
-// Scale the stage to fill the viewport. On wider screens the stage
-// exceeds the width and flowers at the edges are clipped at the screen
-// bounds — the canvas (100vw, overflow:hidden) handles the clip.
 function updateScale() {
   const height = coverRoot.value?.clientHeight || window.innerHeight
-  const width = coverRoot.value?.clientWidth || document.documentElement.clientWidth
-  coverScale.value = Math.max(height / STAGE_HEIGHT, width / 375)
+  const targetWidth = window.innerWidth >= 768 ? 480 : (coverRoot.value?.clientWidth || window.innerWidth)
+  coverScale.value = Math.max(height / STAGE_HEIGHT, targetWidth / STAGE_WIDTH)
 }
 
 function staggerDelay(index) {

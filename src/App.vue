@@ -180,9 +180,12 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
     box-shadow: none !important;
   }
 
-  /* When locked (splash showing), canvas fills column (480px) without zoom so
-     cover can center in column and flowers extend to full column width.
-     Using 100vw here overflows the 480px column with overflow-x: hidden. */
+  /* When splash is showing, allow horizontal overflow so cover flowers can
+     extend past the 480px column boundary without being clipped. */
+  .desktop-right-column:has(.invitation-canvas.is-locked) {
+    overflow: visible !important;
+  }
+
   .invitation-canvas.is-locked {
     width: 480px !important;
     height: 100svh !important;
@@ -193,15 +196,11 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
     background: #fffed6 !important;
   }
 
-  /* Override invitation.css .cover-root (0,1,0) with higher specificity (0,3,0)
-     so this wins regardless of CSS load order. overflow: hidden lets cover-root
-     itself clip the scaled stage symmetrically on both sides, keeping left and
-     right flowers balanced. */
   .invitation-canvas.is-locked .cover-root {
     width: 100% !important;
     max-width: 100% !important;
     height: 100% !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     background: #fffed6 !important;
   }
 
@@ -248,7 +247,7 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
   .invitation-canvas.is-locked {
     width: 100vw !important;
     height: 100svh !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     zoom: 1 !important;
   }
 
