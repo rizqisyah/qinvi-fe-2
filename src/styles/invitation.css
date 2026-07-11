@@ -1897,7 +1897,7 @@
 }
 
 .cover-n275 {
-  left: max(0.0px, calc((375px - 100vw / var(--cover-scale)) / 2));
+  left: 0.0px;
   top: 225.7px;
   width: 44.0px;
   height: 168.0px;
@@ -1905,7 +1905,7 @@
 }
 
 .cover-n277 {
-  left: min(331.0px, calc(375px - 44px - (375px - 100vw / var(--cover-scale)) / 2));
+  left: 331.0px;
   top: 215.7px;
   width: 44.0px;
   height: 168.0px;
