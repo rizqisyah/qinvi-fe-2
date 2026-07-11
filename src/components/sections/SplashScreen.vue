@@ -20,9 +20,9 @@
       <div class="cover-plane cover-plane-fl" style="z-index: 4" :style="staggerDelay(2)"><img class="cover-fl cover-n304" decoding="async" src="../../assets/figma/cover-n304.webp" alt="" /></div>
       <div class="cover-plane cover-plane-fl" style="z-index: 5" :style="staggerDelay(3)"><img class="cover-fl cover-n306" decoding="async" src="../../assets/figma/cover-n306.webp" alt="" /></div>
       <div class="cover-plane cover-plane-fl" style="z-index: 6" :style="staggerDelay(4)"><img class="cover-fl cover-n259" decoding="async" src="../../assets/figma/cover-n259.webp" alt="" /></div>
-      <div class="cover-plane cover-plane-fl" style="z-index: 7" :style="{ ...leftLilyStyle, ...staggerDelay(5) }"><img class="cover-fl cover-n263" decoding="async" src="../../assets/figma/cover-n263.webp" alt="" /></div>
+      <div class="cover-plane cover-plane-fl" style="z-index: 7" :style="staggerDelay(5)"><img class="cover-fl cover-n263" :style="leftLilyStyle" decoding="async" src="../../assets/figma/cover-n263.webp" alt="" /></div>
       <div class="cover-plane cover-plane-fl" style="z-index: 8" :style="staggerDelay(6)"><img class="cover-fl cover-n260" decoding="async" src="../../assets/figma/cover-n260.webp" alt="" /></div>
-      <div class="cover-plane cover-plane-fl" style="z-index: 9" :style="{ ...rightLilyStyle, ...staggerDelay(7) }"><img class="cover-fl cover-n265" decoding="async" src="../../assets/figma/cover-n265.webp" alt="" /></div>
+      <div class="cover-plane cover-plane-fl" style="z-index: 9" :style="staggerDelay(7)"><img class="cover-fl cover-n265" :style="rightLilyStyle" decoding="async" src="../../assets/figma/cover-n265.webp" alt="" /></div>
       <div class="cover-plane cover-plane-fl" style="z-index: 10" :style="staggerDelay(8)"><img class="cover-fl cover-n266" decoding="async" src="../../assets/figma/cover-n266.webp" alt="" /></div>
       <div class="cover-plane cover-plane-fl" style="z-index: 11" :style="staggerDelay(9)"><img class="cover-fl cover-n295" decoding="async" src="../../assets/figma/cover-n295.webp" alt="" /></div>
       <div class="cover-plane cover-plane-fl" style="z-index: 12" :style="staggerDelay(10)"><img class="cover-fl cover-n268" decoding="async" src="../../assets/figma/cover-n268.webp" alt="" /></div>
@@ -32,8 +32,8 @@
       <div class="cover-plane cover-plane-fl" style="z-index: 16" :style="staggerDelay(14)"><img class="cover-fl cover-n312" decoding="async" src="../../assets/figma/cover-n312.webp" alt="" /></div>
       <div class="cover-plane cover-plane-fl" style="z-index: 17" :style="staggerDelay(15)"><img class="cover-fl cover-n309" decoding="async" src="../../assets/figma/cover-n309.webp" alt="" /></div>
       <div class="cover-plane cover-plane-fl" style="z-index: 18" :style="staggerDelay(16)"><img class="cover-fl cover-n274" decoding="async" src="../../assets/figma/cover-n274.webp" alt="" /></div>
-      <div class="cover-plane cover-plane-fl" style="z-index: 19" :style="{ ...leftFlowerStyle, ...staggerDelay(17) }"><img class="cover-fl cover-n275" decoding="async" src="../../assets/figma/cover-n275.webp" alt="" /></div>
-      <div class="cover-plane cover-plane-fl" style="z-index: 20" :style="{ ...rightFlowerStyle, ...staggerDelay(18) }"><img class="cover-fl cover-n277" decoding="async" src="../../assets/figma/cover-n277.webp" alt="" /></div>
+      <div class="cover-plane cover-plane-fl" style="z-index: 19" :style="staggerDelay(17)"><img class="cover-fl cover-n275" :style="leftFlowerStyle" decoding="async" src="../../assets/figma/cover-n275.webp" alt="" /></div>
+      <div class="cover-plane cover-plane-fl" style="z-index: 20" :style="staggerDelay(18)"><img class="cover-fl cover-n277" :style="rightFlowerStyle" decoding="async" src="../../assets/figma/cover-n277.webp" alt="" /></div>
 
       <!-- grass hill (z 21): back flowers behind, front flowers ahead -->
       <div class="cover-plane cover-plane-hill" style="z-index: 21">
@@ -71,7 +71,7 @@
       <p class="cover-text cover-couple enter-text" style="--enter-delay: 1.05s">{{ coupleName }}</p>
 
       <p class="cover-text cover-dear enter-text" style="--enter-delay: 1.2s">Dear Mr / Mrs / Ms</p>
-      <p class="cover-text cover-guest enter-text" style="--enter-delay: 1.35s">{{ guestName }}</p>
+      <p class="cover-text cover-guest enter-text" style="--enter-delay: 1.35s">{{ guestName || 'Bapak/Ibu/Saudara/i' }}</p>
 
       <button
         class="cover-open-button enter-text"
@@ -97,11 +97,9 @@ defineEmits(['open'])
 const STAGE_WIDTH = 375
 const STAGE_HEIGHT = 725
 
-const { coupleNickname, guest, logoUrl } = useWedding()
+const { coupleNickname, guest, logoUrl, guestName } = useWedding()
 
 const coupleName = computed(() => coupleNickname.value || 'Antonio & Ayu')
-
-const guestName = ref('Bapak/Ibu/Saudara/i')
 const coverRoot = ref(null)
 const isReady = ref(false)
 const coverScale = ref(1)
@@ -149,13 +147,8 @@ const rightLilyStyle = computed(() => {
 })
 
 function updateScale() {
-  if (window.innerWidth >= 768) {
-    coverScale.value = 1.28
-  } else {
-    const height = coverRoot.value?.clientHeight || window.innerHeight
-    const width = coverRoot.value?.clientWidth || window.innerWidth
-    coverScale.value = Math.max(height / STAGE_HEIGHT, width / STAGE_WIDTH)
-  }
+  const height = coverRoot.value?.clientHeight || window.innerHeight
+  coverScale.value = height / STAGE_HEIGHT
 }
 
 function staggerDelay(index) {
@@ -168,13 +161,6 @@ function staggerDelay(index) {
 }
 
 onMounted(async () => {
-  // Priority: personalised `?to=` link, then an API-resolved guest, else default.
-  const toParam = new URLSearchParams(window.location.search).get('to')
-  if (toParam) {
-    guestName.value = toParam
-  } else if (guest.value?.guest_name) {
-    guestName.value = guest.value.guest_name
-  }
 
   // Preload critical above-fold images so the browser fetches them
   // before the DOM-parsed <img> tags — avoids the 6-connection limit queue.

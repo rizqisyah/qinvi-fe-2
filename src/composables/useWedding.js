@@ -28,6 +28,8 @@ async function load() {
       state.data = await getHome(state.slug, toParam)
       if (state.data?.guest?.guest_name) {
         guestName.value = state.data.guest.guest_name
+      } else if (toParam) {
+        guestName.value = toParam
       }
       // Apply theme styles dynamically
       applyTheme(state.data?.theme, state.data?.wedding)
