@@ -180,16 +180,12 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
     box-shadow: none !important;
   }
 
-  /* When splash is showing, allow horizontal overflow so cover flowers can
-     extend past the 480px column boundary without being clipped. */
-  .desktop-right-column:has(.invitation-canvas.is-locked) {
-    overflow: visible !important;
-  }
-
+  /* When locked (splash showing), canvas fills the 480px column and stage
+     is scaled to exactly 480px wide (1.28×) so all flowers stay visible. */
   .invitation-canvas.is-locked {
     width: 480px !important;
     height: 100svh !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     zoom: 1 !important;
     margin: 0 auto !important;
     box-shadow: none !important;
@@ -200,7 +196,7 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
     width: 100% !important;
     max-width: 100% !important;
     height: 100% !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     background: #fffed6 !important;
   }
 
@@ -243,11 +239,13 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
     box-shadow: none !important;
   }
 
-  /* When locked, canvas fills viewport with zoom=1 so cover flowers aren't clipped by zoom coordinate system */
+  /* Mobile locked: canvas fills the viewport width with zoom=1. Stage is
+     scaled to cover the viewport (Math.max) so some flowers may extend past
+     the viewport edge — hidden overflow clips them symmetrically. */
   .invitation-canvas.is-locked {
     width: 100vw !important;
     height: 100svh !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     zoom: 1 !important;
   }
 
@@ -255,7 +253,7 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
     width: 100vw !important;
     max-width: 100vw !important;
     height: 100% !important;
-    overflow: visible !important;
+    overflow: hidden !important;
   }
 }
 

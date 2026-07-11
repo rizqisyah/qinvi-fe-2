@@ -107,9 +107,13 @@ const isReady = ref(false)
 const coverScale = ref(1)
 
 function updateScale() {
-  const height = coverRoot.value?.clientHeight || window.innerHeight
-  const targetWidth = window.innerWidth >= 768 ? 480 : (coverRoot.value?.clientWidth || window.innerWidth)
-  coverScale.value = Math.max(height / STAGE_HEIGHT, targetWidth / STAGE_WIDTH)
+  if (window.innerWidth >= 768) {
+    coverScale.value = 1.28
+  } else {
+    const height = coverRoot.value?.clientHeight || window.innerHeight
+    const width = coverRoot.value?.clientWidth || window.innerWidth
+    coverScale.value = Math.max(height / STAGE_HEIGHT, width / STAGE_WIDTH)
+  }
 }
 
 function staggerDelay(index) {
