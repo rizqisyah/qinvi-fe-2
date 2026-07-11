@@ -6,6 +6,11 @@
     data-section="cover"
   >
     <!-- 375x725 artwork stage, scaled to cover the viewport height. -->
+    <div style="position: absolute; top: 10px; left: 10px; z-index: 99999; background: rgba(0,0,0,0.85); color: #00ff00; padding: 10px; font-family: monospace; font-size: 11px; pointer-events: none; border-radius: 4px; line-height: 1.4;">
+      Scale: {{ coverScale }}<br />
+      Left Style: {{ JSON.stringify(leftFlowerStyle) }}<br />
+      Right Style: {{ JSON.stringify(rightFlowerStyle) }}
+    </div>
     <div class="cover-stage" :style="{ '--cover-scale': coverScale }">
       <!-- Every flower/leaf is its own full-frame layer, exported at its true
            Figma transform, so each blooms and sways on its own. Back flowers
