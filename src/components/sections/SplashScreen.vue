@@ -108,7 +108,12 @@ const coverScale = ref(1)
 function updateScale() {
   const height = coverRoot.value?.clientHeight || window.innerHeight
   const width = coverRoot.value?.clientWidth || document.documentElement.clientWidth
-  coverScale.value = Math.max(height / STAGE_HEIGHT, width / 375)
+  const isDesktop = window.innerWidth >= 768
+  if (isDesktop) {
+    coverScale.value = width / 375
+  } else {
+    coverScale.value = Math.max(height / STAGE_HEIGHT, width / 375)
+  }
 }
 
 function staggerDelay(index) {
