@@ -26,6 +26,9 @@ async function load() {
     try {
       const toParam = new URLSearchParams(window.location.search).get('to') || ''
       state.data = await getHome(state.slug, toParam)
+      if (toParam && !state.data?.guest) {
+        throw new Error('Undangan ini bersifat privat dan hanya dapat diakses melalui link resmi.')
+      }
       if (state.data?.guest?.guest_name) {
         guestName.value = state.data.guest.guest_name
       } else if (toParam) {
