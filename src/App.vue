@@ -186,12 +186,11 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
     overflow: visible !important;
   }
 
-  .cover-root {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    margin-left: calc(-50% + 50vw) !important;
+  .invitation-canvas.is-locked .cover-root {
+    width: 375px !important;
+    max-width: 375px !important;
     height: 100% !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     background: #fffed6 !important;
   }
 
@@ -242,7 +241,7 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
     zoom: 1 !important;
   }
 
-  .cover-root {
+  .invitation-canvas.is-locked .cover-root {
     width: 100vw !important;
     max-width: 100vw !important;
     height: 100% !important;
