@@ -32,8 +32,8 @@
       <div class="cover-plane" style="z-index: 16"><img class="cover-fl cover-n312" :style="staggerDelay(14)" decoding="async" src="../../assets/figma/cover-n312.webp" alt="" /></div>
       <div class="cover-plane" style="z-index: 17"><img class="cover-fl cover-n309" :style="staggerDelay(15)" decoding="async" src="../../assets/figma/cover-n309.webp" alt="" /></div>
       <div class="cover-plane" style="z-index: 18"><img class="cover-fl cover-n274" :style="staggerDelay(16)" decoding="async" src="../../assets/figma/cover-n274.webp" alt="" /></div>
-      <div class="cover-plane" style="z-index: 19"><img class="cover-fl cover-n275" :style="leftFlowerStyle" decoding="async" src="../../assets/figma/cover-n275.webp" alt="" /></div>
-      <div class="cover-plane" style="z-index: 20"><img class="cover-fl cover-n277" :style="rightFlowerStyle" decoding="async" src="../../assets/figma/cover-n277.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 19"><img class="cover-n275" :style="leftFlowerStyle" decoding="async" src="../../assets/figma/cover-n275.webp" alt="" /></div>
+      <div class="cover-plane" style="z-index: 20"><img class="cover-n277" :style="rightFlowerStyle" decoding="async" src="../../assets/figma/cover-n277.webp" alt="" /></div>
 
       <!-- grass hill (z 21): back flowers behind, front flowers ahead -->
       <div class="cover-plane cover-plane-hill" style="z-index: 21">
