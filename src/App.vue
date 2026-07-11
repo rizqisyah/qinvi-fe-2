@@ -183,13 +183,14 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
   /* When locked, we apply the dynamically calculated locked-height divided by the scale factor */
   .invitation-canvas.is-locked {
     height: var(--locked-height, 78vh) !important;
-    overflow: hidden !important;
+    overflow: visible !important;
   }
 
   .cover-root {
     width: 375px !important;
     max-width: 375px !important;
     height: 100% !important;
+    overflow: visible !important;
     background: #fffed6 !important;
   }
 
