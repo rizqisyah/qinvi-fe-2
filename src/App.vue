@@ -180,18 +180,27 @@ const words = computed(() => wedding.value?.theme_override?.words || null)
     box-shadow: none !important;
   }
 
-  /* When locked, we apply the dynamically calculated locked-height divided by the scale factor */
+  /* When locked (splash showing), canvas fills viewport without zoom so cover
+     flowers can extend to full viewport width — same approach as mobile. */
   .invitation-canvas.is-locked {
-    height: var(--locked-height, 78vh) !important;
+    width: 100vw !important;
+    height: 100svh !important;
     overflow: visible !important;
+    zoom: 1 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
   }
 
   .invitation-canvas.is-locked .cover-root {
-    width: 375px !important;
-    max-width: 375px !important;
-    height: 100% !important;
-    overflow: visible !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100svh !important;
+    overflow: hidden !important;
     background: #fffed6 !important;
+    z-index: 9999 !important;
+    margin: 0 !important;
   }
 
   /* Center the fixed bottom-nav inside the zoomed 375px space (half width is 187.5px) */
