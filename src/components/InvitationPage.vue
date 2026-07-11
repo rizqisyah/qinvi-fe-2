@@ -1,29 +1,37 @@
 <template>
-  <div class="invitation-canvas" :class="{ 'is-locked': !isOpen }" aria-label="Antonio and Ayu wedding invitation">
-    <Transition name="splash">
+  <div class="invitation-canvas" :class="{ 'is-locked': isLocked }" aria-label="Antonio and Ayu wedding invitation">
+    <Transition name="splash" @after-leave="onSplashLeave">
       <SplashScreen v-if="!isOpen" @open="openInvitation" />
     </Transition>
 
-    <template v-if="isOpen">
-      <HeroSection :is-ready="true" :is-open="true" />
+    <!-- v-show keeps sections pre-rendered in the DOM so opening the
+         invitation never triggers a sudden layout reflow (flicker).
+         The wrapper fades in via CSS opacity once contentVisible is true. -->
+    <div
+      v-show="isOpen"
+      class="invitation-content"
+      :class="{ 'is-visible': contentVisible }"
+    >
+      <VideoSection v-if="wedding?.video_url" />
+      <HeroSection :is-ready="isHeroReady" :is-open="true" />
       <QuranSection />
       <CoupleSection />
       <SaveDateSection />
       <EventSection />
-      <GiftSection />
+      <GiftSection v-if="rekening && rekening.length > 0" />
       <RsvpSection />
       <WishesSection />
-      <VideoSection />
       <GallerySection />
       <FooterSection />
-      <MusicPlayer />
-      <BottomNav />
-    </template>
+    </div>
+
+    <!-- Keep BottomNav outside invitation-content to avoid CSS transform position:fixed containment bug -->
+    <BottomNav v-if="isOpen" />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, nextTick } from 'vue'
 import { useWedding } from '../composables/useWedding'
 import SplashScreen from './sections/SplashScreen.vue'
 import HeroSection from './sections/HeroSection.vue'
@@ -37,11 +45,13 @@ import WishesSection from './sections/WishesSection.vue'
 import GallerySection from './sections/GallerySection.vue'
 import VideoSection from './sections/VideoSection.vue'
 import FooterSection from './sections/FooterSection.vue'
-import MusicPlayer from './sections/MusicPlayer.vue'
 import BottomNav from './sections/BottomNav.vue'
 
 const isOpen = ref(false)
-const { load, wedding } = useWedding()
+const isLocked = ref(true)
+const isHeroReady = ref(false)
+const contentVisible = ref(false)
+const { load, wedding, rekening } = useWedding()
 
 // Fetch the payload up-front while the splash cover is showing so every
 // section has data by the time the invitation opens.
@@ -83,7 +93,22 @@ watch(
   { immediate: true }
 )
 
-function openInvitation() {
+async function openInvitation() {
   isOpen.value = true
+  // Wait for the DOM to update (v-show renders the sections) then fade in
+  // on the next animation frame so the splash transition is already running
+  // before the content becomes visible — eliminates the flicker.
+  await nextTick()
+  requestAnimationFrame(() => {
+    contentVisible.value = true
+  })
+  // Trigger Hero reveal animations after cover starts fading out
+  setTimeout(() => {
+    isHeroReady.value = true
+  }, 250)
+}
+
+function onSplashLeave() {
+  isLocked.value = false
 }
 </script>

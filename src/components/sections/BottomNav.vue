@@ -59,17 +59,81 @@
           <span class="bottom-nav-label">{{ item.label }}</span>
         </button>
       </li>
+      <!-- Music Play/Pause item -->
+      <li v-if="musicUrl" class="bottom-nav-item">
+        <button
+          class="bottom-nav-link"
+          type="button"
+          :aria-label="playing ? 'Pause music' : 'Play music'"
+          @click="toggleMusic"
+        >
+          <!-- Play icon (shown when paused) -->
+          <svg
+            v-if="!playing"
+            class="bottom-nav-icon"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+          <!-- Pause icon (shown when playing) -->
+          <svg
+            v-else
+            class="bottom-nav-icon"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="6" y="4" width="4" height="16" />
+            <rect x="14" y="4" width="4" height="16" />
+          </svg>
+          <span class="bottom-nav-label">{{ playing ? 'Pause' : 'Play' }}</span>
+        </button>
+      </li>
     </ul>
+
+    <!-- Hidden audio element -->
+    <audio
+      ref="audioEl"
+      :src="musicUrl"
+      loop
+      preload="auto"
+      @timeupdate="onTimeUpdate"
+      @play="playing = true"
+      @pause="playing = false"
+    />
   </nav>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useWedding } from '../../composables/useWedding'
 import { useLightbox } from '../../composables/useLightbox'
 
 // The gallery lightbox's backdrop is translucent, so the pill would ghost
 // through it unless it steps aside.
 const { lightboxOpen } = useLightbox()
+const { wedding } = useWedding()
+
+const musicUrl = computed(() => wedding.value?.music_url || 'https://qinvi-worker.kesone01.workers.dev/Music/Brian McKnight - Back At One (Lyrics) (mp3cut.net).mp3')
+const musicStart = computed(() => Number(wedding.value?.music_start) || 0)
+const musicEnd = computed(() => Number(wedding.value?.music_end) || 0)
+
+const audioEl = ref(null)
+const playing = ref(false)
 
 // Each entry points at a `data-section` slab already rendered on the page.
 const ITEMS = [
@@ -120,16 +184,54 @@ function onScroll() {
   })
 }
 
+async function playMusic() {
+  const el = audioEl.value
+  if (!el) return
+  if (musicStart.value && el.currentTime === 0) {
+    el.currentTime = musicStart.value
+  }
+  try {
+    await el.play()
+    playing.value = true
+  } catch {
+    // Autoplay blocked; stays paused until the user interacts.
+    playing.value = false
+  }
+}
+
+function toggleMusic() {
+  const el = audioEl.value
+  if (!el) return
+  if (playing.value) {
+    el.pause()
+  } else {
+    playMusic()
+  }
+}
+
+function onTimeUpdate() {
+  const el = audioEl.value
+  if (!el || !musicEnd.value) return
+  if (el.currentTime >= musicEnd.value) {
+    el.currentTime = musicStart.value || 0
+  }
+}
+
 onMounted(() => {
   syncActive()
   window.addEventListener('scroll', onScroll, { passive: true })
   window.addEventListener('resize', onScroll, { passive: true })
+  // BottomNav dimuat tepat setelah splash screen ditutup,
+  // yang dipicu oleh klik "Buka Undangan". Klik ini memenuhi syarat
+  // interaksi user sehingga autoplay suara diperbolehkan.
+  playMusic()
 })
 
 onBeforeUnmount(() => {
   if (frame) cancelAnimationFrame(frame)
   window.removeEventListener('scroll', onScroll)
   window.removeEventListener('resize', onScroll)
+  audioEl.value?.pause()
 })
 </script>
 
@@ -139,7 +241,7 @@ onBeforeUnmount(() => {
   left: 50%;
   bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   z-index: 70;
-  width: 343px;
+  width: 360px;
   max-width: calc(100vw - 32px);
   transform: translateX(-50%);
   border-radius: 30px;
@@ -207,7 +309,7 @@ onBeforeUnmount(() => {
 
 .bottom-nav-label {
   overflow: hidden;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0.01em;

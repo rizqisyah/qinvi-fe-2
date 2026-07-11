@@ -4,75 +4,78 @@
     class="inv-section invitation-section invitation-section--gallery reveal-on-scroll"
     :class="{ 'in-view': inView }"
     data-section="gallery"
+    :style="sectionStyle"
   >
-    <img class="figma-asset gallery-top-divider" src="../../assets/figma/gallery-top-divider-garland.png" alt="" />
+    <template v-if="hasPhotos">
+      <img class="figma-asset gallery-top-divider" src="../../assets/figma/gallery-top-divider-garland.png" alt="" />
 
-    <h2 class="script-heading gallery-title">Gallery</h2>
+      <h2 class="script-heading gallery-title">Gallery</h2>
 
-    <div class="gallery-carousel" role="region" aria-label="Photo gallery">
-      <div class="gallery-main-photo-wrapper">
-        <button class="gallery-main-photo-button" type="button" aria-label="Enlarge photo" @click="openLightbox">
-          <img
-            class="gallery-main-photo"
-            :src="currentPhotoSrc"
-            :alt="`Gallery photo ${currentIndex + 1} of ${photos.length}`"
-          />
+      <div class="gallery-carousel" role="region" aria-label="Photo gallery">
+        <div class="gallery-main-photo-wrapper">
+          <button class="gallery-main-photo-button" type="button" aria-label="Enlarge photo" @click="openLightbox">
+            <img
+              class="gallery-main-photo"
+              :src="currentPhotoSrc"
+              :alt="`Gallery photo ${currentIndex + 1} of ${photos.length}`"
+            />
+          </button>
+
+          <button class="gallery-nav gallery-nav--prev" type="button" aria-label="Previous photo" @click="prevPhoto">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          <button class="gallery-nav gallery-nav--next" type="button" aria-label="Next photo" @click="nextPhoto">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
+
+        <p v-if="currentCaption" class="gallery-caption">{{ currentCaption }}</p>
+
+        <div class="gallery-thumbnails">
+          <button
+            v-for="(photo, index) in photos"
+            :key="index"
+            type="button"
+            class="gallery-thumb"
+            :class="{ 'is-active': index === currentIndex }"
+            :aria-label="`Photo ${index + 1}`"
+            @click="currentIndex = index"
+          >
+            <img :src="resolve(photo)" alt="" />
+          </button>
+        </div>
+      </div>
+
+      <div v-if="lightboxOpen" class="gallery-lightbox" @click.self="closeLightbox">
+        <button class="gallery-lightbox-close" type="button" aria-label="Close" @click="closeLightbox">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="4" y1="4" x2="20" y2="20" />
+            <line x1="20" y1="4" x2="4" y2="20" />
+          </svg>
         </button>
 
-        <button class="gallery-nav gallery-nav--prev" type="button" aria-label="Previous photo" @click="prevPhoto">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+        <button class="gallery-lightbox-nav gallery-lightbox-nav--prev" type="button" aria-label="Previous photo" @click="prevPhoto">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
             <polyline points="15 18 9 12 15 6" />
           </svg>
         </button>
 
-        <button class="gallery-nav gallery-nav--next" type="button" aria-label="Next photo" @click="nextPhoto">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+        <img class="gallery-lightbox-photo" :src="currentPhotoSrc" :alt="`Gallery photo ${currentIndex + 1} of ${photos.length}`" />
+
+        <button class="gallery-lightbox-nav gallery-lightbox-nav--next" type="button" aria-label="Next photo" @click="nextPhoto">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
             <polyline points="9 18 15 12 9 6" />
           </svg>
         </button>
       </div>
+    </template>
 
-      <p v-if="currentCaption" class="gallery-caption">{{ currentCaption }}</p>
-
-      <div class="gallery-thumbnails">
-        <button
-          v-for="(photo, index) in photos"
-          :key="index"
-          type="button"
-          class="gallery-thumb"
-          :class="{ 'is-active': index === currentIndex }"
-          :aria-label="`Photo ${index + 1}`"
-          @click="currentIndex = index"
-        >
-          <img :src="resolve(photo)" alt="" />
-        </button>
-      </div>
-    </div>
-
-    <div v-if="lightboxOpen" class="gallery-lightbox" @click.self="closeLightbox">
-      <button class="gallery-lightbox-close" type="button" aria-label="Close" @click="closeLightbox">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5">
-          <line x1="4" y1="4" x2="20" y2="20" />
-          <line x1="20" y1="4" x2="4" y2="20" />
-        </svg>
-      </button>
-
-      <button class="gallery-lightbox-nav gallery-lightbox-nav--prev" type="button" aria-label="Previous photo" @click="prevPhoto">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <polyline points="15 18 9 12 15 6" />
-        </svg>
-      </button>
-
-      <img class="gallery-lightbox-photo" :src="currentPhotoSrc" :alt="`Gallery photo ${currentIndex + 1} of ${photos.length}`" />
-
-      <button class="gallery-lightbox-nav gallery-lightbox-nav--next" type="button" aria-label="Next photo" @click="nextPhoto">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <polyline points="9 18 15 12 9 6" />
-        </svg>
-      </button>
-    </div>
-
-    <div class="gallery-closing" ref="closingEl" :class="{ 'in-view': closingInView }">
+    <div class="gallery-closing" ref="closingEl" :class="{ 'in-view': closingInView }" :style="closingStyle">
       <!-- Layers placed one-by-one, dictated from Figma -->
       <img class="closing-asset closing-anim closing-tree-l" :style="delay(0)" :src="img('closing-tree.png')" alt="" />
       <img class="closing-asset closing-anim closing-tree-r" :style="delay(1)" :src="img('closing-tree.png')" alt="" />
@@ -118,6 +121,22 @@ import { useLightbox } from '../../composables/useLightbox'
 const { rootRef, inView } = useScrollReveal()
 const { gallery, logoUrl, hashtagUrl, spousePhoto, coupleTitle } = useWedding()
 const { lightboxOpen } = useLightbox()
+
+const hasPhotos = computed(() => gallery.value && gallery.value.length > 0)
+
+const sectionStyle = computed(() => {
+  if (!hasPhotos.value) {
+    return { height: '1010px' }
+  }
+  return {}
+})
+
+const closingStyle = computed(() => {
+  if (!hasPhotos.value) {
+    return { marginTop: '0' }
+  }
+  return {}
+})
 
 const FALLBACK_PHOTOS = [
   'gallery-photo-main.png',

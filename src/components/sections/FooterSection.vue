@@ -22,7 +22,7 @@
           </svg>
         </a>
       </div>
-      <div class="footer-divider"></div>
+      <!-- <div class="footer-divider"></div> -->
     </div>
   </section>
 </template>

@@ -122,11 +122,11 @@ async function sendUcapan({ name, message }) {
     res?.data && typeof res.data === 'object'
       ? res.data
       : {
-          id: `local-${content.value.ucapan.length}`,
-          guest_name: name,
-          message,
-          created_at: new Date().toISOString(),
-        }
+        id: `local-${content.value.ucapan.length}`,
+        guest_name: name,
+        message,
+        created_at: new Date().toISOString(),
+      }
   content.value.ucapan.unshift(row)
   return res
 }
