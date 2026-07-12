@@ -1,35 +1,33 @@
 <template>
-  <section
+  <div
     v-if="videoUrl"
     id="videoSectionContainer"
-    class="inv-section invitation-section invitation-section--video"
+    class="items-center justify-center w-full h-screen overflow-hidden relative bg-black"
     data-section="video"
   >
-    <div class="video-container">
-      <iframe
-        v-if="embedUrl"
-        id="videoSectionEmbed"
-        class="video-element"
-        :src="embedUrl"
-        title="Wedding video"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; mute"
-        allowfullscreen
-      ></iframe>
-      <video
-        v-else
-        id="videoSection"
-        class="video-element"
-        :src="videoUrl"
-        loop
-        muted
-        controls
-        autoplay
-        playsinline
-        webkit-playsinline
-      ></video>
-    </div>
-  </section>
+    <iframe
+      v-if="embedUrl"
+      id="videoSectionEmbed"
+      class="absolute top-0 left-0 w-full h-full object-cover border-0"
+      :src="embedUrl"
+      title="Wedding video"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; mute"
+      allowfullscreen
+    ></iframe>
+    <video
+      v-else
+      id="videoSection"
+      class="absolute top-0 left-0 w-full h-full object-cover"
+      :src="videoUrl"
+      loop
+      muted
+      controls
+      autoplay
+      playsinline
+      webkit-playsinline
+    ></video>
+  </div>
 </template>
 
 <script setup>
@@ -57,29 +55,49 @@ const embedUrl = computed(() => {
 </script>
 
 <style scoped>
-.invitation-section--video {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-  background: #000;
-}
-
-.video-container {
-  width: 100%;
-  height: 100%;
+.items-center {
   display: flex;
   align-items: center;
+}
+.justify-center {
   justify-content: center;
 }
-
-.video-element {
-  position: absolute;
-  top: 0;
-  left: 0;
+.w-full {
   width: 100%;
+}
+.h-screen {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height to prevent mobile address bar overflow */
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.top-0 {
+  top: 0;
+}
+.left-0 {
+  left: 0;
+}
+.h-full {
   height: 100%;
+}
+.object-cover {
   object-fit: cover;
+}
+.border-0 {
   border: 0;
+}
+.bg-black {
+  background-color: #000;
 }
 </style>
