@@ -1,8 +1,8 @@
 <template>
   <nav
     class="bottom-nav"
-    :class="{ 'is-hidden': lightboxOpen }"
-    :inert="lightboxOpen || undefined"
+    :class="{ 'is-hidden': lightboxOpen || !showNav }"
+    :inert="lightboxOpen || !showNav || undefined"
     aria-label="Navigasi bagian undangan"
   >
     <ul class="bottom-nav-list">
@@ -146,6 +146,8 @@ const ITEMS = computed(() => [
 const ACTIVE_LINE = 0.35
 
 const active = ref(ITEMS.value[0].section)
+const showNav = ref(false)
+let scrollTarget = null
 
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -164,13 +166,36 @@ function goTo(section) {
 // An IntersectionObserver would blank out over the sections that have no nav
 // entry (quran, gift, rsvp...), so instead highlight the last entry scrolled past.
 function syncActive() {
-  const line = window.scrollY + window.innerHeight * ACTIVE_LINE
+  const scrollTop = scrollTarget ? scrollTarget.scrollTop : window.scrollY
+  const line = scrollTop + window.innerHeight * ACTIVE_LINE
+  
   let current = ITEMS.value[0].section
   for (const item of ITEMS.value) {
     const el = sectionEl(item.section)
-    if (el && el.getBoundingClientRect().top + window.scrollY <= line) current = item.section
+    if (el) {
+      const rectTop = el.getBoundingClientRect().top
+      const containerTop = scrollTarget ? scrollTarget.getBoundingClientRect().top : 0
+      const elementTop = rectTop + scrollTop - containerTop
+      if (elementTop <= line) current = item.section
+    }
   }
   active.value = current
+
+  // Check if scrolled past video section and entered invitation section
+  const hasVideo = !!wedding.value?.video_url
+  if (hasVideo) {
+    const heroSection = document.querySelector('[data-section="hero"]')
+    if (heroSection) {
+      const rect = heroSection.getBoundingClientRect()
+      const containerTop = scrollTarget ? scrollTarget.getBoundingClientRect().top : 0
+      const heroTopRelativeToContainer = rect.top - containerTop
+      showNav.value = scrollTop > 20 && heroTopRelativeToContainer <= window.innerHeight - 100
+    } else {
+      showNav.value = scrollTop > 60
+    }
+  } else {
+    showNav.value = true
+  }
 }
 
 let frame = 0
@@ -217,9 +242,18 @@ function onTimeUpdate() {
 }
 
 onMounted(() => {
+  const isDesktop = window.innerWidth >= 768
+  if (isDesktop) {
+    scrollTarget = document.querySelector('.desktop-right-column')
+  }
+  
   syncActive()
+  if (scrollTarget) {
+    scrollTarget.addEventListener('scroll', onScroll, { passive: true })
+  }
   window.addEventListener('scroll', onScroll, { passive: true })
   window.addEventListener('resize', onScroll, { passive: true })
+  
   // BottomNav dimuat tepat setelah splash screen ditutup,
   // yang dipicu oleh klik "Buka Undangan". Klik ini memenuhi syarat
   // interaksi user sehingga autoplay suara diperbolehkan.
@@ -228,6 +262,9 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   if (frame) cancelAnimationFrame(frame)
+  if (scrollTarget) {
+    scrollTarget.removeEventListener('scroll', onScroll)
+  }
   window.removeEventListener('scroll', onScroll)
   window.removeEventListener('resize', onScroll)
   audioEl.value?.pause()
@@ -246,7 +283,7 @@ onBeforeUnmount(() => {
   border-radius: 30px;
   background: #fff;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   /* `backwards`, not `both`: a filled-forwards animation would pin opacity at 1
      and outrank the `.is-hidden` rule below. */
   animation: bottom-nav-in 0.5s 0.3s cubic-bezier(0.16, 1, 0.3, 1) backwards;
@@ -255,6 +292,7 @@ onBeforeUnmount(() => {
 .bottom-nav.is-hidden {
   opacity: 0;
   pointer-events: none;
+  transform: translate(-50%, 24px);
 }
 
 .bottom-nav-list {

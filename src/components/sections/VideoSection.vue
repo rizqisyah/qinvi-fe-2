@@ -68,15 +68,10 @@ const embedUrl = computed(() => {
 .h-screen {
   position: relative;
   width: 100%;
-  height: 100vh;
-  height: 100dvh; /* Dynamic viewport height to prevent mobile address bar overflow */
-}
-@media (max-width: 480px) {
-  .h-screen {
-    width: 100vw;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+  height: calc(100vh / var(--scale-factor, 1));
+  height: calc(100dvh / var(--scale-factor, 1)); /* Compensate for canvas scale factor */
+  backface-visibility: hidden;
+  will-change: transform;
 }
 .overflow-hidden {
   overflow: hidden;
@@ -86,6 +81,8 @@ const embedUrl = computed(() => {
 }
 .absolute {
   position: absolute;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
 }
 .top-0 {
   top: 0;
