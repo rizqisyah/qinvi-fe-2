@@ -59,7 +59,7 @@ const embedUrl = computed(() => {
 <style scoped>
 .invitation-section--video {
   width: 100%;
-  height: 79vh;
+  height: 100vh;
   overflow: hidden;
   position: relative;
   background: #000;
