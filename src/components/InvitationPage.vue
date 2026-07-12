@@ -4,7 +4,7 @@
     <div v-if="state.error" class="restricted-overlay">
       <div class="restricted-box">
         <div class="restricted-icon">🔒</div>
-        <h2 class="restricted-title">Akses Terbatas</h2>
+        <h2 class="restricted-title">{{ isEnglish ? 'Private Invitation' : 'Akses Terbatas' }}</h2>
         <p class="restricted-message">{{ state.error }}</p>
       </div>
     </div>
@@ -62,7 +62,7 @@ const isOpen = ref(false)
 const isLocked = ref(true)
 const isHeroReady = ref(false)
 const contentVisible = ref(false)
-const { load, wedding, guest, rekening, state } = useWedding()
+const { load, wedding, guest, rekening, state, isEnglish } = useWedding()
 
 // Fetch the payload up-front while the splash cover is showing so every
 // section has data by the time the invitation opens.
@@ -101,7 +101,9 @@ watch(
     document.title = resolvedTitle
 
     // 2. Description Resolution
-    let resolvedDescription = `Undangan Pernikahan untuk menghadiri acara ${w.title}`
+    let resolvedDescription = isEnglish.value
+      ? `Wedding Invitation to attend the wedding of ${w.title}`
+      : `Undangan Pernikahan untuk menghadiri acara ${w.title}`
     if (g && g.custom_og_description) {
       resolvedDescription = g.custom_og_description
     } else if (w.seo_settings?.description) {

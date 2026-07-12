@@ -89,30 +89,173 @@ const FALLBACK = [
   },
 ]
 
-const { acara } = useWedding()
+const { acara, isEnglish } = useWedding()
+
+function formatEventDate(dateStr) {
+  if (!dateStr) return { hari: '', tanggal: '' }
+  const d = new Date(dateStr)
+  if (!isNaN(d.getTime())) {
+    const locale = isEnglish.value ? 'en-US' : 'id-ID'
+    const formatted = d.toLocaleDateString(locale, {
+      weekday: 'long',
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    })
+    const parts = formatted.split(',')
+    if (isEnglish.value) {
+      return {
+        hari: parts[0]?.trim() || '',
+        tanggal: `${parts[1]?.trim() || ''}, ${parts[2]?.trim() || ''}`,
+      }
+    }
+    return {
+      hari: parts[0]?.trim() || '',
+      tanggal: parts[1]?.trim() || '',
+    }
+  }
+  if (dateStr.includes(',')) {
+    const parts = dateStr.split(',')
+    return {
+      hari: parts[0]?.trim() || '',
+      tanggal: parts[1]?.trim() || '',
+    }
+  }
+  return {
+    hari: '',
+    tanggal: dateStr,
+  }
+}
+
+function formatSingleTime(t) {
+  const parts = t.split(':')
+  if (parts.length >= 2) {
+    return `${parts[0]}:${parts[1]}`
+  }
+  return t
+}
+
+function formatEventTime(timeStr) {
+  if (!timeStr) return ''
+  const rangeSeparator = timeStr.includes('|')
+    ? '|'
+    : timeStr.includes('-')
+    ? '-'
+    : timeStr.includes('s/d')
+    ? 's/d'
+    : null
+  if (rangeSeparator) {
+    const parts = timeStr.split(rangeSeparator).map((p) => p.trim())
+    const start = formatSingleTime(parts[0])
+    const endRaw = formatSingleTime(parts[1])
+    const end =
+      endRaw === '23:59' || endRaw === '00:00' || endRaw === '23.59' || endRaw === '00.00'
+        ? (isEnglish.value ? 'Finish' : 'Selesai')
+        : endRaw
+    return `${start} - ${end}`
+  }
+  return formatSingleTime(timeStr)
+}
+
+function generateGoogleCalendarUrl(evt) {
+  const dateStr = evt.rawDate || evt.date
+  if (!dateStr) return ''
+  const d = new Date(dateStr)
+  if (isNaN(d.getTime())) return ''
+
+  const year = d.getFullYear()
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  const datePart = `${year}${month}${day}`
+
+  let startHour = 9
+  let startMin = 0
+  let endHour = 11
+  let endMin = 0
+
+  const timeStr = evt.rawTime || evt.time
+  if (timeStr) {
+    const match = timeStr.match(/(\d{1,2})[:.](\d{2})/)
+    if (match) {
+      startHour = parseInt(match[1], 10)
+      startMin = parseInt(match[2], 10)
+      endHour = startHour + 2
+      endMin = startMin
+
+      const separator = timeStr.includes('|') ? '|' : timeStr.includes('-') ? '-' : null
+      if (separator) {
+        const parts = timeStr.split(separator)
+        if (parts.length > 1) {
+          const endMatch = parts[1].match(/(\d{1,2})[:.](\d{2})/)
+          if (endMatch) {
+            endHour = parseInt(endMatch[1], 10)
+            endMin = parseInt(endMatch[2], 10)
+          }
+        }
+      }
+    }
+  }
+
+  const sh = String(startHour).padStart(2, '0')
+  const sm = String(startMin).padStart(2, '0')
+  const eh = String(endHour).padStart(2, '0')
+  const em = String(endMin).padStart(2, '0')
+
+  const dates = `${datePart}T${sh}${sm}00/${datePart}T${eh}${em}00`
+  const title = evt.title || 'Wedding Event'
+  const details = evt.address || ''
+  const location = evt.location ? `${evt.location}, ${details}` : details
+
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${dates}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`
+}
 
 const events = computed(() => {
   const source = acara.value.length
-    ? acara.value.map((a) => ({
-        title: a.title,
-        date: a.event_date,
-        time: a.event_time,
-        location: a.location_name,
-        address: a.address,
-        mapsUrl: a.maps_url || '',
-      }))
-    : FALLBACK
+    ? acara.value.map((a) => {
+        const formattedDate = formatEventDate(a.event_date)
+        const formattedTime = formatEventTime(a.event_time)
+        return {
+          title: a.title,
+          hari: formattedDate.hari,
+          tanggal: formattedDate.tanggal,
+          date: a.event_date,
+          time: formattedTime,
+          rawTime: a.event_time,
+          location: a.location_name,
+          address: a.address,
+          mapsUrl: a.maps_url || '',
+        }
+      })
+    : FALLBACK.map((fb) => {
+        const formattedDate = formatEventDate(fb.date)
+        return {
+          ...fb,
+          hari: formattedDate.hari,
+          tanggal: formattedDate.tanggal,
+        }
+      })
 
   return source.map((evt, index) => {
     const preset = PRESETS[index % PRESETS.length]
+    const calendarUrl = generateGoogleCalendarUrl({
+      title: evt.title || preset.title,
+      date: evt.date,
+      time: evt.rawTime || evt.time,
+      location: evt.location || '',
+      address: evt.address || '',
+    })
+
     return {
       key: `evt-${index}`,
       title: evt.title || preset.title,
+      hari: evt.hari,
+      tanggal: evt.tanggal,
       date: evt.date || '',
       time: evt.time || '',
       location: evt.location || '',
       address: evt.address || '',
       mapsUrl: evt.mapsUrl || '',
+      calendarUrl,
       top: FIRST_TOP + index * CARD_GAP,
       foliageTop: preset.foliageTop,
       foliageSide: preset.foliageSide,

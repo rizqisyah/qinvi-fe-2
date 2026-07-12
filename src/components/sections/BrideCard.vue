@@ -1,5 +1,9 @@
 <template>
-  <div ref="rootRef" class="bride-block reveal-on-scroll" :class="{ 'in-view': inView }">
+  <div
+    ref="rootRef"
+    class="reveal-on-scroll"
+    :class="[isFirst ? 'groom-block' : 'bride-block', { 'in-view': inView }]"
+  >
     <!-- Real photo when the API provides one; illustrated avatar otherwise. -->
     <img v-if="photoUrl" class="couple-asset couple-photo couple-photo-bride" :src="photoUrl" :alt="fullName" />
     <img v-else class="couple-asset couple-circle-bride" src="../../assets/figma/couple-circle-bride.png" alt="" />
@@ -26,13 +30,25 @@ import { useScrollReveal } from '../../composables/useScrollReveal'
 import { useWedding } from '../../composables/useWedding'
 import { parentLine } from '../../lib/format'
 
+defineProps({
+  isFirst: {
+    type: Boolean,
+    default: false,
+  },
+})
+
 const { rootRef, inView } = useScrollReveal()
-const { bride } = useWedding()
+const { bride, isEnglish } = useWedding()
 
 const shortName = computed(() => bride.value?.nickname || 'Ayu')
 const fullName = computed(() => bride.value?.name || 'Ayu Shella Pratni')
 const photoUrl = computed(() => bride.value?.photo_url || '')
-const parents = computed(
-  () => parentLine(bride.value) || 'Putri Pertama dari Bapak Heri & Ibu Sofie'
-)
+const parents = computed(() => {
+  return (
+    parentLine(bride.value) ||
+    (isEnglish.value
+      ? 'First daughter of Mr. Heri & Mrs. Sofie'
+      : 'Putri Pertama dari Bapak Heri & Ibu Sofie')
+  )
+})
 </script>

@@ -71,7 +71,7 @@
       <p class="cover-text cover-couple enter-text" style="--enter-delay: 1.05s">{{ coupleName }}</p>
 
       <p class="cover-text cover-dear enter-text" style="--enter-delay: 1.2s">Dear Mr / Mrs / Ms</p>
-      <p class="cover-text cover-guest enter-text" style="--enter-delay: 1.35s">{{ guestName || 'Bapak/Ibu/Saudara/i' }}</p>
+      <p class="cover-text cover-guest enter-text" style="--enter-delay: 1.35s">{{ guestName || (isEnglish ? 'Our Guest' : 'Bapak/Ibu/Saudara/i') }}</p>
 
       <button
         class="cover-open-button enter-text"
@@ -97,7 +97,7 @@ defineEmits(['open'])
 const STAGE_WIDTH = 375
 const STAGE_HEIGHT = 725
 
-const { coupleNickname, guest, logoUrl, guestName } = useWedding()
+const { coupleNickname, guest, logoUrl, guestName, isEnglish } = useWedding()
 
 const coupleName = computed(() => coupleNickname.value || 'Antonio & Ayu')
 const coverRoot = ref(null)

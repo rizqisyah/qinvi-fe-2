@@ -38,27 +38,29 @@ export function pad2(n) {
  * @param {Date} [now]
  * @returns {string}
  */
-export function relativeTimeId(value, now = new Date()) {
+export function relativeTimeId(value, now = new Date(), isEnglish = false) {
   if (!value) return ''
   const then = value instanceof Date ? value : new Date(value)
   if (Number.isNaN(then.getTime())) return ''
 
+  const isEng = !!(isEnglish && typeof isEnglish === 'object' && 'value' in isEnglish ? isEnglish.value : isEnglish)
+
   const seconds = Math.floor((now.getTime() - then.getTime()) / 1000)
-  if (seconds < 60) return 'baru saja'
+  if (seconds < 60) return isEng ? 'just now' : 'baru saja'
 
   const minutes = Math.floor(seconds / 60)
-  if (minutes < 60) return `${minutes} menit lalu`
+  if (minutes < 60) return isEng ? `${minutes}m ago` : `${minutes} menit lalu`
 
   const hours = Math.floor(minutes / 60)
-  if (hours < 24) return `${hours} jam lalu`
+  if (hours < 24) return isEng ? `${hours}h ago` : `${hours} jam lalu`
 
   const days = Math.floor(hours / 24)
-  if (days < 30) return `${days} hari lalu`
+  if (days < 30) return isEng ? `${days}d ago` : `${days} hari lalu`
 
   const months = Math.floor(days / 30)
-  if (months < 12) return `${months} bulan lalu`
+  if (months < 12) return isEng ? `${months}mo ago` : `${months} bulan lalu`
 
-  return `${Math.floor(months / 12)} tahun lalu`
+  return isEng ? `${Math.floor(months / 12)}y ago` : `${Math.floor(months / 12)} tahun lalu`
 }
 
 /**

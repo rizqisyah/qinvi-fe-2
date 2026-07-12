@@ -1228,6 +1228,7 @@
     opacity: 0;
     transform: scale(0.88) translateZ(0);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateZ(0);
@@ -2897,19 +2898,25 @@
   width: 262px;
 }
 
-/* Maps button */
-.events-maps-button {
+/* Event Action Buttons Container (Maps + Calendar) */
+.events-action-buttons {
   position: absolute;
   top: 318px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 8px 28px;
-  min-width: 127px;
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.events-action-buttons .decor-button {
+  padding: 8px 20px;
+  min-width: 110px;
   font-family: var(--font-jost);
   font-size: 13px;
   color: #be3a3a;
   text-align: center;
-  z-index: 10;
+  box-sizing: border-box;
 }
 
 /* ===== Decorative overlays (same x-positions for both cards) ===== */
@@ -4279,6 +4286,7 @@
     opacity: 0;
     transform: translateY(15px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -4292,8 +4300,13 @@
 }
 
 @keyframes lock-bounce {
-  from { transform: translateY(0); }
-  to { transform: translateY(-6px); }
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-6px);
+  }
 }
 
 .restricted-title {

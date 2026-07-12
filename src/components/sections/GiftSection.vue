@@ -16,7 +16,13 @@
     <h2 class="script-heading gift-title">Wedding Gift</h2>
 
     <!-- Description -->
-    <p class="text-body gift-description">Bagi yang ingin memberikan tanda kasih, dapat mengirimkan melalui fitur di bawah ini:</p>
+    <p class="text-body gift-description">
+      {{
+        isEnglish
+          ? 'For those who wish to send a wedding gift, you may do so through the details below:'
+          : 'Bagi yang ingin memberikan tanda kasih, dapat mengirimkan melalui fitur di bawah ini:'
+      }}
+    </p>
 
     <div
       v-for="(acct, i) in accounts"
@@ -28,11 +34,11 @@
       <img v-if="isBca(acct.bank_name)" class="gift-bca-logo" :src="img('gift-bca-logo.png')" alt="BCA" />
       <p v-else class="gift-bank-name">{{ acct.bank_name }}</p>
 
-      <p class="gift-rekening">No. Rekening : {{ acct.account_number }}</p>
+      <p class="gift-rekening">{{ isEnglish ? 'Account Number : ' : 'No. Rekening : ' }}{{ acct.account_number }}</p>
       <p class="gift-an">A/n {{ acct.account_name }}</p>
 
       <button class="decor-button copy-button" type="button" @click="copy(acct)">
-        {{ copiedId === acct.id ? 'Tersalin!' : 'Copy text' }}
+        {{ copiedId === acct.id ? (isEnglish ? 'Copied!' : 'Tersalin!') : 'Copy text' }}
       </button>
     </div>
   </section>
@@ -44,7 +50,7 @@ import { useScrollReveal } from '../../composables/useScrollReveal'
 import { useWedding } from '../../composables/useWedding'
 
 const { rootRef, inView } = useScrollReveal()
-const { rekening } = useWedding()
+const { rekening, isEnglish } = useWedding()
 
 // First account sits at the original Figma slot; extra accounts stack below.
 const ACCOUNT_TOP = 244

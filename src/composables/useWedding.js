@@ -245,6 +245,7 @@ const ucapan = computed(() => content.value?.ucapan ?? [])
 
 const countdownDate = computed(() => wedding.value?.countdown_date ?? null)
 const coupleTitle = computed(() => wedding.value?.title ?? null)
+const isEnglish = computed(() => wedding.value?.lang?.toLowerCase() === 'english')
 
 // The cover greets the couple by the names they go by, not their full legal
 // names; falls back to the wedding title when either nickname is missing.
@@ -252,7 +253,13 @@ const coupleNickname = computed(() => {
   const groomNick = groom.value?.nickname?.trim()
   const brideNick = bride.value?.nickname?.trim()
   if (!groomNick || !brideNick) return coupleTitle.value
-  return `${groomNick} & ${brideNick}`
+
+  const isGroomFirst = wedding.value?.order_groom_first !== false
+  if (isGroomFirst) {
+    return `${groomNick} & ${brideNick}`
+  } else {
+    return `${brideNick} & ${groomNick}`
+  }
 })
 
 // Theme has two layers: the theme's own defaults (theme.theme_config) and the
@@ -326,6 +333,7 @@ export function useWedding() {
     load,
     guestName,
     // getters
+    isEnglish,
     wedding,
     theme,
     guest,

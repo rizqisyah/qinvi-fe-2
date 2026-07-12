@@ -46,7 +46,15 @@
     <!-- Text content wrapper -->
     <div class="events-text-wrap">
       <h2 class="script-heading events-title">{{ evt.title }}</h2>
-      <p class="events-date">{{ evt.date }}</p>
+      <p class="events-date">
+        <template v-if="evt.hari">
+          <span class="events-day">{{ evt.hari }}</span><br />
+          <span class="events-cal-date">{{ evt.tanggal }}</span>
+        </template>
+        <template v-else>
+          {{ evt.date }}
+        </template>
+      </p>
       <p class="events-time">{{ evt.time }}</p>
 
       <img class="events-asset events-divider" :src="img(evt.assets.divider)" alt="" />
@@ -55,15 +63,26 @@
       <p class="events-address">{{ evt.address }}</p>
     </div>
 
-    <a
-      v-if="evt.mapsUrl"
-      class="decor-button events-maps-button"
-      :href="evt.mapsUrl"
-      target="_blank"
-      rel="noopener"
-      >Maps</a
-    >
-    <button v-else class="decor-button events-maps-button" type="button" disabled>Maps</button>
+    <div class="events-action-buttons">
+      <a
+        v-if="evt.mapsUrl"
+        class="decor-button"
+        :href="evt.mapsUrl"
+        target="_blank"
+        rel="noopener"
+        >Maps</a
+      >
+      <button v-else class="decor-button" type="button" disabled>Maps</button>
+
+      <a
+        v-if="evt.calendarUrl"
+        class="decor-button"
+        :href="evt.calendarUrl"
+        target="_blank"
+        rel="noopener"
+        >Calendar</a
+      >
+    </div>
   </article>
 </template>
 

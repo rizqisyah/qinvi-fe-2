@@ -29,12 +29,13 @@ import { useScrollReveal } from '../../composables/useScrollReveal'
 import { useWedding } from '../../composables/useWedding'
 
 const { rootRef, inView } = useScrollReveal()
-const { quoteText, quoteVerse } = useWedding()
+const { quoteText, quoteVerse, isEnglish } = useWedding()
 
 const FALLBACK_HEADING = 'QS Ar-Rum 21'
 
 const DEFAULT_ARABIC = 'وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَرَحْمَةًۗ اِنَّ فِيْ ذٰلِكَ Lَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ'
 const DEFAULT_TRANSLATION = 'Di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda kebesaran Allah bagi kaum yang berpikir.'
+const DEFAULT_TRANSLATION_EN = 'And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy. Indeed in that are signs for a people who give thought.'
 
 // Intelligently parse quoteText to allow only translation to be customized 
 // without breaking the Arabic display.
@@ -43,7 +44,7 @@ const parts = computed(() => {
   if (!text) {
     return {
       arabic: DEFAULT_ARABIC,
-      translation: DEFAULT_TRANSLATION
+      translation: isEnglish.value ? DEFAULT_TRANSLATION_EN : DEFAULT_TRANSLATION
     }
   }
 

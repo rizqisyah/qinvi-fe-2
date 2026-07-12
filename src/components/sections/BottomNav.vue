@@ -126,7 +126,7 @@ import { useLightbox } from '../../composables/useLightbox'
 // The gallery lightbox's backdrop is translucent, so the pill would ghost
 // through it unless it steps aside.
 const { lightboxOpen } = useLightbox()
-const { wedding } = useWedding()
+const { wedding, isEnglish } = useWedding()
 
 const musicUrl = computed(() => wedding.value?.music_url || 'https://qinvi-worker.kesone01.workers.dev/Music/Brian McKnight - Back At One (Lyrics) (mp3cut.net).mp3')
 const musicStart = computed(() => Number(wedding.value?.music_start) || 0)
@@ -136,16 +136,16 @@ const audioEl = ref(null)
 const playing = ref(false)
 
 // Each entry points at a `data-section` slab already rendered on the page.
-const ITEMS = [
+const ITEMS = computed(() => [
   { section: 'hero', label: 'Home' },
-  { section: 'couple', label: 'Mempelai' },
-  { section: 'events', label: 'Acara' },
-]
+  { section: 'couple', label: isEnglish.value ? 'Couple' : 'Mempelai' },
+  { section: 'events', label: isEnglish.value ? 'Events' : 'Acara' },
+])
 
 // Fraction of the viewport a section must have scrolled past to become active.
 const ACTIVE_LINE = 0.35
 
-const active = ref(ITEMS[0].section)
+const active = ref(ITEMS.value[0].section)
 
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -165,8 +165,8 @@ function goTo(section) {
 // entry (quran, gift, rsvp...), so instead highlight the last entry scrolled past.
 function syncActive() {
   const line = window.scrollY + window.innerHeight * ACTIVE_LINE
-  let current = ITEMS[0].section
-  for (const item of ITEMS) {
+  let current = ITEMS.value[0].section
+  for (const item of ITEMS.value) {
     const el = sectionEl(item.section)
     if (el && el.getBoundingClientRect().top + window.scrollY <= line) current = item.section
   }

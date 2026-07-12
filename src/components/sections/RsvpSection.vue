@@ -14,8 +14,11 @@
       <!-- Live HTML Header -->
       <h2 class="rsvp-title">Rsvp</h2>
       <p class="rsvp-desc">
-        Kehadiran Bapak/Ibu/Saudara/i akan menjadi kehormatan besar bagi kami dan keluarga.
-        Mohon konfirmasi kehadiran Anda melalui formulir reservasi di bawah:
+        {{
+          isEnglish
+            ? 'Your presence will be a great honor for us and our family. Please confirm your attendance through the reservation form below:'
+            : 'Kehadiran Bapak/Ibu/Saudara/i akan menjadi kehormatan besar bagi kami dan keluarga. Mohon konfirmasi kehadiran Anda melalui formulir reservasi di bawah:'
+        }}
       </p>
 
       <!-- Already RSVP'd Success Message -->
@@ -25,38 +28,38 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
-        <p class="rsvp-success-title">Terima Kasih!</p>
-        <p class="rsvp-success-desc">Anda telah melakukan konfirmasi kehadiran untuk undangan ini.</p>
+        <p class="rsvp-success-title">{{ isEnglish ? 'Thank You!' : 'Terima Kasih!' }}</p>
+        <p class="rsvp-success-desc">{{ isEnglish ? 'You have confirmed your attendance for this invitation.' : 'Anda telah melakukan konfirmasi kehadiran untuk undangan ini.' }}</p>
       </div>
 
       <!-- RSVP Form Fields -->
       <form v-else @submit.prevent="submit">
-        <label class="form-label" for="rsvp-name">Nama:</label>
-        <input id="rsvp-name" v-model="name" class="visual-input rsvp-name" type="text" placeholder="Nama Anda" required />
+        <label class="form-label" for="rsvp-name">{{ isEnglish ? 'Name:' : 'Nama:' }}</label>
+        <input id="rsvp-name" v-model="name" class="visual-input rsvp-name" type="text" :placeholder="isEnglish ? 'Your Name' : 'Nama Anda'" required />
         
-        <label class="form-label" for="rsvp-phone">No Hp:</label>
-        <input id="rsvp-phone" v-model="phone" class="visual-input rsvp-phone" type="tel" placeholder="Nomor Handphone" required />
+        <label class="form-label" for="rsvp-phone">{{ isEnglish ? 'Phone Number:' : 'No Hp:' }}</label>
+        <input id="rsvp-phone" v-model="phone" class="visual-input rsvp-phone" type="tel" :placeholder="isEnglish ? 'Phone Number' : 'Nomor Handphone'" required />
         
-        <span class="form-label rsvp-attendance-label">Kehadiran</span>
-        <div class="rsvp-attendance-group" role="radiogroup" aria-label="Kehadiran">
+        <span class="form-label rsvp-attendance-label">{{ isEnglish ? 'Attendance' : 'Kehadiran' }}</span>
+        <div class="rsvp-attendance-group" role="radiogroup" :aria-label="isEnglish ? 'Attendance' : 'Kehadiran'">
           <label class="rsvp-attendance-option">
             <input v-model="attendance" type="radio" name="rsvp-attendance" value="hadir" required />
-            <span>Hadir</span>
+            <span>{{ isEnglish ? 'Attending' : 'Hadir' }}</span>
           </label>
           <label class="rsvp-attendance-option">
             <input v-model="attendance" type="radio" name="rsvp-attendance" value="tidak_hadir" required />
-            <span>Tidak Hadir</span>
+            <span>{{ isEnglish ? 'Not Attending' : 'Tidak Hadir' }}</span>
           </label>
         </div>
         
         <template v-if="isAttending">
-          <label class="form-label" for="rsvp-count">Jumlah Tamu:</label>
-          <input id="rsvp-count" v-model.number="guestCount" class="visual-input rsvp-count" type="number" min="1" placeholder="Jumlah Tamu" required />
+          <label class="form-label" for="rsvp-count">{{ isEnglish ? 'Number of Guests:' : 'Jumlah Tamu:' }}</label>
+          <input id="rsvp-count" v-model.number="guestCount" class="visual-input rsvp-count" type="number" min="1" :placeholder="isEnglish ? 'Number of Guests' : 'Jumlah Tamu'" required />
         </template>
         
         <p v-if="feedback" class="rsvp-feedback" :class="{ 'is-error': isError }">{{ feedback }}</p>
         <button class="decor-button send-button" type="submit" :disabled="submitting">
-          {{ submitting ? 'Mengirim...' : 'Send' }}
+          {{ submitting ? (isEnglish ? 'Sending...' : 'Mengirim...') : 'Send' }}
         </button>
       </form>
     </div>
@@ -69,7 +72,7 @@ import { useScrollReveal } from '../../composables/useScrollReveal'
 import { useWedding } from '../../composables/useWedding'
 
 const { rootRef, inView } = useScrollReveal()
-const { sendRsvp, guestName: name, guest } = useWedding()
+const { sendRsvp, guestName: name, guest, isEnglish } = useWedding()
 
 const phone = ref('')
 const attendance = ref('hadir')
@@ -112,7 +115,7 @@ watch(
 
 async function submit() {
   if (!name.value.trim()) {
-    feedback.value = 'Nama wajib diisi.'
+    feedback.value = isEnglish.value ? 'Name is required.' : 'Nama wajib diisi.'
     isError.value = true
     return
   }
@@ -135,7 +138,7 @@ async function submit() {
     feedback.value = ''
     isError.value = false
   } catch (err) {
-    feedback.value = err instanceof Error ? err.message : 'Gagal mengirim RSVP.'
+    feedback.value = err instanceof Error ? err.message : (isEnglish.value ? 'Failed to submit RSVP.' : 'Gagal mengirim RSVP.')
     isError.value = true
   } finally {
     submitting.value = false
