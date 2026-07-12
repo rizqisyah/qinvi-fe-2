@@ -68,8 +68,8 @@ const embedUrl = computed(() => {
 .h-screen {
   position: relative;
   width: 100%;
-  height: calc(100vh / var(--scale-factor, 1));
-  height: calc(100dvh / var(--scale-factor, 1)); /* Compensate for canvas scale factor */
+  height: calc(100vh / var(--scale-factor, 1) + 4px);
+  height: calc(100dvh / var(--scale-factor, 1) + 4px); /* Compensate for canvas scale factor and rounding gaps */
   backface-visibility: hidden;
   will-change: transform;
 }
