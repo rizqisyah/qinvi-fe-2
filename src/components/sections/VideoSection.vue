@@ -67,11 +67,16 @@ const embedUrl = computed(() => {
 }
 .h-screen {
   position: relative;
-  width: 100vw;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 100%;
   height: 100vh;
   height: 100dvh; /* Dynamic viewport height to prevent mobile address bar overflow */
+}
+@media (max-width: 480px) {
+  .h-screen {
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 .overflow-hidden {
   overflow: hidden;
