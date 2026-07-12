@@ -106,7 +106,7 @@ const coverScale = ref(1)
 
 const leftFlowerStyle = computed(() => {
   if (typeof window === 'undefined') return {}
-  const width = window.innerWidth >= 768 ? 480 : (coverRoot.value?.clientWidth || window.innerWidth)
+  const width = window.innerWidth >= 768 ? 480 : window.innerWidth
   const overflow = 375 - width / coverScale.value
   const viewportLeftInStage = overflow > 0 ? overflow / 2 : 0
   return {
@@ -116,7 +116,7 @@ const leftFlowerStyle = computed(() => {
 
 const rightFlowerStyle = computed(() => {
   if (typeof window === 'undefined') return {}
-  const width = window.innerWidth >= 768 ? 480 : (coverRoot.value?.clientWidth || window.innerWidth)
+  const width = window.innerWidth >= 768 ? 480 : window.innerWidth
   const overflow = 375 - width / coverScale.value
   const viewportLeftInStage = overflow > 0 ? overflow / 2 : 0
   const leftPos = 331 - viewportLeftInStage
@@ -127,7 +127,7 @@ const rightFlowerStyle = computed(() => {
 
 const leftLilyStyle = computed(() => {
   if (typeof window === 'undefined') return {}
-  const width = window.innerWidth >= 768 ? 480 : (coverRoot.value?.clientWidth || window.innerWidth)
+  const width = window.innerWidth >= 768 ? 480 : window.innerWidth
   const overflow = 375 - width / coverScale.value
   const viewportLeftInStage = overflow > 0 ? overflow / 2 : 0
   return {
@@ -137,7 +137,7 @@ const leftLilyStyle = computed(() => {
 
 const rightLilyStyle = computed(() => {
   if (typeof window === 'undefined') return {}
-  const width = window.innerWidth >= 768 ? 480 : (coverRoot.value?.clientWidth || window.innerWidth)
+  const width = window.innerWidth >= 768 ? 480 : window.innerWidth
   const overflow = 375 - width / coverScale.value
   const viewportLeftInStage = overflow > 0 ? overflow / 2 : 0
   const leftPos = 328.3 - viewportLeftInStage
@@ -147,7 +147,7 @@ const rightLilyStyle = computed(() => {
 })
 
 function updateScale() {
-  const height = coverRoot.value?.clientHeight || window.innerHeight
+  const height = typeof window !== 'undefined' ? window.innerHeight : STAGE_HEIGHT
   coverScale.value = height / STAGE_HEIGHT
 }
 
