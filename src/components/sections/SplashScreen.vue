@@ -147,8 +147,10 @@ const rightLilyStyle = computed(() => {
 })
 
 function updateScale() {
-  const height = typeof window !== 'undefined' ? window.innerHeight : STAGE_HEIGHT
-  coverScale.value = height / STAGE_HEIGHT
+  if (typeof window === 'undefined') return
+  const width = window.innerWidth >= 768 ? 480 : window.innerWidth
+  const height = window.innerHeight
+  coverScale.value = Math.max(width / STAGE_WIDTH, height / STAGE_HEIGHT)
 }
 
 function staggerDelay(index) {
